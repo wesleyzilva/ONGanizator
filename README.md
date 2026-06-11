@@ -1,142 +1,142 @@
 # ONGanizator
 
-**Plataforma de Governança, Captação e Monitoramento de Impacto Social**
+**Governance, Fundraising & Social Impact Monitoring Platform**
 
-> Demo MVP — Next.js 15 · NestJS 11 · Tailwind CSS · Dados Mock · GitHub Pages
+> MVP Demo — Next.js 15 · NestJS 11 · Tailwind CSS · Mock Data · GitHub Pages
 
-🌐 **[Acessar demo online](https://wesleyzilva.github.io/ONGanizator/)**
-
----
-
-## O que é
-
-ONGanizator é uma plataforma digital que conecta organizações de impacto social (ONGs, cooperativas e negócios sociais) com investidores, patrocinadores e financiadores, oferecendo:
-
-- **Governança institucional** — diagnóstico de maturidade e score em 5 dimensões
-- **Gestão documental** — validação de KYC e conformidade legal
-- **Marketplace de projetos** — vitrine com filtros por ODS, região e ticket
-- **Matching automático** — conecta investidores aos projetos mais aderentes ao seu perfil
-- **Monitoramento em tempo real** — relatórios, evidências, timeline e indicadores de impacto
-- **Relatórios ESG/ODS** — prestação de contas auditável para financiadores
+🌐 **[Live demo](https://wesleyzilva.github.io/ONGanizator/)**
 
 ---
 
-## Telas
+## What is it
 
-| Página | Descrição |
-|--------|-----------|
-| `/` | Dashboard executivo com KPIs globais |
-| `/organizacoes` | Catálogo de organizações com score de maturidade |
-| `/organizacoes/:id` | Detalhe institucional + radar de maturidade |
-| `/projetos` | Tabela de todos os projetos |
-| `/marketplace` | Vitrine pública com filtros por ODS e região |
-| `/investidores` | Perfis de investidores com matching automático |
-| `/impacto` | Painel ESG/ODS consolidado |
-| `/monitoramento` | Prestação de contas: relatórios, evidências, timeline |
-| `/para-investidores` | One page de pitch para captação de investimento |
+ONGanizator is a digital platform that connects social impact organizations (NGOs, cooperatives and social businesses) with investors, sponsors and funders, providing:
+
+- **Institutional governance** — maturity diagnostic with a score across 5 dimensions
+- **Document management** — KYC validation and legal compliance tracking
+- **Project marketplace** — public catalogue filtered by SDG, region and investment ticket
+- **Automatic matching** — links investors to the projects best aligned with their portfolio
+- **Real-time monitoring** — reports, photo evidence, timeline and impact indicators
+- **ESG / SDG reporting** — auditable accountability for funders
 
 ---
 
-## Stack
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Executive dashboard with global KPIs |
+| `/organizacoes` | Organization catalogue with maturity scores |
+| `/organizacoes/:id` | Institutional detail + maturity radar |
+| `/projetos` | Full project table |
+| `/marketplace` | Public showcase filtered by SDG and region |
+| `/investidores` | Investor profiles with automatic matching |
+| `/impacto` | Consolidated ESG / SDG panel |
+| `/monitoramento` | Accountability: reports, evidence, timeline |
+| `/para-investidores` | Investor pitch one-pager |
+
+---
+
+## Tech stack
 
 ### Frontend
 - [Next.js 15](https://nextjs.org/) — App Router, Server Components, Static Export
 - [React 19](https://react.dev/)
 - [Tailwind CSS 3](https://tailwindcss.com/)
-- [Lucide React](https://lucide.dev/) — ícones
+- [Lucide React](https://lucide.dev/) — icons
 - TypeScript 5
 
-### Backend (API local)
+### Backend (local API)
 - [NestJS 11](https://nestjs.com/) — modular, decorators, Swagger
 - [ts-node-dev](https://github.com/wclr/ts-node-dev) — hot reload
-- Dados mock em memória (sem banco de dados)
+- In-memory mock data (no database required)
 
-### Monorepo
+### Monorepo structure
 ```
 ONGanizator/
 ├── apps/
 │   ├── web/        # Next.js 15 (frontend)
-│   └── api/        # NestJS 11 (backend local)
+│   └── api/        # NestJS 11 (local backend)
 ├── packages/
-│   └── shared/     # Tipos TypeScript compartilhados
+│   └── shared/     # Shared TypeScript types
 └── package.json    # npm workspaces
 ```
 
 ---
 
-## Rodar localmente
+## Running locally
 
-**Pré-requisitos:** Node.js 18+ e npm 9+
+**Requirements:** Node.js 18+ and npm 9+
 
 ```bash
-# 1. Clonar
+# 1. Clone
 git clone https://github.com/wesleyzilva/ONGanizator.git
 cd ONGanizator
 
-# 2. Instalar dependências
+# 2. Install dependencies
 npm install --workspaces --include-workspace-root
 
-# 3. Subir API (porta 3001)
+# 3. Start API (port 3001)
 npm run dev:api
 
-# 4. Subir frontend (porta 3000) — em outro terminal
+# 4. Start frontend (port 3000) — in a separate terminal
 npm run dev:web
 ```
 
-| Serviço | URL |
+| Service | URL |
 |---------|-----|
 | Frontend | http://localhost:3000 |
 | API | http://localhost:3001 |
 | Swagger | http://localhost:3001/docs |
 
-**Credenciais de demo:**
+**Demo credentials:**
 
-| E-mail | Senha | Perfil |
-|--------|-------|--------|
-| `admin@onganizator.com.br` | `demo@2026` | Administrador |
-| `ong@demo.org` | `demo@2026` | ONG |
-| `investidor@demo.com.br` | `demo@2026` | Investidor |
-
----
-
-## Endpoints da API
-
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `POST` | `/api/auth/login` | Autenticação mock |
-| `GET` | `/api/dashboard` | KPIs executivos |
-| `GET` | `/api/organizacoes` | Lista com filtros |
-| `GET` | `/api/organizacoes/:id/score` | Score de maturidade |
-| `GET` | `/api/projetos` | Lista com filtros |
-| `GET` | `/api/investidores/:id/match` | Matching automático |
-| `GET` | `/api/impacto/resumo` | Painel ESG/ODS |
-| `GET` | `/api/monitoramento/consolidado` | Relatórios consolidados |
-| `GET` | `/api/monitoramento/projeto/:id` | Timeline + evidências do projeto |
+| Email | Password | Role |
+|-------|----------|------|
+| `admin@onganizator.com.br` | `demo@2026` | Administrator |
+| `ong@demo.org` | `demo@2026` | NGO |
+| `investidor@demo.com.br` | `demo@2026` | Investor |
 
 ---
 
-## Deploy (GitHub Pages)
+## API endpoints
 
-O deploy é automático via GitHub Actions a cada push na branch `main`.
+| Method | Route | Description |
+|--------|-------|-------------|
+| `POST` | `/api/auth/login` | Mock authentication |
+| `GET` | `/api/dashboard` | Executive KPIs |
+| `GET` | `/api/organizacoes` | Organization list with filters |
+| `GET` | `/api/organizacoes/:id/score` | Maturity score breakdown |
+| `GET` | `/api/projetos` | Project list with filters |
+| `GET` | `/api/investidores/:id/match` | Automatic project matching |
+| `GET` | `/api/impacto/resumo` | ESG / SDG summary |
+| `GET` | `/api/monitoramento/consolidado` | Consolidated monitoring |
+| `GET` | `/api/monitoramento/projeto/:id` | Project timeline + evidence |
+
+---
+
+## Deployment (GitHub Pages)
+
+Deployment is fully automated via GitHub Actions on every push to `main`.
 
 ```
-push → main → GitHub Actions → build estático → gh-pages branch → GitHub Pages
+push → main → GitHub Actions → static build → gh-pages branch → GitHub Pages
 ```
 
 Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
 
 ---
 
-## Contexto de negócio
+## Business context
 
-Este MVP foi desenvolvido para demonstração a financiadores e investidores sociais.
-Documentação completa em:
+This MVP was built to demonstrate the platform to social investors and funders.
+Full documentation:
 
-- [`One-Page-ONGanizator.md`](One-Page-ONGanizator.md) — pitch para investidores
-- [`Arquitetura-MVP-Tradeoffs.md`](Arquitetura-MVP-Tradeoffs.md) — decisões técnicas e roadmap
+- [`One-Page-ONGanizator.md`](One-Page-ONGanizator.md) — investor pitch one-pager
+- [`Arquitetura-MVP-Tradeoffs.md`](Arquitetura-MVP-Tradeoffs.md) — technical decisions and roadmap
 
 ---
 
-## Licença
+## License
 
 MIT
