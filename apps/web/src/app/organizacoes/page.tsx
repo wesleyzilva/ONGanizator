@@ -18,7 +18,7 @@ export default async function OrganizacoesPage() {
           <h1 className="text-2xl font-bold text-gray-900">Organizações</h1>
           <p className="text-sm text-gray-500 mt-1">{data.length} organizações cadastradas</p>
         </div>
-        <button className="btn-primary">+ Nova Organização</button>
+        <Link href="/organizacoes/nova/editar" className="btn-primary">+ Nova Organização</Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

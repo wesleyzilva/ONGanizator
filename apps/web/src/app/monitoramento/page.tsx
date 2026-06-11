@@ -1,6 +1,5 @@
 import { api } from '@/lib/api';
 import Link from 'next/link';
-import clsx from 'clsx';
 
 const TIPO_ICON: Record<string, string> = {
   marco: '🚩',
@@ -67,10 +66,7 @@ export default async function MonitoramentoPage() {
         <h2 className="font-semibold text-gray-800 mb-3">Status de Conformidade</h2>
         <div className="space-y-2">
           {consolidado.alertas?.map((a: any, i: number) => (
-            <div key={i} className={clsx(
-              'flex items-center gap-3 px-4 py-3 rounded-lg text-sm',
-              a.tipo === 'ok' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
-            )}>
+            <div key={i} className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm ${a.tipo === 'ok' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'}`}>
               <span>{a.tipo === 'ok' ? '✓' : '⚠'}</span>
               <span>{a.mensagem}</span>
             </div>
@@ -93,19 +89,14 @@ export default async function MonitoramentoPage() {
                   <span className="text-sm font-semibold text-gray-700">
                     {ind.realizado.toLocaleString('pt-BR')} / {ind.meta.toLocaleString('pt-BR')} {ind.unidade}
                   </span>
-                  <span className={clsx(
-                    'badge text-xs',
-                    ind.status === 'atingido' ? 'bg-green-100 text-green-700' :
-                    ind.status === 'no_prazo' ? 'bg-blue-100 text-blue-700' :
-                    'bg-amber-100 text-amber-700'
-                  )}>
+                  <span className={`badge text-xs ${ind.status === 'atingido' ? 'bg-green-100 text-green-700' : ind.status === 'no_prazo' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}`}>
                     {ind.percentual}%
                   </span>
                 </div>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className={clsx('h-full rounded-full transition-all', IND_COR[ind.status] || 'bg-brand-500')}
+                  className={`h-full rounded-full transition-all ${IND_COR[ind.status] || 'bg-brand-500'}`}
                   style={{ width: `${Math.min(ind.percentual, 100)}%` }}
                 />
               </div>
@@ -121,7 +112,7 @@ export default async function MonitoramentoPage() {
           {consolidado.ultimasAtualizacoes?.map((ev: any, i: number) => (
             <div key={i} className="flex gap-4 items-start">
               <div className="flex flex-col items-center">
-                <span className={clsx('w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0', TIPO_COR[ev.tipo])}>
+                <span className={`w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0 ${TIPO_COR[ev.tipo]}`}>
                   {TIPO_ICON[ev.tipo]}
                 </span>
                 {i < (consolidado.ultimasAtualizacoes.length - 1) && (
@@ -165,10 +156,7 @@ export default async function MonitoramentoPage() {
                     <p className="font-semibold text-gray-900 text-sm">{r.titulo}</p>
                     <p className="text-xs text-gray-400">{r.periodo}</p>
                   </div>
-                  <span className={clsx(
-                    'badge text-xs',
-                    r.status === 'publicado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-                  )}>
+                  <span className={`badge text-xs ${r.status === 'publicado' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                     {r.status === 'publicado' ? '✓ Publicado' : 'Em elaboração'}
                   </span>
                 </div>
@@ -188,7 +176,7 @@ export default async function MonitoramentoPage() {
                         </div>
                         <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                           <div
-                            className={clsx('h-full rounded-full', pct >= 100 ? 'bg-green-500' : 'bg-brand-500')}
+                            className={`h-full rounded-full ${pct >= 100 ? 'bg-green-500' : 'bg-brand-500'}`}
                             style={{ width: `${Math.min(pct, 100)}%` }}
                           />
                         </div>
@@ -212,10 +200,7 @@ export default async function MonitoramentoPage() {
                             />
                           </div>
                         ) : (
-                          <div className={clsx(
-                            'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium',
-                            ev.tipo === 'video' ? 'bg-rose-50 text-rose-600' : 'bg-gray-50 text-gray-600'
-                          )}>
+                          <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium ${ev.tipo === 'video' ? 'bg-rose-50 text-rose-600' : 'bg-gray-50 text-gray-600'}`}>
                             <span>{ev.tipo === 'video' ? '▶' : '📄'}</span>
                             <span className="max-w-[120px] truncate">{ev.descricao}</span>
                           </div>

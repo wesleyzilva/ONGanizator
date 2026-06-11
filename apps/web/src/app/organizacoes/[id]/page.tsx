@@ -1,6 +1,7 @@
 import { api } from '@/lib/api';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { ORGS } from '@/lib/mockData';
+import Link from 'next/link';
 
 export function generateStaticParams() {
   return ORGS.map(o => ({ id: o.id }));
@@ -25,8 +26,11 @@ export default async function OrgDetalhe({ params }: { params: Promise<{ id: str
         <div className="w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xl shrink-0">
           {org.nomeFantasia.charAt(0)}
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{org.nomeFantasia}</h1>
+        <div className="flex-1">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-gray-900">{org.nomeFantasia}</h1>
+            <Link href={`/organizacoes/${id}/editar`} className="px-3 py-1 border border-gray-200 text-xs text-gray-600 rounded-lg hover:bg-gray-50">✏️ Editar</Link>
+          </div>
           <p className="text-sm text-gray-500">{org.razaoSocial} · CNPJ {org.cnpj}</p>
           <div className="flex gap-2 mt-2">
             <span className="badge bg-gray-100 text-gray-600">{tipoLabel[org.tipo]}</span>

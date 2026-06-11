@@ -18,9 +18,12 @@ export default async function InvestidoresPage() {
 
   return (
     <div className="p-8 space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Investidores & Patrocinadores</h1>
-        <p className="text-sm text-gray-500 mt-1">{data.length} investidores ativos na plataforma</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Investidores & Patrocinadores</h1>
+          <p className="text-sm text-gray-500 mt-1">{data.length} investidores ativos na plataforma</p>
+        </div>
+        <Link href="/investidores/novo/editar" className="btn-primary">+ Cadastrar Investidor</Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -37,6 +40,7 @@ export default async function InvestidoresPage() {
               >
                 Ver Matches
               </Link>
+              <Link href={`/investidores/${inv.id}/editar`} className="text-xs text-gray-500 hover:text-gray-700 border border-gray-200 rounded-lg px-2 py-1.5">✏️</Link>
             </div>
 
             <div className="grid grid-cols-2 gap-3">

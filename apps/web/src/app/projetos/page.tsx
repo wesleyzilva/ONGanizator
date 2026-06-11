@@ -46,6 +46,9 @@ export default async function ProjetosPage() {
                 <td className="py-3 px-2 text-right font-medium text-gray-800">{fmt(p.valorMeta)}</td>
                 <td className="py-3 px-2 text-right font-semibold text-brand-600">{fmt(p.valorCaptado)}</td>
                 <td className="py-3 px-2 text-right text-gray-600">{p.beneficiarios.toLocaleString('pt-BR')}</td>
+                <td className="py-3 px-2 text-right">
+                  <Link href={`/projetos/${p.id}/editar`} className="text-xs text-gray-400 hover:text-brand-600 border border-gray-200 rounded px-2 py-1">✏️</Link>
+                </td>
               </tr>
             ))}
           </tbody>
