@@ -1,158 +1,214 @@
-# ONGanizator - Arquitetura Sugerida (MVP com Dados Mock)
+# ONGanizator - Arquitetura e Trade-offs
 
-## 1. Resumo Executivo
+## 1. Resumo executivo
 
-Objetivo: construir uma app de demonstracao para captar financiamento, com experiencia parecida com o portal partners.flexpag.com (dashboard operacional + fluxos de negocio), mas com stack mais atual e arquitetura preparada para evoluir para producao.
+ONGanizator foi estruturado como monorepo para acelerar a demo e manter um caminho claro para producao. A versao atual prioriza experiencia web, dados mock ricos, export estatico e deploy simples no GitHub Pages.
 
-Foco do MVP:
-- Provar valor para financiadores em 4 a 8 semanas.
-- Demonstrar jornada ponta a ponta com dados mock realistas.
-- Mostrar governanca, rastreabilidade e monitoramento de impacto.
-- Evitar complexidade de microservicos no inicio.
+Objetivos arquiteturais:
 
-## 2. Problema que o MVP resolve
+- demonstrar a jornada completa ONG -> empresa/investidor -> contrato -> execucao -> evidencias;
+- manter rotas estaticas compativeis com GitHub Pages;
+- isolar dados em uma camada mock substituivel por API real;
+- preparar a evolucao para contratos, regras legais brasileiras, documentos e auditoria.
 
-A plataforma conecta organizacoes sociais, cooperativas, investidores e patrocinadores para:
-- onboarding institucional;
-- avaliacao de maturidade;
-- cadastro e vitrine de projetos;
-- monitoramento de impacto e ESG.
+## 2. Stack atual
 
-O MVP deve provar 3 pontos:
-1. Confianca: governanca e validacao institucional.
-2. Match: conexao entre projetos e financiadores.
-3. Transparencia: indicadores de impacto e trilha de auditoria.
+| Camada | Tecnologia | Papel |
+|---|---|---|
+| Monorepo | npm workspaces | Organizar web, API e pacote compartilhado |
+| Frontend | Next.js 15.3.3 App Router | UI, rotas, renderizacao estatica |
+| React | React 19 | Componentes client/server |
+| Linguagem | TypeScript 5 | Tipagem e contratos internos |
+| UI | Tailwind CSS 3 | Estilo rapido e consistente |
+| API | NestJS 11 | BFF/API preparada para backend real |
+| Shared | `packages/shared` | Tipos e contratos compartilhados |
+| Deploy | GitHub Actions + GitHub Pages | Build e publicacao automatica |
 
-## 3. Escopo recomendado para apresentacao (MVP)
+## 3. Estrutura do monorepo
 
-## Modulos incluidos
-- Autenticacao e perfis (RBAC basico)
-- Cadastro institucional (ONG, cooperativa, negocio social)
-- Gestao documental (upload mock, status de validacao)
-- Diagnostico de maturidade (questionario + score)
-- Cadastro de projetos
-- Marketplace com filtros
-- Dashboard de impacto (ODS, ESG, metas)
+```text
+ONGanizator/
+  apps/
+    web/                 # Next.js App Router
+    api/                 # NestJS API/BFF
+  packages/
+    shared/              # Tipos e contratos comuns
+  .github/workflows/
+    deploy.yml           # Deploy GitHub Pages
+  BenchMark.md
+  Overview.md
+  Arquitetura-MVP-Tradeoffs.md
+```
 
-## Modulos adiados (pos-MVP)
-- Pagamentos reais (PIX/cartao/boleto)
-- OCR e IA de classificacao automatica
-- Integracoes externas (Receita, Open Finance, gov.br)
-- App mobile nativo
+## 4. Rotas web atuais
 
-## 4. Arquitetura recomendada (trade-off vencedor)
+| Rota | Tipo | Descricao |
+|---|---|---|
+| `/` | Static | Dashboard executivo |
+| `/organizacoes` | Static | Lista de organizacoes |
+| `/organizacoes/[id]` | SSG | Perfil da organizacao |
+| `/organizacoes/[id]/editar` | SSG + client form | Edicao/cadastro de organizacao |
+| `/projetos` | Static | Lista de projetos |
+| `/projetos/novo` | Client | Cadastro multi-etapa de projeto |
+| `/projetos/[id]` | SSG | Detalhe completo do projeto |
+| `/projetos/[id]/editar` | SSG + client form | Edicao de projeto |
+| `/projetos/[id]/relatorio` | SSG + client form | Relatorio periodico com evidencias |
+| `/investidores` | Static | Lista de investidores |
+| `/investidores/[id]/editar` | SSG + client form | Edicao/cadastro de investidor |
+| `/investidores/[id]/match` | SSG | Motor de match inteligente |
+| `/marketplace` | Static | Vitrine de projetos |
+| `/crowdfunding` | Static | Campanhas e vaquinhas corporativas |
+| `/diagnostico` | Client | Quiz de maturidade institucional |
+| `/risco` | Static | Relatorios de risco reputacional |
+| `/crm` | Static | CRM de doadores |
+| `/mentoria` | Static | Marketplace de mentores |
+| `/contabilidade` | Static | DRE e lancamentos |
+| `/monitoramento` | Static | Prestacao de contas e indicadores |
+| `/impacto` | Static | Impacto & ESG |
+| `/para-investidores` | Static | Pagina institucional para investidores |
 
-Recomendacao para MVP: Monolito modular fullstack, com fronteira clara de dominios.
-
-Stack sugerida:
-- Frontend: Next.js 15 + React 19 + TypeScript + Tailwind + componente UI padrao
-- Backend: NestJS 11 (BFF/API), no mesmo monorepo
-- Banco: PostgreSQL + Prisma
-- Cache/fila (opcional no MVP): Redis
-- Observabilidade: OpenTelemetry + logs estruturados
-- Auth: Auth.js (credenciais + OAuth) com RBAC por papel
-- Mock strategy: adapters de dados com JSON seedado + Faker para volume
-
-Motivo da escolha:
-- entrega rapida para demo;
-- UX moderna e performatica;
-- arquitetura limpa para migrar de mock para dados reais sem refazer telas;
-- menor custo operacional inicial do que microservicos.
-
-## 5. Matriz de trade-off
-
-| Opcao | Time-to-market | Custo inicial | Escalabilidade | Complexidade | Risco MVP |
-|---|---|---|---|---|---|
-| Next.js fullstack apenas | Muito alta | Muito baixo | Media | Baixa | Baixo |
-| Next.js + NestJS (recomendada) | Alta | Baixo | Alta | Media | Baixo |
-| Angular + Spring Boot | Media | Medio | Alta | Media | Medio |
-| Microservicos desde o inicio | Baixa | Alto | Muito alta | Alta | Alto |
-
-Decisao: Next.js + NestJS em monorepo, com modularizacao por dominio.
-
-## 6. Desenho da arquitetura (alto nivel)
+## 5. Desenho de arquitetura atual
 
 ```mermaid
 flowchart LR
-  U[Usuarios\nONG Cooperativa Investidor Admin] --> W[Web App\nNext.js]
-  W --> B[API BFF\nNestJS]
+  U[Usuarios: ONG, Empresa, Investidor, Admin] --> W[Next.js Web App]
+  W --> MD[Mock Data Layer]
+  W --> UI[Componentes de dominio]
 
-  subgraph Dominios
-    B --> D1[Identidade e Acesso]
-    B --> D2[Cadastro Institucional]
-    B --> D3[Documentos e Validacao]
-    B --> D4[Projetos e Marketplace]
-    B --> D5[Monitoramento e Impacto]
-    B --> D6[Relatorios ESG]
+  subgraph Dominios Web
+    UI --> D1[Organizacoes]
+    UI --> D2[Projetos]
+    UI --> D3[Investidores e Match]
+    UI --> D4[Governanca e Risco]
+    UI --> D5[Captacao e CRM]
+    UI --> D6[Monitoramento, ESG e Contabilidade]
+    UI --> D7[Regras Legais e Contratos]
   end
 
-  D1 --> P[(PostgreSQL)]
-  D2 --> P
-  D3 --> P
-  D4 --> P
-  D5 --> P
-  D6 --> P
+  MD --> S1[Seed estatico em mockData.ts]
+  W --> GH[Static Export]
+  GH --> P[GitHub Pages]
 
-  D2 --> M[(Mock Adapter\nJSON Seed)]
-  D3 --> M
-  D4 --> M
-  D5 --> M
-
-  B --> O[Observabilidade\nLogs + Traces + Metrics]
+  API[NestJS API preparada] -. futura integracao .-> DB[(PostgreSQL/Prisma)]
+  W -. substituir mock .-> API
 ```
 
-## 7. Estrategia de dados mock (para convencer financiador)
+## 6. Fronteiras de dominio
 
-Principios:
-- Dados plausiveis, nao sensiveis e anonimizados.
-- Massa de dados suficiente para parecer operacao real.
-- Cenarios bons e ruins para mostrar capacidade de governanca.
+| Dominio | Responsabilidades |
+|---|---|
+| Identidade e acesso | Usuarios, perfis, RBAC, login futuro |
+| Organizacoes | Cadastro, dados legais, maturidade, documentos |
+| Projetos | Objetivos, metas SMART, orcamento, cronograma, ODS |
+| Investidores | Mandato, ticket, regioes, ODS, restricoes |
+| Matching | Score por ODS, geografia, ticket, maturidade e tracao |
+| Captacao | Marketplace, crowdfunding, CRM e relacionamento |
+| Governanca | Diagnostico, risco, compliance, due diligence |
+| Contabilidade | Receitas, despesas, DRE, notas e prestacao de contas |
+| Impacto | Indicadores, evidencias, timeline, relatorios ESG |
+| Legal/Contratos | Marcos legais, calculadora fiscal, termos e auditoria |
 
-Conjuntos mock recomendados:
-- 120 organizacoes (ONG/cooperativa/negocio social)
-- 480 projetos (4 por organizacao em media)
-- 60 investidores/patrocinadores
-- 2.500 eventos de monitoramento (metas, entregas, evidencias)
-- 1.200 documentos com status variados (pendente/aprovado/reprovado)
+## 7. Trade-offs tomados
 
-Cenarios de demo:
-1. ONG faz onboarding e sobe documentos.
-2. Avaliador calcula score de maturidade.
-3. Projeto entra no marketplace e recebe match de investidor.
-4. Dashboard mostra ODS/ESG e evolucao de metas.
+| Decisao | Beneficio | Custo/Risco | Mitigacao |
+|---|---|---|---|
+| Next.js com export estatico | Deploy simples e barato no GitHub Pages | Sem SSR/API dinamica em producao estatica | Mock rico e API NestJS preparada |
+| Dados em `mockData.ts` | Rapidez para demo executiva | Sem persistencia real | Camada `api.ts` abstrai acesso aos dados |
+| Rotas dinamicas com `generateStaticParams` | Compatibilidade com static export | Precisa enumerar ids mock | Server wrapper para forms client |
+| Client forms sem persistencia | Demonstra UX sem backend | Dados nao gravam apos refresh | Futuro POST na API NestJS |
+| GitHub Pages | Deploy publico rapido | Base path e assets precisam configuracao | `basePath` e `assetPrefix` no Next |
+| Monolito modular | Menor complexidade MVP | Pode crescer demais | Separar dominios quando houver escala real |
 
-## 8. Jornada da demo (pitch de 10 minutos)
+## 8. Regras tecnicas importantes
 
-1. Login por perfil (ONG e Investidor).
-2. Mostrar score de maturidade institucional.
-3. Abrir projeto no marketplace com filtros por ODS, regiao e ticket.
-4. Simular interesse/aporte de investidor.
-5. Exibir monitoramento do impacto (indicadores antes/depois).
-6. Fechar com painel executivo e trilha de auditoria.
+1. Rotas dinamicas em `output: 'export'` precisam de `generateStaticParams`.
+2. Paginas client que dependem de params devem usar wrapper server + componente client.
+3. Dados devem passar pela camada `apps/web/src/lib/api.ts` quando possivel.
+4. Mock nao deve conter PII real, credenciais ou documentos sensiveis.
+5. Build de producao deve ser validado antes de push/deploy.
 
-## 9. Roadmap objetivo
+## 9. Arquitetura da jornada legal/auditavel
 
-Fase 0 (Semana 1):
-- Setup monorepo, design system, auth e estrutura de dominios.
+```mermaid
+sequenceDiagram
+  participant E as Empresa
+  participant P as Plataforma
+  participant O as ONG
+  participant C as Compliance
 
-Fase 1 (Semanas 2-3):
-- Cadastro institucional, documentos e diagnostico.
+  E->>P: Informa regime tributario, causa, valor e objetivo ESG
+  P->>P: Seleciona mecanismo legal elegivel
+  P->>E: Exibe beneficio fiscal estimado e custo efetivo
+  E->>P: Escolhe projeto/ONG
+  P->>C: Executa checklist de risco e documentos
+  C->>P: Aprova ou aponta pendencias
+  P->>O: Gera contrato/termo com obrigacoes e cronograma
+  O->>P: Envia evidencias e relatorios periodicos
+  P->>E: Entrega dashboard ESG e pacote de auditoria
+```
 
-Fase 2 (Semanas 4-5):
-- Projetos, marketplace e matching basico.
+## 10. Evolucao para producao
 
-Fase 3 (Semanas 6-7):
-- Dashboard impacto/ESG + observabilidade + refinamento demo.
+### Fase 1 - Persistencia real
 
-Fase 4 (Semana 8):
-- Storytelling final para financiadores e pacote de apresentacao.
+- PostgreSQL + Prisma.
+- Entidades: Organization, Project, Investor, Campaign, Donation, Contract, LegalFramework, Document, Evidence, Report, AccountingEntry.
+- Autenticacao com Auth.js ou provedor OAuth.
 
-## 10. Arquitetura-alvo apos aprovacao do financiamento
+### Fase 2 - Workflow documental
 
-Evolucao natural sem refatoracao drastica:
-- separar dominos em servicos (quando houver gargalo real);
-- introduzir event bus para trilhas e automacoes;
-- plugar pagamentos e integracoes oficiais;
-- expandir camada de IA para avaliacao documental.
+- Upload seguro de documentos.
+- Versionamento.
+- Status de validade.
+- Checklist por mecanismo legal.
+- Assinatura digital.
 
-Resumo final: com essa abordagem, o MVP fica rapido, convincente para o investimento e tecnicamente preparado para escalar sem retrabalho estrutural.
+### Fase 3 - Contratos personalizados
+
+- Templates versionados.
+- Campos obrigatorios por mecanismo legal.
+- Geracao de PDF.
+- Trilha de aceite.
+- Hash do documento para auditoria.
+
+### Fase 4 - Integracoes
+
+- Receita/CNPJ e certidoes, quando viavel.
+- Provedores de pagamento.
+- Assinatura digital.
+- ERPs/contabilidade.
+- Ferramentas ESG corporativas.
+
+### Fase 5 - IA assistiva
+
+- Classificacao documental.
+- Sugestao de mecanismo legal.
+- Revisao de contrato.
+- Alertas de risco.
+- Sumarizacao de evidencias para relatorio ESG.
+
+## 11. Deploy
+
+Workflow atual:
+
+1. Push em `main`.
+2. GitHub Actions instala dependencias.
+3. Executa `npm run build` em `apps/web`.
+4. Gera static export em `apps/web/out`.
+5. Publica em `gh-pages` via `peaceiris/actions-gh-pages`.
+
+URL publica esperada:
+
+```text
+https://wesleyzilva.github.io/ONGanizator/
+```
+
+## 12. Comandos principais
+
+```bash
+npm install --workspaces --include-workspace-root --legacy-peer-deps
+npm run dev:web
+npm run build --workspace=apps/web
+```
+
+Resumo: a arquitetura atual e adequada para demonstracao publica e pitch comercial, mantendo um caminho direto para backend real, governanca documental, regras legais brasileiras e auditoria ponta a ponta.
