@@ -7,6 +7,7 @@ import {
   getMonitoramentoConsolidado,
   getMonitoramentoProjeto,
   getOrgScore,
+  getProjetoDetalhes,
 } from "./mockData";
 
 function asPromise<T>(v: T): Promise<T> {
@@ -52,6 +53,7 @@ export const api = {
       projetos: matches,
     });
   },
+  projetoDetalhes: (id: string) => asPromise(getProjetoDetalhes(id)),
   impactoResumo: () => asPromise(getImpactoResumo()),
   impactoProjeto: (id: string) => asPromise(null),
   monitoramentoConsolidado: () => asPromise(getMonitoramentoConsolidado()),

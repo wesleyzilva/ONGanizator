@@ -17,7 +17,7 @@ export default async function ProjetosPage() {
           <h1 className="text-2xl font-bold text-gray-900">Projetos</h1>
           <p className="text-sm text-gray-500 mt-1">{data.length} projetos cadastrados</p>
         </div>
-        <button className="btn-primary">+ Novo Projeto</button>
+        <Link href="/projetos/novo" className="btn-primary">+ Novo Projeto</Link>
       </div>
 
       <div className="card overflow-auto">
