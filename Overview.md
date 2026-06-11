@@ -1,5 +1,5 @@
-[10:37, 09/06/2026] Guilherme Berberti Recife Flexpag: # DOCUMENTO DE REQUISITOS
-
+[[10:37, 09/06/2026] Guilherme Berberti Recife Flexpag: # DOCUMENTO DE REQUISITOS
+](https://docs.google.com/presentation/d/1Zaot_xirA5M002TMJKoEC8ZofJlQT-Jq4YFO-XJNWlQ/edit?slide=id.p#slide=id.p)
 # PLATAFORMA DE GOVERNANÇA, CAPTAÇÃO E FINANCIAMENTO DE IMPACTO SOCIAL
 
 Versão 1.0
@@ -580,7 +580,205 @@ Avaliar a capacidade institucional.
 * Responsiva
 * Aplicativo Android
 * Aplicativo iOS
+Plataforma de Governança, Captação de Recursos e Desenvolvimento de Organizações de Impacto
 
+1. Visão Geral
+
+A Shiboleth Consultoria e a DEARO propõem o desenvolvimento conjunto de uma plataforma digital voltada para organizações da sociedade civil, negócios sociais, cooperativas e projetos de impacto, integrando governança institucional, validação organizacional, captação de recursos e monitoramento de resultados.
+
+A plataforma combinará características de soluções de inteligência social e governança institucional, semelhantes à SIMBI Social, com funcionalidades de financiamento coletivo inspiradas em plataformas como Catarse, Benfeitoria e Vakinha.
+
+O objetivo é criar um ecossistema capaz de conectar organizações sociais, investidores sociais privados, empresas, fundações, institutos, governos e grandes doadores, proporcionando maior segurança, transparência e eficiência na destinação de recursos.
+
+
+2. Objetivos da Plataforma
+
+A plataforma terá como objetivos:
+
+* Avaliar a maturidade institucional das organizações cadastradas;
+* Verificar documentação e requisitos legais para captação de recursos;
+* Classificar o nível de governança e compliance das organizações;
+* Estruturar projetos aptos à captação de recursos;
+* Conectar organizações a investidores, patrocinadores e doadores;
+* Disponibilizar mecanismos de crowdfunding para campanhas públicas;
+* Disponibilizar mecanismos de financiamento para negócios sociais;
+* Monitorar indicadores de impacto e prestação de contas;
+* Gerar relatórios de ESG, ODS e impacto social.
+
+3. Fluxo Operacional
+
+Etapa 1 – Cadastro Institucional
+
+A organização realiza seu cadastro na plataforma e envia:
+
+* Estatuto social;
+* Ata de eleição da diretoria;
+* CNPJ;
+* Certidões;
+* Demonstrações financeiras;
+* Relatórios de atividades;
+* Informações sobre governança;
+* Dados de conformidade legal e fiscal.
+
+Etapa 2 – Diagnóstico Institucional
+
+A organização passa por um processo estruturado de avaliação envolvendo:
+
+* Governança;
+* Gestão financeira;
+* Compliance;
+* Sustentabilidade econômica;
+* Capacidade de execução;
+* Histórico de resultados;
+* Indicadores de impacto.
+
+Etapa 3 – Validação
+
+A documentação e os critérios institucionais são analisados pela equipe técnica da plataforma.
+
+As organizações serão classificadas em níveis de maturidade institucional, permitindo aos investidores compreender o grau de confiabilidade e preparação da instituição.
+
+Etapa 4 – Estruturação de Projetos
+
+Após aprovação institucional, a organização poderá cadastrar projetos para:
+
+* Captação por doação;
+* Editais públicos e privados;
+* Patrocínio empresarial;
+* Leis de incentivo;
+* Crowdfunding;
+* Negócios sociais;
+* Investimento de impacto.
+
+Etapa 5 – Captação de Recursos
+
+Os projetos aprovados serão disponibilizados para:
+
+* Doadores individuais;
+* Empresas;
+* Institutos e fundações;
+* Investidores de impacto;
+* Parceiros estratégicos.
+
+Etapa 6 – Monitoramento e Prestação de Contas
+
+A plataforma acompanhará:
+
+* Execução física;
+* Execução financeira;
+* Indicadores de impacto;
+* Metas e resultados;
+* Relatórios periódicos.
+
+4. Responsabilidades da Shiboleth Consultoria
+
+A Shiboleth será responsável por:
+
+* Desenvolvimento da metodologia de avaliação institucional;
+* Construção do modelo de maturidade organizacional;
+* Desenvolvimento do sistema de governança e compliance;
+* Estruturação metodológica dos processos de acompanhamento;
+* Desenvolvimento tecnológico da plataforma;
+* Implantação de indicadores de desempenho e impacto;
+* Gestão da operação técnica da plataforma;
+* Consultoria especializada para fortalecimento institucional das organizações.
+
+5. Responsabilidades da DEARO
+
+A DEARO será responsável por:
+
+* Estratégias de captação de recursos;
+* Relacionamento com investidores sociais e grandes doadores;
+* Desenvolvimento de campanhas de comunicação e marketing social;
+* Estruturação de campanhas de crowdfunding;
+* Intermediação de parcerias estratégicas;
+* Mobilização de patrocinadores e financiadores;
+* Apoio à estruturação de projetos para captação;
+* Gestão comercial e expansão da plataforma.
+
+6. Modelo de Receita
+
+As receitas poderão ser compostas por:
+
+ Assinaturas
+
+* Plano Básico;
+* Plano Profissional;
+* Plano Premium.
+
+Taxa de Captação
+
+Percentual incidente sobre recursos captados por intermédio da plataforma.
+
+Serviços Especializados
+
+* Diagnósticos institucionais;
+* Governança;
+* Compliance;
+* Planejamento estratégico;
+* Captação de recursos;
+* Certificações institucionais.
+
+Soluções Corporativas
+
+Prestação de serviços para:
+
+* Empresas;
+* Institutos;
+* Fundações;
+* Organismos internacionais;
+* Governos.
+
+Incluindo:
+
+* Gestão de editais;
+* Due diligence social;
+* Auditorias de impacto;
+* Programas ESG;
+* Monitoramento de investimentos sociais.
+
+7. Modelo Societário e Financeiro
+
+A parceria será estabelecida sob o princípio de compartilhamento equitativo de responsabilidades, investimentos, riscos e resultados.
+
+As partes concordam preliminarmente que:
+
+* Os investimentos necessários para o desenvolvimento da plataforma serão realizados em condições equivalentes;
+* As receitas líquidas geradas pela operação serão divididas em partes iguais entre Shiboleth e DEARO;
+* As decisões estratégicas serão tomadas de forma conjunta;
+* A propriedade intelectual desenvolvida no âmbito do projeto será compartilhada entre as partes, conforme instrumento jurídico específico.
+
+8. Estratégia de Implantação
+
+Fase 1 – Prestação de Serviços
+
+Captação de contratos junto a grandes empresas, fundações, institutos e investidores sociais para financiar a estrutura inicial do projeto.
+
+Fase 2 – Desenvolvimento do MVP
+
+Construção da versão inicial da plataforma contendo:
+
+* Cadastro institucional;
+* Diagnóstico;
+* Validação documental;
+* Dashboard de governança.
+
+Fase 3 – Marketplace de Projetos
+
+Disponibilização do ambiente de conexão entre organizações e financiadores.
+
+Fase 4 – Crowdfunding
+
+Lançamento das campanhas públicas de arrecadação.
+
+Fase 5 – Ecossistema de Investimento de Impacto
+
+Ampliação para modelos de financiamento estruturado, negócios sociais e investimentos de impacto.
+
+
+Visão de Longo Prazo
+
+Transformar a plataforma na principal infraestrutura digital brasileira para governança, validação, aceleração e financiamento de organizações de impacto social, promovendo maior transparência, eficiência e sustentabilidade para o terceiro setor e para os negócios de impacto.
 ---
 
 # MVP (VERSÃO 1)
