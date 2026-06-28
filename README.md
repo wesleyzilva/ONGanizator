@@ -26,14 +26,38 @@ ONGanizator is a digital platform that connects social impact organizations (NGO
 | Route | Description |
 |-------|-------------|
 | `/` | Executive dashboard with global KPIs |
+| `/login` | Login page for mock stakeholder profiles |
+| `/registro` | Register a new demo profile |
+| `/perfil` | Profile and stakeholder perspective selector |
 | `/organizacoes` | Organization catalogue with maturity scores |
 | `/organizacoes/:id` | Institutional detail + maturity radar |
 | `/projetos` | Full project table |
 | `/marketplace` | Public showcase filtered by SDG and region |
 | `/investidores` | Investor profiles with automatic matching |
+| `/crm` | CRM / relationship view for professional stakeholders |
+| `/contabilidade` | Finance and compliance summary for Advogado/Contador |
+| `/risco` | Reputation and risk analysis |
 | `/impacto` | Consolidated ESG / SDG panel |
 | `/monitoramento` | Accountability: reports, evidence, timeline |
 | `/para-investidores` | Investor pitch one-pager |
+
+---
+
+## Stakeholder journeys
+
+This prototype supports mock stakeholder flows through a shared profile model and perspective selector. Use the following routes to switch viewpoints:
+
+- `/login` — choose a demo or custom profile
+- `/registro` — create a new persona for the platform
+- `/perfil` — manage consent, current role and active stakeholder perspective
+
+The sidebar menu adapts to the selected stakeholder view to surface only relevant modules.
+
+### Implemented today
+- Mock login and registration for ADM, ONG, Investidor and Advogado/Contador personas.
+- Profile page with stakeholder perspective selector and persisted session.
+- Sidebar filtering by perspective to present only relevant menu sections.
+- Journey-aware language for ONG gamificação, Investidor decisão de investimento, Advogado/Contabilidade CRM profissional, and ADM visão completa.
 
 ---
 

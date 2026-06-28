@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { api } from '@/lib/api';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { StatusBadge } from '@/components/ui/StatusBadge';
@@ -14,9 +15,24 @@ export default async function DashboardPage() {
 
   return (
     <div className="p-8 space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard Executivo</h1>
-        <p className="text-sm text-gray-500 mt-1">Visão geral do ecossistema de impacto social</p>
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Dashboard Executivo</h1>
+            <p className="text-sm text-gray-500 mt-1">Visão geral do ecossistema de impacto social</p>
+          </div>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Link href="/login" className="inline-flex items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+              Login / Perfil
+            </Link>
+            <Link href="/registro" className="inline-flex items-center justify-center rounded-xl border border-brand-600 bg-white px-4 py-3 text-sm font-semibold text-brand-600 hover:bg-brand-50">
+              Registrar visão
+            </Link>
+          </div>
+        </div>
+        <div className="rounded-3xl border border-dashed border-brand-200 bg-brand-50 p-5 text-sm text-brand-700">
+          Selecione sua visão de stakeholder em <strong>Perfil</strong> para habilitar menus e jornadas específicas de ONG, Investidor, Advogado/Contador ou ADM.
+        </div>
       </div>
 
       {/* KPIs */}
