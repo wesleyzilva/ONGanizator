@@ -81,3 +81,4 @@ export default async function OrgDetalhe({ params }: { params: Promise<{ id: str
     </div>
   );
 }
+ 
