@@ -1,166 +1,106 @@
 # ONGanizator
 
-**Governance, Fundraising & Social Impact Monitoring Platform**
+Plataforma white-label para governanca, captacao e prestacao de contas de projetos sociais, desenhada para uma operacao pequena, auditavel e orientada por stakeholders.
 
-> MVP Demo — Next.js 15 · NestJS 11 · Tailwind CSS · Mock Data · GitHub Pages
+O foco do projeto nao e volume alto de usuarios ou requisicoes. O foco e coordenar poucos agentes com responsabilidades claras: advogado, contador, ONG, projeto, investidor, fundacao/instituto e administrador da plataforma. A plataforma deve registrar a jornada completa da prospeccao ate o relatorio anual do que foi entregue.
 
-🌐 **[Live demo](https://wesleyzilva.github.io/ONGanizator/)**
+## Problema que a plataforma resolve
 
----
+ONGs e fundacoes pequenas normalmente nao tem um sistema auditavel para gerir projetos, evidencias, orcamento, prestacao de contas e captacao recorrente. Isso cria perda de memoria, baixa confianca para investidores e dificuldade de comprovar o que foi entregue.
 
-## What is it
+ONGanizator organiza essa jornada em um fluxo unico:
 
-ONGanizator is a digital platform that connects social impact organizations (NGOs, cooperatives and social businesses) with investors, sponsors and funders, providing:
+1. Advogado prospecta investidores, empresas e fundacoes.
+2. Advogado cadastra ou convida a ONG.
+3. ONG completa cadastro, documentos e projetos.
+4. Projeto passa por avaliacao, OKRs/KRs, orcamento e risco.
+5. Contador acompanha valores, lancamentos, comprovantes e saldo.
+6. Investidor ou fundacao avalia, aprova e acompanha a execucao.
+7. Plataforma registra evidencias, alteracoes e entregas.
+8. Relatorio anual consolida execucao fisica, financeira e impacto.
 
-- **Institutional governance** — maturity diagnostic with a score across 5 dimensions
-- **Document management** — KYC validation and legal compliance tracking
-- **Project marketplace** — public catalogue filtered by SDG, region and investment ticket
-- **Automatic matching** — links investors to the projects best aligned with their portfolio
-- **Real-time monitoring** — reports, photo evidence, timeline and impact indicators
-- **ESG / SDG reporting** — auditable accountability for funders
+## Documentacao reorganizada
 
----
+| Documento | Finalidade |
+|---|---|
+| [Overview.md](Overview.md) | Visao do produto, problema, modulos e jornadas principais |
+| [Analise-Projeto-Atual.md](Analise-Projeto-Atual.md) | Diagnostico do app atual contra a plataforma desejada |
+| [Referencias-Mercado.md](Referencias-Mercado.md) | Analise de Portal do Incentivo, Benevity e GlobalGiving |
+| [Stakeholders-Agentes.md](Stakeholders-Agentes.md) | Agentes da plataforma, permissoes, interacoes e acoes combinadas |
+| [Squad-Agentes.md](Squad-Agentes.md) | Agentes da squad de desenvolvimento e suporte |
+| [Jornada-Auditavel.md](Jornada-Auditavel.md) | Fluxo auditavel da prospeccao ao relatorio anual |
+| [Legal-Captacao-ONGs.md](Legal-Captacao-ONGs.md) | Referencia inicial sobre captacao, incentivos e obrigacoes legais |
+| [Arquitetura-MVP-Tradeoffs.md](Arquitetura-MVP-Tradeoffs.md) | Arquitetura atual, trade-offs e caminho tecnico do MVP |
+| [productBacklog/poBacklog.md](productBacklog/poBacklog.md) | Backlog canonico do PO com epicos, historias e aceite |
+| [productBacklog/raidLog.md](productBacklog/raidLog.md) | Decisoes, riscos, assumptions, issues e backlog vivo |
+| [productBacklog/cidades/franciscoBeltrao.md](productBacklog/cidades/franciscoBeltrao.md) | Base enxuta de prospeccao local em Francisco Beltrao |
+| [productBacklog/cidades/patobranco.md](productBacklog/cidades/patobranco.md) | Base enxuta de prospeccao local em Pato Branco |
+| [docs/backup/README.md](docs/backup/README.md) | Materiais arquivados para nao confundir os agentes |
 
-## Pages
+## Escopo do mock atual
 
-| Route | Description |
-|-------|-------------|
-| `/` | Executive dashboard with global KPIs |
-| `/login` | Login page for mock stakeholder profiles |
-| `/registro` | Register a new demo profile |
-| `/perfil` | Profile and stakeholder perspective selector |
-| `/organizacoes` | Organization catalogue with maturity scores |
-| `/organizacoes/:id` | Institutional detail + maturity radar |
-| `/projetos` | Full project table |
-| `/marketplace` | Public showcase filtered by SDG and region |
-| `/investidores` | Investor profiles with automatic matching |
-| `/crm` | CRM / relationship view for professional stakeholders |
-| `/contabilidade` | Finance and compliance summary for Advogado/Contador |
-| `/risco` | Reputation and risk analysis |
-| `/impacto` | Consolidated ESG / SDG panel |
-| `/monitoramento` | Accountability: reports, evidence, timeline |
-| `/para-investidores` | Investor pitch one-pager |
+O repositorio ja possui uma demo em monorepo com frontend Next.js, API NestJS preparada e dados mock. Antes de rodar localmente e avaliar telas, a documentacao passa a ser a referencia do que o mock deve demonstrar:
 
----
+- login por perfil de stakeholder;
+- menu filtrado por papel e perspectiva;
+- cadastro de ONG feito pelo advogado, com liberacao de acesso;
+- cadastro e manutencao de projetos pela ONG;
+- trilha auditavel para alteracoes de projeto, orcamento, documentos e evidencias;
+- gamificacao por selos Bronze, Prata e Ouro;
+- CRM/kanban de prospeccao de investidores, empresas e fundacoes;
+- visao contabil dos valores intermediarios;
+- monitoramento de entregas com evidencias e relatorio anual.
 
-## Stakeholder journeys
+## Rotas ja existentes na demo
 
-This prototype supports mock stakeholder flows through a shared profile model and perspective selector. Use the following routes to switch viewpoints:
+| Rota | Uso esperado na nova narrativa |
+|---|---|
+| `/` | Dashboard executivo e resumo auditavel |
+| `/login` | Entrada por perfil mock |
+| `/perfil` | Selecao de perspectiva e consentimentos |
+| `/organizacoes` | Cadastro, lista e maturidade das ONGs |
+| `/projetos` | Projetos, objetivos, KRs, orcamento e status |
+| `/investidores` | Investidores, fundacoes e mandatos de impacto |
+| `/crm` | Prospecao feita pelo advogado |
+| `/contabilidade` | Visao do contador sobre entradas, despesas e pendencias |
+| `/risco` | Risco reputacional e compliance |
+| `/monitoramento` | Evidencias, timeline e prestacao de contas |
+| `/impacto` | Indicadores ODS/ESG e relatorios |
+| `/para-investidores` | Pitch para investidores e fundacoes |
 
-- `/login` — choose a demo or custom profile
-- `/registro` — create a new persona for the platform
-- `/perfil` — manage consent, current role and active stakeholder perspective
+## Stack
 
-The sidebar menu adapts to the selected stakeholder view to surface only relevant modules.
+| Camada | Tecnologia |
+|---|---|
+| Web | Next.js 15, React 19, TypeScript, Tailwind CSS |
+| API local | NestJS 11 |
+| Compartilhado | npm workspaces e `packages/shared` |
+| Dados atuais | Mock em memoria e arquivos TypeScript |
+| Deploy demo | GitHub Pages via GitHub Actions |
 
-### Implemented today
-- Mock login and registration for ADM, ONG, Investidor and Advogado/Contador personas.
-- Profile page with stakeholder perspective selector and persisted session.
-- Sidebar filtering by perspective to present only relevant menu sections.
-- Journey-aware language for ONG gamificação, Investidor decisão de investimento, Advogado/Contabilidade CRM profissional, and ADM visão completa.
+## Executar localmente
 
----
-
-## Tech stack
-
-### Frontend
-- [Next.js 15](https://nextjs.org/) — App Router, Server Components, Static Export
-- [React 19](https://react.dev/)
-- [Tailwind CSS 3](https://tailwindcss.com/)
-- [Lucide React](https://lucide.dev/) — icons
-- TypeScript 5
-
-### Backend (local API)
-- [NestJS 11](https://nestjs.com/) — modular, decorators, Swagger
-- [ts-node-dev](https://github.com/wclr/ts-node-dev) — hot reload
-- In-memory mock data (no database required)
-
-### Monorepo structure
-```
-ONGanizator/
-├── apps/
-│   ├── web/        # Next.js 15 (frontend)
-│   └── api/        # NestJS 11 (local backend)
-├── packages/
-│   └── shared/     # Shared TypeScript types
-└── package.json    # npm workspaces
-```
-
----
-
-## Running locally
-
-**Requirements:** Node.js 18+ and npm 9+
+Use estes comandos para iniciar o desenvolvimento local:
 
 ```bash
-# 1. Clone
-git clone https://github.com/wesleyzilva/ONGanizator.git
-cd ONGanizator
-
-# 2. Install dependencies
 npm install --workspaces --include-workspace-root
-
-# 3. Start API (port 3001)
-npm run dev:api
-
-# 4. Start frontend (port 3000) — in a separate terminal
-npm run dev:web
+npm run dev
 ```
 
-| Service | URL |
-|---------|-----|
+| Servico | URL |
+|---|---|
 | Frontend | http://localhost:3000 |
 | API | http://localhost:3001 |
 | Swagger | http://localhost:3001/docs |
 
-**Demo credentials:**
+Para validar o export estatico antes do deploy no GitHub Pages:
 
-| Email | Password | Role |
-|-------|----------|------|
-| `admin@onganizator.com.br` | `demo@2026` | Administrator |
-| `ong@demo.org` | `demo@2026` | NGO |
-| `investidor@demo.com.br` | `demo@2026` | Investor |
-
----
-
-## API endpoints
-
-| Method | Route | Description |
-|--------|-------|-------------|
-| `POST` | `/api/auth/login` | Mock authentication |
-| `GET` | `/api/dashboard` | Executive KPIs |
-| `GET` | `/api/organizacoes` | Organization list with filters |
-| `GET` | `/api/organizacoes/:id/score` | Maturity score breakdown |
-| `GET` | `/api/projetos` | Project list with filters |
-| `GET` | `/api/investidores/:id/match` | Automatic project matching |
-| `GET` | `/api/impacto/resumo` | ESG / SDG summary |
-| `GET` | `/api/monitoramento/consolidado` | Consolidated monitoring |
-| `GET` | `/api/monitoramento/projeto/:id` | Project timeline + evidence |
-
----
-
-## Deployment (GitHub Pages)
-
-Deployment is fully automated via GitHub Actions on every push to `main`.
-
-```
-push → main → GitHub Actions → static build → gh-pages branch → GitHub Pages
+```bash
+npm run build --workspace=apps/web
 ```
 
-Workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+O workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) publica `apps/web/out` no branch `gh-pages` a partir da branch `main`.
 
----
+## Principio de produto
 
-## Business context
-
-This MVP was built to demonstrate the platform to social investors and funders.
-Full documentation:
-
-- [`One-Page-ONGanizator.md`](One-Page-ONGanizator.md) — investor pitch one-pager
-- [`Arquitetura-MVP-Tradeoffs.md`](Arquitetura-MVP-Tradeoffs.md) — technical decisions and roadmap
-
----
-
-## License
-
-MIT
+Cada acao relevante deve responder quatro perguntas: quem fez, por que fez, o que mudou e qual evidencia sustenta a mudanca. Se a resposta nao puder aparecer no relatorio anual, a acao ainda nao esta bem modelada.
