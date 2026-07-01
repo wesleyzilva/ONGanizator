@@ -12,3 +12,4 @@ build/
 .turbo/
 coverage/
 *.zip
+push-via-api.sh

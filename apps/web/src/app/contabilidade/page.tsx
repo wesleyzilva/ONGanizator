@@ -44,7 +44,7 @@ export default function ContabilidadePage() {
       </div>
 
       {/* KPI cards */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="card p-5 bg-green-50 border-green-200">
           <p className="text-xs font-medium text-green-700 uppercase tracking-wide">Total de Receitas</p>
           <p className="text-2xl font-bold text-green-800 mt-1">{fmt(totalReceitas)}</p>

@@ -141,7 +141,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       </div>
 
       {/* resumo matches */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="card p-4 text-center border-green-200 bg-green-50">
           <p className="text-3xl font-black text-green-600">{excelentes.length}</p>
           <p className="text-xs text-green-700 font-semibold mt-1">Excelentes matches</p>

@@ -66,13 +66,24 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       />
 
       <div className="flex h-[calc(100vh-4rem)]">
-        {/* Sidebar — parte do flex layout, empurra o conteúdo */}
+        {/* Backdrop — só no mobile, quando o drawer está aberto */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-x-0 bottom-0 top-16 z-30 bg-black/40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Sidebar — drawer sobreposto no mobile, coluna fixa no desktop */}
         <div
-          className={`shrink-0 overflow-hidden border-r border-gray-200 bg-white transition-[width] duration-200 ease-in-out ${
-            sidebarOpen ? 'w-72' : 'w-0'
+          className={`fixed bottom-0 left-0 top-16 z-40 w-72 overflow-hidden border-r border-gray-200 bg-white transition-transform duration-200 ease-in-out lg:static lg:top-0 lg:z-auto lg:shrink-0 lg:transition-[width] ${
+            sidebarOpen
+              ? 'translate-x-0 lg:w-72'
+              : '-translate-x-full lg:w-0 lg:translate-x-0'
           }`}
         >
-          <div className="w-72 h-full">
+          <div className="h-full w-72">
             <Sidebar perspective={perspective} />
           </div>
         </div>

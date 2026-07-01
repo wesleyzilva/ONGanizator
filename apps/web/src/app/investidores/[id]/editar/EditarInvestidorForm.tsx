@@ -66,7 +66,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
 
       <div className="card p-6 space-y-5">
         <h2 className="text-base font-semibold text-gray-900 border-b border-gray-100 pb-3">🏢 Identificação</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Nome / Razão Social" required>
             <input className={inputCls} value={form.nome} onChange={e => setForm(f => ({ ...f, nome: e.target.value }))} placeholder="Fundação Horizonte Verde" />
           </Field>
@@ -81,7 +81,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
             </select>
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Email de contato">
             <input className={inputCls} type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="esg&#64;empresa.com.br" />
           </Field>
@@ -99,7 +99,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
       <div className="card p-6 space-y-5">
         <h2 className="text-base font-semibold text-gray-900 border-b border-gray-100 pb-3">🎯 Critérios de Match</h2>
         <p className="text-xs text-gray-500">Estes dados alimentam o motor de compatibilidade com projetos.</p>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Ticket mínimo (R$)" required>
             <input className={inputCls} type="number" min={0} value={form.ticketMin} onChange={e => setForm(f => ({ ...f, ticketMin: e.target.value }))} placeholder="50000" />
           </Field>
@@ -108,7 +108,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
           </Field>
         </div>
         <Field label="Prioridade de investimento" required>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
               { v: 'impacto', l: '🌱 Impacto social' },
               { v: 'retorno', l: '📈 Retorno + impacto' },
@@ -122,7 +122,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
           </div>
         </Field>
         <Field label="ODS de interesse" required>
-          <div className="grid grid-cols-6 gap-1.5">
+          <div className="grid grid-cols-4 sm:grid-cols-6 gap-1.5">
             {ODS_LIST.map(n => (
               <label key={n} className={`flex items-center justify-center px-2 py-1.5 rounded-lg border cursor-pointer text-xs font-bold transition-colors ${form.ods.includes(n) ? 'border-brand-400 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-400 hover:bg-gray-50'}`}>
                 <input type="checkbox" className="hidden" checked={form.ods.includes(n)} onChange={() => toggleOds(n)} />
@@ -133,7 +133,7 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
           <p className="text-xs text-gray-400 mt-1">{form.ods.length} ODS selecionados</p>
         </Field>
         <Field label="Regiões de atuação (estados)" required>
-          <div className="grid grid-cols-7 gap-1.5">
+          <div className="grid grid-cols-5 sm:grid-cols-7 gap-1.5">
             {ESTADOS.map(e => (
               <label key={e} className={`flex items-center justify-center px-2 py-1.5 rounded border cursor-pointer text-xs font-semibold transition-colors ${form.regioes.includes(e) ? 'border-brand-400 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-400 hover:bg-gray-50'}`}>
                 <input type="checkbox" className="hidden" checked={form.regioes.includes(e)} onChange={() => toggleEstado(e)} />

@@ -100,7 +100,7 @@ export default function NovoRelatorioPage({ projetoId }: { projetoId: string }) 
             onChange={e => setForm(f => ({ ...f, titulo: e.target.value }))} />
         </Field>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Field label="Tipo" required>
             <select className={inputCls} value={form.tipo} onChange={e => setForm(f => ({ ...f, tipo: e.target.value }))}>
               <option value="D0">D0 — Linha de base</option>
@@ -149,7 +149,7 @@ export default function NovoRelatorioPage({ projetoId }: { projetoId: string }) 
         <h2 className="text-base font-semibold text-gray-900 border-b border-gray-100 pb-3">📊 Indicadores do Período</h2>
 
         {indicadores.map((ind, idx) => (
-          <div key={idx} className="grid grid-cols-4 gap-3 items-end relative">
+          <div key={idx} className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-end relative">
             <Field label={idx === 0 ? 'Indicador' : ''}>
               <input className={inputCls} placeholder="Nascentes restauradas" value={ind.nome}
                 onChange={e => updateInd(idx, 'nome', e.target.value)} />
@@ -241,7 +241,7 @@ export default function NovoRelatorioPage({ projetoId }: { projetoId: string }) 
               )}
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <Field label="Tipo">
                 <select className={inputCls} value={ev.tipo}
                   onChange={e => updateEv(idx, 'tipo', e.target.value)}>

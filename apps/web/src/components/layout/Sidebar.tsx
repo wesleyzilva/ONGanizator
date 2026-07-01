@@ -28,8 +28,8 @@ export function Sidebar({ perspective }: SidebarProps) {
   }
 
   return (
-    <aside className="w-72 bg-white border-r border-gray-200 flex flex-col shrink-0">
-      <div className="p-5 border-b border-gray-100">
+    <aside className="w-72 h-full bg-white border-r border-gray-200 flex flex-col shrink-0">
+      <div className="p-5 border-b border-gray-100 shrink-0">
         <div className="flex items-center gap-2">
           <span className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">O</span>
           <div>
@@ -39,7 +39,7 @@ export function Sidebar({ perspective }: SidebarProps) {
         </div>
       </div>
 
-      <nav className="flex-1 p-3 space-y-4 overflow-y-auto">
+      <nav className="flex-1 min-h-0 p-3 space-y-4 overflow-y-auto">
         {menuGroups.map((group) => (
           <div key={group.label}>
             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-2 mb-1">{group.label}</p>
@@ -63,7 +63,7 @@ export function Sidebar({ perspective }: SidebarProps) {
       </nav>
 
       {/* Footer: perfil ativo + ações de sessão */}
-      <div className="p-4 border-t border-gray-100 space-y-3">
+      <div className="p-4 border-t border-gray-100 space-y-3 shrink-0">
         {/* Usuário */}
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">

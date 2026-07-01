@@ -180,7 +180,7 @@ export default function NovoProjetoPage() {
               value={dados.descricao} onChange={e => setDados(d => ({ ...d, descricao: e.target.value }))} />
           </Field>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field label="Organização responsável" required>
               <select className={inputCls} value={dados.organizacao} onChange={e => setDados(d => ({ ...d, organizacao: e.target.value }))}>
                 <option value="">Selecione…</option>
@@ -209,7 +209,7 @@ export default function NovoProjetoPage() {
             </Field>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Field label="Estado">
               <input className={inputCls} placeholder="MT" maxLength={2} value={dados.estado}
                 onChange={e => setDados(d => ({ ...d, estado: e.target.value.toUpperCase() }))} />
@@ -224,7 +224,7 @@ export default function NovoProjetoPage() {
             </Field>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field label="Data de início" required>
               <input className={inputCls} type="date" value={dados.dataInicio}
                 onChange={e => setDados(d => ({ ...d, dataInicio: e.target.value }))} />
@@ -325,7 +325,7 @@ export default function NovoProjetoPage() {
                   onChange={e => updateItem(setMetas, idx, 'descricao', e.target.value)} />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Indicador (nome)" required>
                   <input className={inputCls} placeholder="Ex: Nascentes restauradas" value={m.indicador}
                     onChange={e => updateItem(setMetas, idx, 'indicador', e.target.value)} />
@@ -336,7 +336,7 @@ export default function NovoProjetoPage() {
                 </Field>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Field label="Linha de base">
                   <input className={inputCls} type="number" placeholder="0" value={m.linhaDeBase}
                     onChange={e => updateItem(setMetas, idx, 'linhaDeBase', e.target.value)} />
@@ -381,7 +381,7 @@ export default function NovoProjetoPage() {
           <div className="space-y-3">
             <p className="text-sm font-medium text-gray-700">Rubricas orçamentárias</p>
             {orcamento.rubricas.map((r, idx) => (
-              <div key={idx} className="grid grid-cols-3 gap-3 items-end">
+              <div key={idx} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
                 <Field label={idx === 0 ? 'Rubrica' : ''}>
                   <input className={inputCls} placeholder="Ex: Pessoal técnico" value={r.nome}
                     onChange={e => setOrcamento(o => ({ ...o, rubricas: o.rubricas.map((x, i) => i === idx ? { ...x, nome: e.target.value } : x) }))} />
@@ -460,7 +460,7 @@ export default function NovoProjetoPage() {
                   value={m.descricao} onChange={e => updateItem(setMarcos, idx, 'descricao', e.target.value)} />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Prazo previsto" required>
                   <input className={inputCls} type="date" value={m.prazo}
                     onChange={e => updateItem(setMarcos, idx, 'prazo', e.target.value)} />
