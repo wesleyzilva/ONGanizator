@@ -1,0 +1,31 @@
+# Backup - One Page ONGanizator
+
+Este material foi substituido como fonte ativa por [../../README.md](../../README.md), [../../Overview.md](../../Overview.md) e [../../productBacklog/poBacklog.md](../../productBacklog/poBacklog.md).
+
+## Tese preservada
+
+ONGanizator e uma plataforma white-label de governanca, captacao e prestacao de contas para ONGs, fundacoes e projetos sociais.
+
+A tese central: poucos stakeholders bem coordenados, com trilha auditavel, conseguem aumentar confianca entre quem executa impacto social e quem financia esse impacto.
+
+## Problema
+
+ONGs pequenas nao possuem um sistema confiavel para gerir projetos, registrar evidencias, organizar documentos, fazer captacao ativa e entregar relatorio anual claro para financiadores.
+
+## Solucao
+
+Uma plataforma unica para onboarding de ONGs, cadastro e validacao de projetos, selos, CRM de prospeccao conduzido pelo advogado, visao contabil, match com investidores/fundacoes, monitoramento e relatorio anual auditavel.
+
+## Modelo de receita preservado
+
+| Receita | Pagador | Como monetiza |
+|---|---|---|
+| SaaS white-label | ONG, rede ou fundacao | Plano mensal por ambiente |
+| Captacao assistida | ONG ou financiador | Success fee sobre projeto captado |
+| Compliance e contratos | ONG ou financiador | Pacotes juridicos e documentais |
+| Contabilidade social | ONG | Plano mensal ou pacote por projeto |
+| Relatorio de risco | Investidor, empresa ou fundacao | Relatorio unitario ou assinatura |
+
+## Observacao
+
+Nao usar este arquivo como backlog. Usar [../../productBacklog/poBacklog.md](../../productBacklog/poBacklog.md).
