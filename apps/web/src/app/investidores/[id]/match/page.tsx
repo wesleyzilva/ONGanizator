@@ -283,3 +283,4 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
     </div>
   );
 }
+ 
