@@ -423,3 +423,4 @@ export default async function ProjetoDetalheePage({
     </div>
   );
 }
+ 
