@@ -2569,3 +2569,4 @@ export function calcularBeneficioFiscal(
     IR_TOTAL,
   };
 }
+ 
