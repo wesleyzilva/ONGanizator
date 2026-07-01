@@ -1,0 +1,60 @@
+# ONGanizator - Analise do Projeto Atual
+
+## 1. Resumo
+
+O projeto atual ja tem uma base forte para demonstracao: monorepo, frontend Next.js, API NestJS preparada, dados mock ricos, rotas de organizacoes, projetos, investidores, CRM, contabilidade, risco, monitoramento e impacto.
+
+O principal gap nao e quantidade de telas. O gap e alinhamento da jornada. Hoje o app parece uma plataforma ampla de impacto social; o desejado e uma operacao auditavel com agentes claros: advogado, contador, ONG, projeto, investidor, fundacao/instituto e administrador.
+
+## 2. O que ja existe
+
+| Area | Evidencia no projeto | Valor atual |
+|---|---|---|
+| Autenticacao mock | `mockAuth.ts` e `/login` | Permite entrar como administrador, ONG, investidor e advogado |
+| Perspectivas | `perspective.ts` e `Sidebar.tsx` | Filtra menu por `adm`, `ong`, `investidor`, `advogado` |
+| Organizacoes | `ORGS`, rotas `/organizacoes` | Cadastro e score de maturidade basico |
+| Projetos | `PROJECTS`, detalhes por projeto, `/projetos` | Projetos com ODS, meta, captado, status e beneficiarios |
+| Investidores | `INVESTORS`, `/investidores`, match | Ja mistura empresa, instituto, fundacao e pessoa fisica |
+| Monitoramento | `RELATORIOS`, `TIMELINE`, evidencias | Bom material para jornada auditavel |
+| Impacto | `INDICATORS`, `/impacto` | Indicadores e ODS ja existem |
+| CRM | `DOADORES`, `/crm` | Existe, mas esta orientado a doadores, nao ao kanban do advogado |
+| Contabilidade | `LANCAMENTOS`, `/contabilidade` | Existe DRE simplificado, lancamentos e NF mock |
+| Legal/fiscal | `MARCOS_LEGAIS`, `calcularBeneficioFiscal` | Ha base inicial para leis de incentivo e calculadora |
+| Diagnostico | `DIAGNOSTICO_DIMENSOES`, `/diagnostico` | Bom ponto de partida para selos e maturidade |
+
+## 3. Gaps contra a plataforma desejada
+
+| Gap | Estado atual | Estado desejado |
+|---|---|---|
+| Contador como agente separado | Misturado com advogado na perspectiva `advogado` | Perfil, menu e jornada propria |
+| Fundacao como agente separado | Fundacao aparece como tipo de investidor | Perfil e jornada de grants/chamadas |
+| Projeto como unidade auditavel | Projeto tem dados e relatorios, mas sem eventos/versionamento explicito | Projeto com objetivo, KRs, selos, eventos e relatorio anual |
+| CRM do advogado | Tela de CRM de doadores | Kanban de prospeccao com status, semaforo e associacao projeto-financiador |
+| Selos Bronze/Prata/Ouro | Diagnostico existe, selos nao estao centrais | Selos ligados a evidencias e eventos auditaveis |
+| Leis de incentivo | Marcos legais existem, mas nao orientam a jornada | Motor de elegibilidade, calculadora e checklist por lei |
+| Relatorio anual | Existem relatorios, inclusive anual | Relatorio anual como fechamento padrao do fluxo |
+| Tipos compartilhados | `packages/shared` ainda usa papeis antigos | Tipos alinhados a advogado, contador, ONG, investidor, fundacao, admin |
+| White-label | Mencionado em docs, nao aparece como configuracao | Identidade basica por ONG/rede/parceiro |
+
+## 4. Implicacoes das referencias de mercado
+
+| Referencia | Aprendizado para ONGanizator |
+|---|---|
+| Portal do Incentivo | Transformar leis de incentivo em fluxo de decisao: melhor lei, elegibilidade, limite, conta do projeto, recibo e guarda documental |
+| Benevity | Ter uma unica trilha de auditoria para doacao, grant, compliance, relatorio e risco, mesmo que o MVP seja local e menor |
+| GlobalGiving | Vitrine de projetos precisa gerar confianca com historias, atualizacoes, evidencias e capacidade de doacao/acompanhamento |
+
+## 5. Sequencia recomendada
+
+| Marco | Objetivo | Por que vem antes |
+|---|---|---|
+| M0 - Squad e backlog | Criar agentes e governanca de entrega | Sem isso, o projeto volta a crescer sem foco |
+| M1 - Perfis e menu | Separar advogado, contador, ONG, investidor, fundacao e admin | A jornada depende de permissoes claras |
+| M2 - Projeto auditavel | Adicionar objetivo, KRs, selos, eventos e relatorio anual | O projeto e a unidade central da plataforma |
+| M3 - CRM de captacao | Transformar CRM em kanban do advogado | Prospecao e o motor de receita/uso |
+| M4 - Incentivos e compliance | Evoluir leis de incentivo para calculadora/checklist | Diferencial brasileiro e fonte de confianca |
+| M5 - Webinar mock | Ajustar dados, telas e narrativa para demonstracao | Validacao com ONGs e parceiros |
+
+## 6. Criterio de corte
+
+Se uma entrega nao ajuda a explicar prospeccao, validacao, aporte, execucao, evidencia ou relatorio anual, ela deve sair do P0.
