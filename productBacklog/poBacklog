@@ -1,0 +1,86 @@
+# PO Backlog - ONGanizator
+
+## 1. Objetivo do backlog
+
+Este e o backlog canonico do Product Owner para orientar desenvolvimento e suporte da plataforma. Ele traduz a visao de produto, referencias de mercado e RAID log em epicos, historias, criterios de aceite e validacoes.
+
+O criterio principal de priorizacao e simples: primeiro provar a jornada auditavel em ambiente local e demo, depois preparar deploy estatico no GitHub Pages.
+
+## 2. Norte do produto
+
+ONGanizator deve demonstrar uma jornada completa e auditavel:
+
+1. Advogado prospecta financiador.
+2. Advogado cadastra/convida ONG.
+3. ONG completa cadastro e projeto.
+4. Contador valida orcamento e lancamentos.
+5. Advogado valida elegibilidade juridica.
+6. Investidor ou fundacao avalia risco, projeto e proposta.
+7. ONG executa entregas com evidencias.
+8. Plataforma consolida relatorio anual.
+
+## 3. Backlog por marco
+
+### M1 - Perfis, permissoes e navegacao
+
+| ID | Historia | Prioridade | Criterios de aceite | Validacao |
+|---|---|---|---|---|
+| PO-001 | Como usuario, quero entrar como advogado, contador, ONG, investidor, fundacao ou admin para testar cada jornada separadamente. | P0 | Login exibe os 6 perfis; cada demo user salva `role` e `perspective`; `/perfil` mostra a perspectiva ativa. | Login manual + build web |
+| PO-002 | Como stakeholder, quero ver um menu coerente com meu papel para reduzir ruido operacional. | P0 | Contador ve contabilidade, relatorios e pendencias; fundacao ve projetos, chamadas/matches, risco e relatorios; advogado ve CRM, ONGs, projetos, risco e legal. | Navegacao por perfil |
+| PO-003 | Como time tecnico, quero alinhar tipos compartilhados com as personas reais para evitar divergencia entre mock, API e web. | P0 | `packages/shared` contempla roles e entidades desejadas; web e API compilam. | `npm run build` |
+| PO-004 | Como admin, quero ver a matriz de permissoes por perfil para explicar quem pode editar, aprovar ou visualizar. | P1 | Tela ou bloco de perfil mostra permissoes resumidas por papel. | Revisao visual |
+
+### M2 - Projeto auditavel e selos
+
+| ID | Historia | Prioridade | Criterios de aceite | Validacao |
+|---|---|---|---|---|
+| PO-005 | Como ONG, quero cadastrar projeto com objetivo, KRs, orcamento, cronograma e ODS para deixar a promessa mensuravel. | P0 | Projeto exibe objetivo, KRs, metas, responsaveis, orcamento e ODS; dados mock cobrem pelo menos 3 projetos. | Detalhe de projeto |
+| PO-006 | Como advogado, quero aprovar projeto para prospeccao para controlar elegibilidade inicial. | P0 | Projeto tem estado `em_avaliacao` e `aprovado_para_prospeccao`; aprovacao gera evento mockado. | Timeline/auditoria |
+| PO-007 | Como ONG e financiador, quero ver selos Bronze, Prata e Ouro para entender maturidade auditavel do projeto. | P0 | Existe um projeto mock por selo; cada selo mostra criterio e evidencia minima. | Lista/detalhe de projeto |
+| PO-008 | Como financiador, quero relatorio anual consolidado por projeto para comprovar entrega fisica, financeira e impacto. | P0 | Relatorio anual inclui objetivo, KRs, evidencias, orcamento executado, parecer contabil e parecer juridico. | Rota de relatorio |
+
+### M3 - Captacao conduzida pelo advogado
+
+| ID | Historia | Prioridade | Criterios de aceite | Validacao |
+|---|---|---|---|---|
+| PO-009 | Como advogado, quero um kanban de prospeccao para acompanhar oportunidades por status e semaforo. | P0 | CRM usa colunas Backlog, Prospeccao, Em andamento e Finalizado; cards mostram financiador, projeto, ticket, semaforo e proxima acao. | `/crm` |
+| PO-010 | Como advogado, quero associar financiador/fundacao a projeto para registrar hipotese de match. | P0 | Card de oportunidade mostra ONG, projeto, financiador, justificativa e data. | `/crm` + detalhe |
+| PO-011 | Como advogado, quero gerar proposta para patrocinador para apoiar conversas comerciais. | P0 | Proposta mostra objetivo, KRs, orcamento, ODS, modalidade de captacao e contrapartidas. | Tela/preview mock |
+| PO-012 | Como advogado/contador, quero uma pagina institucional propria para explicar o valor profissional da plataforma. | P1 | Existe rota/documento de jornada para advogados e contadores. | Navegacao |
+
+### M4 - Incentivos, compliance e contabilidade
+
+| ID | Historia | Prioridade | Criterios de aceite | Validacao |
+|---|---|---|---|---|
+| PO-013 | Como advogado, quero selecionar o mecanismo de captacao mais adequado para orientar a proposta. | P0 | Mecanismos: Rouanet, Esporte, FIA, Fundo do Idoso, PRONON, PRONAS, Reciclagem, Audiovisual, doacao direta e edital. | Fluxo legal |
+| PO-014 | Como financiador, quero simular limite de incentivo para estimar aporte possivel. | P0 | Calculadora recebe tipo de financiador, imposto estimado, mecanismo e retorna limite, alertas e documentos. | Teste de funcao/tela |
+| PO-015 | Como contador, quero validar recibos, comprovantes e conciliacao para apoiar prestacao de contas. | P0 | Contabilidade mostra pendencias, recibos, comprovantes, status e parecer. | `/contabilidade` |
+| PO-016 | Como admin/financiador, quero pacote de auditoria por projeto para baixar ou visualizar evidencias e documentos. | P1 | Pacote lista projeto, eventos, contrato/termo, comprovantes, evidencias e relatorios. | Relatorio/auditoria |
+
+### M5 - GitHub Pages, demo local e webinar
+
+| ID | Historia | Prioridade | Criterios de aceite | Validacao |
+|---|---|---|---|---|
+| PO-017 | Como time, quero rodar o app localmente para iniciar ajustes guiados pelo backlog. | P0 | Dependencias instaladas; `npm run dev` sobe web/API; URL local registrada no RAID. | Servidor local |
+| PO-018 | Como time, quero garantir build estatico para GitHub Pages antes de deploy. | P0 | `npm run build --workspace=apps/web` gera `apps/web/out`; `.nojekyll` previsto no workflow. | Build web |
+| PO-019 | Como PO, quero roteiro de demo por perfil para conduzir webinar. | P0 | Roteiro passa por advogado, ONG, contador, fundacao/investidor e admin. | Ensaio local |
+| PO-020 | Como admin, quero white-label basico para demonstrar uso por ONG/rede parceira. | P1 | Config mock permite nome, cor e logo textual. | Revisao visual |
+
+## 4. Regras de aceite globais
+
+- Toda historia P0 deve indicar stakeholder, etapa da jornada e evidencia auditavel.
+- Toda alteracao de perfil/menu deve respeitar [Stakeholders-Agentes.md](../Stakeholders-Agentes.md).
+- Toda regra legal deve respeitar [Legal-Captacao-ONGs.md](../Legal-Captacao-ONGs.md) e manter disclaimer de revisao profissional.
+- Toda alteracao em dados compartilhados deve avaliar `apps/web/src/lib/mockData.ts`, `apps/api/src/mock/seed.ts` e `packages/shared/src/index.ts`.
+- Toda entrega deve registrar validacao executada ou bloqueio no [raidLog.md](raidLog.md).
+
+## 5. Validacoes executadas
+
+| Data | Item | Resultado |
+|---|---|---|
+| 2026-07-01 | PO-018 - build estatico web | `npm run build --workspace=apps/web` executado com sucesso; Next exportou 72 paginas para `apps/web/out` |
+| 2026-07-01 | PO-017 - ambiente local | `npm run dev` subiu web e API; frontend respondeu 200 em `http://localhost:3000/ONGanizator`; Swagger respondeu 200 em `http://localhost:3001/docs` |
+
+## 6. Proximo corte recomendado
+
+Comecar por PO-001, PO-002 e PO-003. Sem perfis e menus separados, os agentes continuam vendo jornadas misturadas e qualquer ajuste visual tende a reforcar a confusao atual.
