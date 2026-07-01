@@ -71,3 +71,4 @@ export function Sidebar({ perspective }: SidebarProps) {
     </aside>
   );
 }
+ 
