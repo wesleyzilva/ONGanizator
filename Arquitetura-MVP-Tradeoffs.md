@@ -1,214 +1,194 @@
-# ONGanizator - Arquitetura e Trade-offs
+# ONGanizator - Arquitetura do MVP e Trade-offs
 
 ## 1. Resumo executivo
 
-ONGanizator foi estruturado como monorepo para acelerar a demo e manter um caminho claro para producao. A versao atual prioriza experiencia web, dados mock ricos, export estatico e deploy simples no GitHub Pages.
+O MVP deve provar a jornada auditavel antes de provar escala. A quantidade esperada de usuarios e pequena e o volume de requisicoes nao e significativo. Por isso, a arquitetura deve favorecer clareza de dominio, rastreabilidade e velocidade de demonstracao.
 
-Objetivos arquiteturais:
+O produto atual esta estruturado como monorepo com web, API preparada e pacote compartilhado. A demo usa dados mock para mostrar fluxos de stakeholder sem depender de banco ou integracoes externas.
 
-- demonstrar a jornada completa ONG -> empresa/investidor -> contrato -> execucao -> evidencias;
-- manter rotas estaticas compativeis com GitHub Pages;
-- isolar dados em uma camada mock substituivel por API real;
-- preparar a evolucao para contratos, regras legais brasileiras, documentos e auditoria.
+## 2. Objetivos arquiteturais
 
-## 2. Stack atual
+- Demonstrar a jornada advogado -> ONG -> projeto -> financiador -> execucao -> relatorio anual.
+- Permitir login e navegacao por perfil de stakeholder.
+- Manter trilha auditavel de alteracoes, evidencias, documentos e status.
+- Reaproveitar entidades antes de criar novos campos ou tabelas.
+- Manter app mock funcional para apresentacao e coleta de feedback.
+- Preparar evolucao para persistencia real, contratos, documentos e assinatura digital.
+
+## 3. Stack atual
 
 | Camada | Tecnologia | Papel |
 |---|---|---|
-| Monorepo | npm workspaces | Organizar web, API e pacote compartilhado |
-| Frontend | Next.js 15.3.3 App Router | UI, rotas, renderizacao estatica |
+| Monorepo | npm workspaces | Organizar web, API e shared |
+| Frontend | Next.js 15 App Router | UI, rotas e export estatico |
 | React | React 19 | Componentes client/server |
-| Linguagem | TypeScript 5 | Tipagem e contratos internos |
-| UI | Tailwind CSS 3 | Estilo rapido e consistente |
-| API | NestJS 11 | BFF/API preparada para backend real |
-| Shared | `packages/shared` | Tipos e contratos compartilhados |
-| Deploy | GitHub Actions + GitHub Pages | Build e publicacao automatica |
+| Linguagem | TypeScript 5 | Tipos e contratos internos |
+| UI | Tailwind CSS 3 | Estilo do mock |
+| API | NestJS 11 | API/BFF preparada para backend real |
+| Shared | `packages/shared` | Tipos compartilhados |
+| Deploy | GitHub Actions + GitHub Pages | Publicacao da demo |
 
-## 3. Estrutura do monorepo
+## 4. Estrutura do monorepo
 
 ```text
 ONGanizator/
   apps/
     web/                 # Next.js App Router
-    api/                 # NestJS API/BFF
+    api/                 # NestJS API/BFF preparada
   packages/
     shared/              # Tipos e contratos comuns
-  .github/workflows/
-    deploy.yml           # Deploy GitHub Pages
-  BenchMark.md
+  productBacklog/        # RAID log e fontes de prospeccao
+  README.md
   Overview.md
-  Arquitetura-MVP-Tradeoffs.md
+  Stakeholders-Agentes.md
+  Jornada-Auditavel.md
+  Legal-Captacao-ONGs.md
 ```
 
-## 4. Rotas web atuais
-
-| Rota | Tipo | Descricao |
-|---|---|---|
-| `/` | Static | Dashboard executivo |
-| `/organizacoes` | Static | Lista de organizacoes |
-| `/organizacoes/[id]` | SSG | Perfil da organizacao |
-| `/organizacoes/[id]/editar` | SSG + client form | Edicao/cadastro de organizacao |
-| `/projetos` | Static | Lista de projetos |
-| `/projetos/novo` | Client | Cadastro multi-etapa de projeto |
-| `/projetos/[id]` | SSG | Detalhe completo do projeto |
-| `/projetos/[id]/editar` | SSG + client form | Edicao de projeto |
-| `/projetos/[id]/relatorio` | SSG + client form | Relatorio periodico com evidencias |
-| `/investidores` | Static | Lista de investidores |
-| `/investidores/[id]/editar` | SSG + client form | Edicao/cadastro de investidor |
-| `/investidores/[id]/match` | SSG | Motor de match inteligente |
-| `/marketplace` | Static | Vitrine de projetos |
-| `/crowdfunding` | Static | Campanhas e vaquinhas corporativas |
-| `/diagnostico` | Client | Quiz de maturidade institucional |
-| `/risco` | Static | Relatorios de risco reputacional |
-| `/crm` | Static | CRM de doadores |
-| `/mentoria` | Static | Marketplace de mentores |
-| `/contabilidade` | Static | DRE e lancamentos |
-| `/monitoramento` | Static | Prestacao de contas e indicadores |
-| `/impacto` | Static | Impacto & ESG |
-| `/para-investidores` | Static | Pagina institucional para investidores |
-
-## 5. Desenho de arquitetura atual
+## 5. Arquitetura conceitual
 
 ```mermaid
 flowchart LR
-  U[Usuarios: ONG, Empresa, Investidor, Admin] --> W[Next.js Web App]
-  W --> MD[Mock Data Layer]
-  W --> UI[Componentes de dominio]
+  A[Agentes: Advogado, Contador, ONG, Investidor, Fundacao, Admin] --> W[Next.js Web]
+  W --> M[Mock Data Layer]
+  W --> E[Eventos de auditoria]
+  W --> R[Relatorios e evidencias]
 
-  subgraph Dominios Web
-    UI --> D1[Organizacoes]
-    UI --> D2[Projetos]
-    UI --> D3[Investidores e Match]
-    UI --> D4[Governanca e Risco]
-    UI --> D5[Captacao e CRM]
-    UI --> D6[Monitoramento, ESG e Contabilidade]
-    UI --> D7[Regras Legais e Contratos]
+  subgraph Dominios
+    O[Organizacoes]
+    P[Projetos]
+    C[CRM e captacao]
+    F[Financiadores]
+    G[Governanca e risco]
+    K[Contabilidade]
+    I[Impacto e monitoramento]
   end
 
-  MD --> S1[Seed estatico em mockData.ts]
-  W --> GH[Static Export]
-  GH --> P[GitHub Pages]
+  M --> O
+  M --> P
+  M --> C
+  M --> F
+  M --> G
+  M --> K
+  M --> I
 
-  API[NestJS API preparada] -. futura integracao .-> DB[(PostgreSQL/Prisma)]
+  API[NestJS API] -. evolucao .-> DB[(PostgreSQL/Prisma)]
   W -. substituir mock .-> API
 ```
 
-## 6. Fronteiras de dominio
+## 6. Rotas web atuais
 
-| Dominio | Responsabilidades |
+| Rota | Uso na jornada reorganizada |
 |---|---|
-| Identidade e acesso | Usuarios, perfis, RBAC, login futuro |
-| Organizacoes | Cadastro, dados legais, maturidade, documentos |
-| Projetos | Objetivos, metas SMART, orcamento, cronograma, ODS |
-| Investidores | Mandato, ticket, regioes, ODS, restricoes |
-| Matching | Score por ODS, geografia, ticket, maturidade e tracao |
-| Captacao | Marketplace, crowdfunding, CRM e relacionamento |
-| Governanca | Diagnostico, risco, compliance, due diligence |
-| Contabilidade | Receitas, despesas, DRE, notas e prestacao de contas |
-| Impacto | Indicadores, evidencias, timeline, relatorios ESG |
-| Legal/Contratos | Marcos legais, calculadora fiscal, termos e auditoria |
+| `/` | Dashboard executivo e resumo de auditoria |
+| `/login` | Entrada por persona mock |
+| `/registro` | Criacao de perfil demo |
+| `/perfil` | Perspectiva ativa e consentimentos |
+| `/organizacoes` | Cadastro e maturidade das ONGs |
+| `/organizacoes/[id]` | Perfil institucional e governanca |
+| `/projetos` | Lista de projetos e status |
+| `/projetos/novo` | Cadastro de projeto pela ONG/advogado |
+| `/projetos/[id]` | Detalhe do projeto, KRs e auditoria |
+| `/projetos/[id]/relatorio` | Relatorio periodico/anual |
+| `/investidores` | Investidores, empresas e fundacoes |
+| `/investidores/[id]/match` | Match com projetos |
+| `/crm` | Kanban de prospeccao do advogado |
+| `/contabilidade` | Lancamentos, saldos e pendencias |
+| `/risco` | Risco reputacional e compliance |
+| `/monitoramento` | Evidencias, timeline e prestacao de contas |
+| `/impacto` | ODS, ESG e indicadores consolidados |
+| `/para-investidores` | Pitch para investidores e fundacoes |
 
-## 7. Trade-offs tomados
+## 7. Fronteiras de dominio
+
+| Dominio | Responsabilidade |
+|---|---|
+| Identidade e acesso | Usuarios, perfis, perspectivas e permissoes |
+| Organizacoes | Cadastro, documentos, maturidade e governanca |
+| Projetos | Objetivo, KRs, orcamento, cronograma, ODS e status |
+| CRM/Captacao | Leads, oportunidades, kanban, semaforo e associacao projeto-financiador |
+| Financiadores | Investidores, empresas, fundacoes, mandatos, tickets e restricoes |
+| Legal/Compliance | Checklists, termos, pareceres e pendencias juridicas |
+| Contabilidade | Receitas, despesas, comprovantes, DRE e conciliacao |
+| Auditoria | Eventos, versoes, evidencias, logs e pacote exportavel |
+| Impacto | Indicadores, ODS, beneficiarios e relatorios |
+
+## 8. Entidades minimas para evolucao real
+
+Quando sair do mock para persistencia, a primeira modelagem deve partir destas entidades:
+
+- User;
+- StakeholderProfile;
+- Organization;
+- Project;
+- ProjectVersion;
+- KeyResult;
+- InvestorOrFunder;
+- FundingOpportunity;
+- LegalChecklist;
+- AccountingEntry;
+- Evidence;
+- AuditEvent;
+- Report;
+- WhiteLabelConfig.
+
+## 9. Trade-offs
 
 | Decisao | Beneficio | Custo/Risco | Mitigacao |
 |---|---|---|---|
-| Next.js com export estatico | Deploy simples e barato no GitHub Pages | Sem SSR/API dinamica em producao estatica | Mock rico e API NestJS preparada |
-| Dados em `mockData.ts` | Rapidez para demo executiva | Sem persistencia real | Camada `api.ts` abstrai acesso aos dados |
-| Rotas dinamicas com `generateStaticParams` | Compatibilidade com static export | Precisa enumerar ids mock | Server wrapper para forms client |
-| Client forms sem persistencia | Demonstra UX sem backend | Dados nao gravam apos refresh | Futuro POST na API NestJS |
-| GitHub Pages | Deploy publico rapido | Base path e assets precisam configuracao | `basePath` e `assetPrefix` no Next |
-| Monolito modular | Menor complexidade MVP | Pode crescer demais | Separar dominios quando houver escala real |
+| Mock rico antes de banco | Rapidez para webinar e feedback | Dados nao persistem | Camada de dados isolada para troca futura |
+| Next.js com export estatico | Deploy simples no GitHub Pages | Sem SSR/API dinamica em producao estatica | API NestJS preparada para proxima fase |
+| Poucos perfis bem definidos | Jornada clara para demonstracao | Menos flexibilidade generica | Expandir RBAC apos validar fluxo |
+| Auditoria por eventos | Rastreabilidade forte | Exige disciplina de modelagem | Eventos minimos documentados em Stakeholders |
+| Reaproveitar entidades | Evita crescimento caotico de campos | Pode exigir refatoracao de mock | Criar adaptadores e tipos compartilhados |
 
-## 8. Regras tecnicas importantes
+## 10. Regras tecnicas importantes
 
 1. Rotas dinamicas em `output: 'export'` precisam de `generateStaticParams`.
-2. Paginas client que dependem de params devem usar wrapper server + componente client.
+2. Paginas client que dependem de params devem usar wrapper server com componente client.
 3. Dados devem passar pela camada `apps/web/src/lib/api.ts` quando possivel.
-4. Mock nao deve conter PII real, credenciais ou documentos sensiveis.
-5. Build de producao deve ser validado antes de push/deploy.
+4. Mock nao deve conter documentos sensiveis, credenciais reais ou PII desnecessaria.
+5. Cada fluxo novo deve declarar quais eventos de auditoria gera.
+6. Antes de criar novo campo, verificar se a informacao cabe em projeto, organizacao, financiador, evidencia, lancamento ou evento.
 
-## 9. Arquitetura da jornada legal/auditavel
+## 11. Evolucao recomendada
 
-```mermaid
-sequenceDiagram
-  participant E as Empresa
-  participant P as Plataforma
-  participant O as ONG
-  participant C as Compliance
+### Fase 1 - Mock alinhado a jornada
 
-  E->>P: Informa regime tributario, causa, valor e objetivo ESG
-  P->>P: Seleciona mecanismo legal elegivel
-  P->>E: Exibe beneficio fiscal estimado e custo efetivo
-  E->>P: Escolhe projeto/ONG
-  P->>C: Executa checklist de risco e documentos
-  C->>P: Aprova ou aponta pendencias
-  P->>O: Gera contrato/termo com obrigacoes e cronograma
-  O->>P: Envia evidencias e relatorios periodicos
-  P->>E: Entrega dashboard ESG e pacote de auditoria
-```
+- Personas: advogado, contador, ONG, investidor, fundacao e admin.
+- Menu por perfil.
+- Kanban de prospeccao do advogado.
+- Projetos com objetivo, KRs, selos e evidencias.
+- Relatorio anual mockado.
 
-## 10. Evolucao para producao
-
-### Fase 1 - Persistencia real
+### Fase 2 - Persistencia real
 
 - PostgreSQL + Prisma.
-- Entidades: Organization, Project, Investor, Campaign, Donation, Contract, LegalFramework, Document, Evidence, Report, AccountingEntry.
-- Autenticacao com Auth.js ou provedor OAuth.
-
-### Fase 2 - Workflow documental
-
+- Autenticacao real.
 - Upload seguro de documentos.
-- Versionamento.
-- Status de validade.
-- Checklist por mecanismo legal.
-- Assinatura digital.
+- AuditEvent persistido.
 
-### Fase 3 - Contratos personalizados
+### Fase 3 - Workflow juridico/contabil
 
-- Templates versionados.
-- Campos obrigatorios por mecanismo legal.
-- Geracao de PDF.
-- Trilha de aceite.
-- Hash do documento para auditoria.
+- Checklists por modalidade de captacao.
+- Templates de termos/contratos.
+- Validacao contabil de comprovantes.
+- Exportacao de pacote de auditoria.
 
 ### Fase 4 - Integracoes
 
-- Receita/CNPJ e certidoes, quando viavel.
-- Provedores de pagamento.
 - Assinatura digital.
+- Armazenamento de documentos.
+- Consulta CNPJ/certidoes quando viavel.
 - ERPs/contabilidade.
-- Ferramentas ESG corporativas.
-
-### Fase 5 - IA assistiva
-
-- Classificacao documental.
-- Sugestao de mecanismo legal.
-- Revisao de contrato.
-- Alertas de risco.
-- Sumarizacao de evidencias para relatorio ESG.
-
-## 11. Deploy
-
-Workflow atual:
-
-1. Push em `main`.
-2. GitHub Actions instala dependencias.
-3. Executa `npm run build` em `apps/web`.
-4. Gera static export em `apps/web/out`.
-5. Publica em `gh-pages` via `peaceiris/actions-gh-pages`.
-
-URL publica esperada:
-
-```text
-https://wesleyzilva.github.io/ONGanizator/
-```
+- Sistemas ESG de empresas e fundacoes.
 
 ## 12. Comandos principais
 
 ```bash
-npm install --workspaces --include-workspace-root --legacy-peer-deps
+npm install --workspaces --include-workspace-root
 npm run dev:web
 npm run build --workspace=apps/web
 ```
 
-Resumo: a arquitetura atual e adequada para demonstracao publica e pitch comercial, mantendo um caminho direto para backend real, governanca documental, regras legais brasileiras e auditoria ponta a ponta.
+Resumo: a arquitetura deve continuar simples, porque o desafio do MVP nao e trafego. O desafio e provar uma jornada confiavel, demonstravel e auditavel de ponta a ponta.
