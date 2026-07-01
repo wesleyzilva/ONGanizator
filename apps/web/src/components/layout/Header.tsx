@@ -53,3 +53,4 @@ export default function Header({ perspective, onToggleSidebar, onPerspectiveChan
     </header>
   );
 }
+ 
