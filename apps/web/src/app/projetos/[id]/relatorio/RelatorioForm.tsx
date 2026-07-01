@@ -293,3 +293,4 @@ export default function NovoRelatorioPage({ projetoId }: { projetoId: string }) 
     </div>
   );
 }
+ 
