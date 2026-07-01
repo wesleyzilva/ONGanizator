@@ -1,0 +1,28 @@
+# Backup - Benchmark ONGanizator
+
+Este material foi consolidado em [../../Referencias-Mercado.md](../../Referencias-Mercado.md). O benchmark da raiz foi removido para reduzir duplicidade operacional.
+
+## Referencias preservadas
+
+| Referencia | Aprendizado mantido |
+|---|---|
+| Portal do Incentivo | Leis de incentivo devem virar workflow, calculadora e checklist |
+| Prosas | Editais e relacionamento com OSCs sao referencia, mas relatorio anual nao e o centro |
+| Benfeitoria | Crowdfunding e narrativa publica devem se conectar a evidencias e prestacao de contas |
+| GlobalGiving | Marketplace precisa mostrar confianca, historias, updates e evidencias |
+| Benevity | Trilha unica de auditoria, grants, compliance e reporting sao referencia enterprise |
+| Submittable/Fluxx | Grants e formularios inspiram chamadas e avaliacao de fundacoes |
+| Salesforce Nonprofit | CRM e ecossistema enterprise reforcam o valor de uma solucao menor e focada |
+
+## Diferenciais preservados
+
+1. Projeto como unidade auditavel de promessa, recurso, execucao e evidencia.
+2. Advogado como agente de captacao e estruturacao juridica.
+3. Contador como agente de validacao financeira no fluxo.
+4. Relatorio anual gerado a partir da trilha.
+5. Produto adequado para operacao pequena.
+6. Base legal brasileira tratada como workflow.
+
+## Observacao
+
+Nao usar este arquivo para priorizacao. Usar [../../Referencias-Mercado.md](../../Referencias-Mercado.md) e [../../productBacklog/poBacklog.md](../../productBacklog/poBacklog.md).
