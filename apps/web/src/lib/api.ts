@@ -59,3 +59,4 @@ export const api = {
   monitoramentoConsolidado: () => asPromise(getMonitoramentoConsolidado()),
   monitoramentoProjeto: (id: string) => asPromise(getMonitoramentoProjeto(id)),
 };
+ 
