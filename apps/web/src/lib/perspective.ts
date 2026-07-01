@@ -125,3 +125,4 @@ export function getMenuGroupsForPerspective(perspective: Perspective) {
     items: group.items.filter((item) => allowed.has(item.href)),
   })).filter((group) => group.items.length > 0);
 }
+ 
