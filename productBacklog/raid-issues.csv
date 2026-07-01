@@ -1,0 +1,10 @@
+title,body,labels,assignee
+"Cadastro e Login — Usuários (ONG, Doador PF, Doador PJ)","Implementar telas de cadastro e login para os três perfis com validação básica e fluxo mock.","priority:high,complexity:low,area:auth",
+"Criar Campanha (fluxo mínimo)","Formulário mínimo para criar campanha e publicar como rascunho.","priority:high,complexity:low,area:crowdfunding",
+"Pagamento PIX — fluxo mock e captura de comprovante","Implementar fluxo de contribuição via PIX simulado e registrar comprovante em localStorage.","priority:high,complexity:low,area:payments",
+"Barra de completude no cadastro (ONG / PJ)","Exibir progresso de preenchimento do cadastro para ONG e PJ.","priority:high,complexity:low,area:onboarding",
+"Gerar PDF simples de prestação de contas","Gerador de PDF estático/templated com campos chave para download manual.","priority:high,complexity:low,area:finance",
+"Segurança & Conformidade (LGPD básico)","Banner de consentimento e logs de consentimento mock.","priority:high,complexity:medium,area:security",
+"Testes e QA — cenários mock","Criar dados de teste e cenários básicos para os fluxos críticos.","priority:high,complexity:medium,area:qa",
+"Infra & Observability","Documentar jobs locais e monitoramento básico para processos longos.","priority:high,complexity:medium,area:infra",
+"Documentação de APIs (OpenAPI)","Garantir endpoints mock com OpenAPI/Swagger atualizados.","priority:high,complexity:low,area:docs",

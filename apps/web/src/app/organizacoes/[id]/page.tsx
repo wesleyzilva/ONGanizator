@@ -2,6 +2,8 @@ import { api } from '@/lib/api';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { ORGS } from '@/lib/mockData';
 import Link from 'next/link';
+import ProfileCompleteness from '@/components/ProfileCompleteness';
+import ExportReportButton from '@/components/ExportReportButton';
 
 export function generateStaticParams() {
   return ORGS.map(o => ({ id: o.id }));
@@ -35,6 +37,21 @@ export default async function OrgDetalhe({ params }: { params: Promise<{ id: str
           <div className="flex gap-2 mt-2">
             <span className="badge bg-gray-100 text-gray-600">{tipoLabel[org.tipo]}</span>
             <StatusBadge status={org.nivel} />
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="w-64">
+              <ProfileCompleteness data={org} />
+            </div>
+            <div className="ml-auto flex gap-2">
+              <ExportReportButton title={`Perfil — ${org.nomeFantasia}`} renderHtml={() => `
+                <h1>${org.nomeFantasia}</h1>
+                <p class="muted">${org.razaoSocial} — CNPJ ${org.cnpj}</p>
+                <h3>Área</h3>
+                <p>${org.areaAtuacao}</p>
+                <h3>ODS</h3>
+                <p>${org.ods.join(', ')}</p>
+              `} />
+            </div>
           </div>
         </div>
       </div>

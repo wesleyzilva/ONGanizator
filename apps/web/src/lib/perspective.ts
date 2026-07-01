@@ -1,5 +1,12 @@
-export type { Perspective } from './mockAuth';
 import type { Perspective } from './mockAuth';
+export type { Perspective } from './mockAuth';
+
+export const PERSPECTIVE_LABELS: Record<Perspective, { title: string; subtitle: string }> = {
+  adm: { title: 'ADM', subtitle: 'Visão completa de governança e operação' },
+  ong: { title: 'ONG', subtitle: 'Jornada gamificada por selos e maturidade' },
+  investidor: { title: 'Investidor', subtitle: 'Decisão de investimento com clareza e contrapartida' },
+  advogado: { title: 'Advogado/Contador', subtitle: 'CRM profissional e compliance financeiro' },
+};
 
 export interface NavItem {
   label: string;
@@ -12,14 +19,7 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-export const PERSPECTIVE_LABELS: Record<Perspective, { title: string; subtitle: string }> = {
-  adm: { title: 'ADM', subtitle: 'Visão completa de governança e operação' },
-  ong: { title: 'ONG', subtitle: 'Jornada gamificada por selos e maturidade' },
-  investidor: { title: 'Investidor', subtitle: 'Decisão de investimento com clareza e contrapartida' },
-  advogado: { title: 'Advogado/Contador', subtitle: 'CRM profissional e compliance financeiro' },
-};
-
-const NAV_GROUPS: NavGroup[] = [
+export const NAV_GROUPS: NavGroup[] = [
   {
     label: 'Principal',
     items: [
@@ -44,6 +44,7 @@ const NAV_GROUPS: NavGroup[] = [
       { label: 'Diagnóstico', href: '/diagnostico', icon: '🩺' },
       { label: 'Risco Reputacional', href: '/risco', icon: '⚠️' },
       { label: 'Contabilidade', href: '/contabilidade', icon: '📒' },
+      { label: 'Relatórios', href: '/relatorios', icon: '📑' },
     ],
   },
   {
@@ -65,6 +66,7 @@ const NAV_GROUPS: NavGroup[] = [
 const VIEW_ALLOWED_HREFS: Record<Perspective, string[]> = {
   adm: [
     '/',
+    '/perfil',
     '/organizacoes',
     '/projetos',
     '/investidores',
@@ -78,47 +80,52 @@ const VIEW_ALLOWED_HREFS: Record<Perspective, string[]> = {
     '/impacto',
     '/mentoria',
     '/para-investidores',
+    '/relatorios',
     '/login',
     '/registro',
-    '/perfil',
   ],
   ong: [
     '/',
+    '/perfil',
     '/organizacoes',
     '/projetos',
     '/diagnostico',
     '/monitoramento',
     '/impacto',
     '/crowdfunding',
-    '/perfil',
+    '/relatorios',
     '/login',
     '/registro',
   ],
   investidor: [
     '/',
+    '/perfil',
     '/investidores',
     '/marketplace',
     '/crowdfunding',
     '/para-investidores',
-    '/perfil',
+    '/relatorios',
     '/login',
     '/registro',
   ],
   advogado: [
     '/',
+    '/perfil',
     '/organizacoes',
     '/projetos',
     '/investidores',
     '/crm',
     '/contabilidade',
     '/risco',
-    '/perfil',
+    '/monitoramento',
+    '/impacto',
+    '/relatorios',
     '/login',
     '/registro',
   ],
 };
 
-export function getMenuGroupsForPerspective(perspective: Perspective) {
+export function getMenuGroupsForPerspective(perspective: Perspective): NavGroup[] {
   const allowed = new Set(VIEW_ALLOWED_HREFS[perspective]);
   return NAV_GROUPS.map((group) => ({
     ...group,

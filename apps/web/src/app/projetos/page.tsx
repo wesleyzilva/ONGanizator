@@ -1,9 +1,9 @@
-import { api } from '@/lib/api';
+import { getProjects } from '@/lib/mockUtils';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import Link from 'next/link';
 
 export default async function ProjetosPage() {
-  const { data } = await api.projetos();
+  const data = getProjects();
 
   const fmt = (n: number) =>
     n >= 1_000_000
@@ -46,7 +46,8 @@ export default async function ProjetosPage() {
                 <td className="py-3 px-2 text-right font-medium text-gray-800">{fmt(p.valorMeta)}</td>
                 <td className="py-3 px-2 text-right font-semibold text-brand-600">{fmt(p.valorCaptado)}</td>
                 <td className="py-3 px-2 text-right text-gray-600">{p.beneficiarios.toLocaleString('pt-BR')}</td>
-                <td className="py-3 px-2 text-right">
+                <td className="py-3 px-2 text-right space-x-2">
+                  <Link href={`/projetos/${p.id}/contribuir`} className="text-xs text-white bg-brand-600 hover:bg-brand-700 rounded px-2 py-1">Contribuir</Link>
                   <Link href={`/projetos/${p.id}/editar`} className="text-xs text-gray-400 hover:text-brand-600 border border-gray-200 rounded px-2 py-1">✏️</Link>
                 </td>
               </tr>

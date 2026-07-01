@@ -1,3 +1,14 @@
+# Deprecated — não usar
+
+Este arquivo é legado. As informações principais foram distribuídas para os documentos ativos:
+
+- `productBacklog/vision.md`
+- `productBacklog/roadmap.md`
+- `productBacklog/backlog.md`
+- `productBacklog/raid-log.md`
+
+Use somente os arquivos acima para desenvolvimento AI-first.
+
 # Benchmark - ONGanizator
 
 ## 1. Posicionamento

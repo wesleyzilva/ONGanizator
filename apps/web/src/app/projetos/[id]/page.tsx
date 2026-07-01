@@ -1,6 +1,8 @@
 import { api } from '@/lib/api';
-import { PROJECTS } from '@/lib/mockData';
+import { getProjects } from '@/lib/mockUtils';
 import Link from 'next/link';
+import ProjectContributions from '@/components/ProjectContributions';
+import ExportReportButton from '@/components/ExportReportButton';
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ id: p.id }));
@@ -96,11 +98,62 @@ export default async function ProjetoDetalheePage({
             ))}
           </div>
         </div>
-        <Link href={`/projetos/${id}/relatorio`}
-          className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">
-          + Relatório
-        </Link>
+        <div className="flex gap-2">
+          <Link href={`/projetos/${id}/contribuir`} className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">Contribuir</Link>
+          <ExportReportButton title={`Prestação — ${projeto.titulo}`} renderHtml={() => `
+            <h1>${projeto.titulo}</h1>
+            <p class="muted">${projeto.organizacaoNome}</p>
+            <h3>Resumo</h3>
+            <p>${projeto.descricao}</p>
+            <h3>Meta / Captado</h3>
+            <p>Meta: ${fmt(projeto.valorMeta)} — Captado: ${fmt(projeto.valorCaptado)}</p>
+          `} />
+          <Link href={`/projetos/${id}/relatorio`} className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">+ Relatório</Link>
+        </div>
       </div>
+
+      <section className="grid gap-4 lg:grid-cols-[1.5fr,0.5fr]">
+        <div className="card p-6 bg-brand-50 border-brand-100">
+          <p className="text-xs uppercase tracking-[0.2em] text-brand-700">Jornada de valor</p>
+          <h2 className="mt-3 text-xl font-semibold text-gray-900">ONG → Projeto → Captação → Investidor → Compliance</h2>
+          <p className="mt-3 text-sm text-gray-600">
+            Este projeto conecta a organização, a captação e o investidor com um fluxo de compliance e relatório anual. Use os links ao lado para acompanhar cada etapa da jornada.
+          </p>
+          <div className="mt-5 space-y-3 text-sm">
+            <div className="flex items-center gap-2">
+              <span>1.</span>
+              <Link href="/organizacoes" className="font-semibold text-brand-700 hover:underline">Organização</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>2.</span>
+              <Link href="/projetos" className="font-semibold text-brand-700 hover:underline">Projeto</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>3.</span>
+              <Link href="/crowdfunding" className="font-semibold text-brand-700 hover:underline">Captação</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>4.</span>
+              <Link href="/investidores" className="font-semibold text-brand-700 hover:underline">Investidor</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>5.</span>
+              <Link href="/relatorios" className="font-semibold text-brand-700 hover:underline">Compliance & Relatório</Link>
+            </div>
+          </div>
+        </div>
+        <div className="card p-6 bg-white border border-gray-200">
+          <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Apoie o fechamento</p>
+          <p className="mt-3 text-sm text-gray-600">
+            Ao documentar evidências e relatórios, este projeto entra no ciclo de prestação de contas e traz maior confiança ao investidor.
+          </p>
+          <div className="mt-5 space-y-3">
+            <Link href="/crowdfunding" className="block rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-semibold text-brand-700 hover:bg-brand-100">Ver captação</Link>
+            <Link href="/investidores" className="block rounded-2xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">Ver investidores</Link>
+            <Link href="/relatorios" className="block rounded-2xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">Ver relatórios</Link>
+          </div>
+        </div>
+      </section>
 
       {/* ── KPI cards ──────────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -108,10 +161,7 @@ export default async function ProjetoDetalheePage({
           <p className="text-xs text-gray-500 mb-1">Meta total</p>
           <p className="text-xl font-bold text-gray-900">{fmt(projeto.valorMeta)}</p>
         </div>
-        <div className="card p-4 text-center">
-          <p className="text-xs text-gray-500 mb-1">Captado</p>
-          <p className="text-xl font-bold text-brand-600">{fmt(projeto.valorCaptado)}</p>
-        </div>
+        <ProjectContributions projetoId={projeto.id} baseCaptado={projeto.valorCaptado} />
         <div className="card p-4 text-center">
           <p className="text-xs text-gray-500 mb-1">% captado</p>
           <p className="text-xl font-bold text-gray-900">{percentualCaptado}%</p>

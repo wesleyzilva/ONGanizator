@@ -111,3 +111,29 @@ export interface DashboardSummary {
   projetosPorStatus: Record<ProjectStatus, number>;
   distribuicaoODS: Record<string, number>;
 }
+
+// Relatório anual compartilhado
+export interface AnnualProjectSummary {
+  id: string;
+  titulo: string;
+  organizacaoNome: string;
+  valorMeta: number;
+  valorCaptado: number;
+  beneficiarios: number;
+  ods: ODS[];
+}
+
+export interface AnnualReport {
+  year: number;
+  perspective: 'investidor' | 'advogado' | 'ong' | 'adm';
+  totals: {
+    receita: number;
+    despesas: number;
+    saldo: number;
+    totalBeneficiarios: number;
+    totalProjetos: number;
+  };
+  projects: AnnualProjectSummary[];
+  indicators?: ImpactIndicator[];
+  generatedAt?: string;
+}
