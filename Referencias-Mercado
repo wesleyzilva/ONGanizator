@@ -1,0 +1,104 @@
+# ONGanizator - Referencias e Analise de Mercado
+
+## 1. Objetivo
+
+Este documento traduz referencias externas em decisoes de produto. A ideia nao e copiar produtos maiores, mas entender quais capacidades aumentam confianca na captacao, execucao e prestacao de contas de projetos sociais.
+
+## 2. Referencias analisadas
+
+| Referencia | Posicionamento | O que observar |
+|---|---|---|
+| Portal do Incentivo | Conteudo e ferramentas sobre leis de incentivo no Brasil | Calculadora, escolha da melhor lei, manual de apresentacao, patrocinadores por edital, compliance social |
+| Benevity | Plataforma enterprise de corporate purpose | Doacoes, grants, voluntariado, reporting, compliance, nonprofit validation, trilha unica de auditoria |
+| GlobalGiving | Marketplace global de projetos sociais | Vitrine de projetos, confianca publica, atualizacoes de impacto, suporte a nonprofits, relacionamento com doadores e empresas |
+
+## 3. Portal do Incentivo
+
+### Capacidades relevantes
+
+- Biblioteca de leis de incentivo.
+- Calculadora de incentivo.
+- Orientacao para empresas e proponentes.
+- Comparacao de leis e limites de deducao.
+- Manual para elaboracao de apresentacao.
+- Patrocinadores por edital.
+
+### Leis que devem entrar no discovery do produto
+
+| Lei/mecanismo | Uso no produto |
+|---|---|
+| Lei Rouanet | Projetos culturais, limite de IR, recibo de mecenato, conta especifica e prestacao ao MinC |
+| Lei Federal de Incentivo ao Esporte | Projetos esportivos, limite de IR, proponente sem fins lucrativos e conta especifica |
+| FIA/FUMCAD | Crianca e adolescente, conselho municipal/estadual, fundo e recibo padronizado |
+| Fundo do Idoso | Idosos, conselho/fundo, doacao incentivada e prestacao ao conselho |
+| PRONON | Oncologia, projetos aprovados no Ministerio da Saude e prestacao de contas |
+| PRONAS/PCD | Saude da pessoa com deficiencia, requisitos especificos e conta do projeto |
+| Lei da Reciclagem | Economia circular e sustentabilidade, com elegibilidade por cadeia de reciclagem |
+| Lei do Audiovisual | Projetos audiovisuais, ANCINE, modalidades de investimento/patrocinio |
+| Leis estaduais/municipais | Entrada futura para regionalizacao e editais locais |
+
+### Implicacoes para ONGanizator
+
+1. Criar um seletor de mecanismo de captacao por area, publico, tipo de financiador e regime tributario.
+2. Criar uma calculadora simples por lei, com limite, competicao entre leis e documentos exigidos.
+3. Criar checklist de projeto apto a captar: aprovacao, conta especifica, prazo de captacao, recibo e guarda documental.
+4. Separar o papel do advogado, que valida elegibilidade juridica, do contador, que valida lancamento, recibo e conciliacao.
+
+## 4. Benevity
+
+### Capacidades relevantes
+
+- Plataforma unica para giving, volunteering, grants, employee groups, challenges e reporting.
+- Gestao de grants com aplicacoes, scoring, desembolso e compliance.
+- Validacao continua de nonprofits e mitigacao de risco.
+- Trilha unica de auditoria para financas, juridico, conselho e diretoria.
+- Reporting executivo com impacto consolidado.
+- Uso de IA para sumarizacao, match assurance e governanca.
+
+### Implicacoes para ONGanizator
+
+1. Unificar captacao, execucao, contabilidade e relatorio em um mesmo fluxo.
+2. Priorizar audit trail antes de automacoes sofisticadas.
+3. Criar visao de risco para investidor/fundacao antes do aporte.
+4. Preparar IA futura para sumarizar propostas, relatorios e evidencias, sempre com governanca e opt-out.
+5. Nao competir por escala global agora; competir por localizacao Brasil, leis de incentivo e suporte profissional.
+
+## 5. GlobalGiving
+
+### Capacidades relevantes
+
+- Marketplace de projetos sociais por tema, pais e urgencia.
+- Relacao entre nonprofits, donors e companies.
+- Atualizacoes para doadores sobre uso do recurso.
+- Reputacao publica, selos, validacoes e transparencia.
+- Suporte, treinamento e ferramentas para nonprofits.
+
+### Implicacoes para ONGanizator
+
+1. O marketplace precisa mostrar historia, tese, metas, evidencias e atualizacoes, nao apenas uma tabela.
+2. Selos devem comunicar confianca de forma simples, mas sustentada por checklist e evidencia.
+3. Relatorio anual e atualizacoes periodicas devem ser visiveis para financiadores.
+4. ONGs precisam de trilha de aprendizagem e suporte para melhorar maturidade.
+
+## 6. Posicionamento recomendado
+
+ONGanizator deve ser posicionado como uma plataforma brasileira, white-label e auditavel para captacao assistida e prestacao de contas de projetos sociais.
+
+O diferencial contra as referencias e a combinacao:
+
+- leis de incentivo brasileiras como workflow;
+- advogado como agente de captacao e compliance;
+- contador como agente financeiro;
+- projeto como unidade auditavel;
+- relatorio anual como produto final;
+- baixo volume operacional com alta confianca documental.
+
+## 7. O que nao copiar agora
+
+- Disbursement global complexo.
+- Voluntariado corporativo amplo.
+- Employee groups e challenges corporativos.
+- Plataforma multi-pais.
+- IA sem trilha de governanca.
+
+Esses temas podem aparecer em roadmap futuro, mas nao devem entrar no P0 do webinar.
