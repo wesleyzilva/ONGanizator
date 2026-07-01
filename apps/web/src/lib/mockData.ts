@@ -142,6 +142,7 @@ export const PROJECTS = [
     dataInicio: "2024-01-01",
     dataFim: "2025-12-31",
     criadoEm: "2023-11-10",
+    selo: 'ouro',
   },
   {
     id: "prj-002",
@@ -160,6 +161,7 @@ export const PROJECTS = [
     dataInicio: "2024-03-01",
     dataFim: "2026-02-28",
     criadoEm: "2024-01-15",
+    selo: 'prata',
   },
   {
     id: "prj-003",
@@ -178,6 +180,7 @@ export const PROJECTS = [
     dataInicio: "2024-06-01",
     dataFim: "2025-05-31",
     criadoEm: "2024-04-20",
+    selo: 'bronze',
   },
   {
     id: "prj-004",
@@ -196,6 +199,7 @@ export const PROJECTS = [
     dataInicio: "2024-02-01",
     dataFim: "2025-01-31",
     criadoEm: "2023-12-01",
+    selo: 'prata',
   },
   {
     id: "prj-005",
@@ -205,7 +209,7 @@ export const PROJECTS = [
     descricao:
       "Logística reversa e geração de créditos de carbono para catadores.",
     ods: [1, 8, 12],
-    status: "em_avaliacao",
+    status: "aprovado_para_prospeccao",
     valorMeta: 260000,
     valorCaptado: 0,
     beneficiarios: 680,
@@ -214,6 +218,7 @@ export const PROJECTS = [
     dataInicio: "2025-01-01",
     dataFim: "2025-12-31",
     criadoEm: "2024-09-05",
+    selo: null,
   },
   {
     id: "prj-006",
@@ -231,6 +236,7 @@ export const PROJECTS = [
     dataInicio: "2024-05-01",
     dataFim: "2025-04-30",
     criadoEm: "2024-03-10",
+    selo: 'bronze',
   },
   {
     id: "prj-007",
@@ -249,24 +255,7 @@ export const PROJECTS = [
     dataInicio: "2024-07-01",
     dataFim: "2025-06-30",
     criadoEm: "2024-05-22",
-  },
-  {
-    id: "prj-009",
-    organizacaoId: "org-005",
-    organizacaoNome: "Recicla Solidária",
-    titulo: "Churrasco Solidário de Benefícios",
-    descricao:
-      "Evento comunitário para arrecadar fundos, apoiar catadores e gerar renda local." ,
-    ods: [1, 2, 8],
-    status: "ativo",
-    valorMeta: 180000,
-    valorCaptado: 120000,
-    beneficiarios: 520,
-    estado: "PE",
-    cidade: "Recife",
-    dataInicio: "2024-08-01",
-    dataFim: "2025-01-31",
-    criadoEm: "2024-06-10",
+    selo: null,
   },
   {
     id: "prj-008",
@@ -285,8 +274,46 @@ export const PROJECTS = [
     dataInicio: "2025-02-01",
     dataFim: "2025-12-31",
     criadoEm: "2024-11-01",
+    selo: null,
   },
 ];
+
+export const SELO_CRITERIOS = {
+  bronze: {
+    label: 'Bronze',
+    icon: '🥉',
+    cor: 'text-amber-700 bg-amber-50 border-amber-200',
+    criterios: [
+      'CNPJ ativo e certidões negativas vigentes',
+      'Estatuto social atualizado',
+      'Histórico de ao menos 1 projeto concluído',
+      'Relatório de linha de base (D0) publicado',
+    ],
+  },
+  prata: {
+    label: 'Prata',
+    icon: '🥈',
+    cor: 'text-slate-600 bg-slate-50 border-slate-200',
+    criterios: [
+      'Todos os critérios Bronze',
+      'Pelo menos 1 relatório anual publicado',
+      'Metas com indicadores mensuráveis (KRs)',
+      'Pelo menos 1 aporte formal recebido',
+    ],
+  },
+  ouro: {
+    label: 'Ouro',
+    icon: '🥇',
+    cor: 'text-yellow-700 bg-yellow-50 border-yellow-200',
+    criterios: [
+      'Todos os critérios Prata',
+      'Parecer jurídico de elegibilidade emitido',
+      'Parecer contábil homologado pelo contador',
+      'Evidências fotográficas e documentais completas',
+      'Relatório de impacto com dados verificados',
+    ],
+  },
+} as const;
 
 export const INVESTORS = [
   {
@@ -676,6 +703,33 @@ export const TIMELINE = [
     titulo: "Relatório Q2/2024 publicado",
     descricao:
       "64 incêndios combatidos, 78.000 hectares protegidos, 91% alertas respondidos < 2h.",
+  },
+  {
+    projetoId: "prj-005",
+    data: "2025-02-10",
+    tipo: "auditoria",
+    titulo: "Elegibilidade jurídica avaliada",
+    descricao:
+      "Advogado revisor concluiu análise: CNPJ regular, estatuto conforme Lei 9.790/99 e certidões negativas vigentes.",
+    responsavel: "Adv. Carlos Mendes",
+  },
+  {
+    projetoId: "prj-005",
+    data: "2025-02-18",
+    tipo: "aprovacao",
+    titulo: "Aprovado para Prospecção",
+    descricao:
+      "Projeto aprovado pelo advogado revisor para iniciar prospecção de financiadores. Mecanismo indicado: Rouanet + Doação Direta.",
+    responsavel: "Adv. Carlos Mendes",
+  },
+  {
+    projetoId: "prj-008",
+    data: "2025-04-05",
+    tipo: "auditoria",
+    titulo: "Projeto em avaliação jurídica",
+    descricao:
+      "Advogado iniciou análise de elegibilidade. Pendência: ata da assembleia de aprovação do projeto não entregue.",
+    responsavel: "Adv. Carlos Mendes",
   },
 ];
 
@@ -1910,7 +1964,7 @@ export const DOADORES = [
     id: "don-006",
     nome: "Prefeitura de Cuiabá",
     tipo: "PJ",
-    email: "convenios@prefeitura.mt.gov.br",
+    email: "convenios@prefeitura-exemplo.gov.br",
     valorTotal: 180000,
     ultimaDoacao: "2024-12-01",
     frequencia: "por_projeto",
@@ -1921,7 +1975,7 @@ export const DOADORES = [
     id: "don-007",
     nome: "Banco Bradesco",
     tipo: "PJ",
-    email: "fundacao@bradesco.com.br",
+    email: "fundacao@instituto-exemplo.com.br",
     valorTotal: 80000,
     ultimaDoacao: "2025-01-10",
     frequencia: "por_projeto",
@@ -2587,4 +2641,3 @@ export function calcularBeneficioFiscal(
     IR_TOTAL,
   };
 }
- 

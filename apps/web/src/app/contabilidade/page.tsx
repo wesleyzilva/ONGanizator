@@ -191,7 +191,73 @@ export default function ContabilidadePage() {
           ))}
         </div>
       </div>
+
+      {/* ── Pendências e Comprovantes ─────────────────────────────────── */}
+      <section>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">⚠️ Pendências para Prestação de Contas</h2>
+        <div className="space-y-3">
+          {[
+            { id: 'pend-001', projetoId: 'prj-001', descricao: 'Comprovante de pagamento — Salários Março/2025', tipo: 'comprovante', status: 'pendente', prazo: '2025-04-30', responsavel: 'ONG Pantanal Vivo' },
+            { id: 'pend-002', projetoId: 'prj-001', descricao: 'Nota fiscal — Equipamentos de monitoramento (NF-9012)', tipo: 'nota_fiscal', status: 'pendente', prazo: '2025-04-15', responsavel: 'ONG Pantanal Vivo' },
+            { id: 'pend-003', projetoId: 'prj-005', descricao: 'Relatório de impacto Q1/2025 não enviado', tipo: 'relatorio', status: 'atrasado', prazo: '2025-03-31', responsavel: 'Recicla Solidária' },
+            { id: 'pend-004', projetoId: 'prj-001', descricao: 'Conciliação bancária — Fevereiro/2025', tipo: 'conciliacao', status: 'ok', prazo: '2025-03-15', responsavel: 'Contador parceiro' },
+          ].map((p) => (
+            <div key={p.id} className={`card p-4 flex items-center gap-4 ${p.status === 'atrasado' ? 'border-red-200 bg-red-50' : p.status === 'ok' ? 'border-green-200 bg-green-50' : ''}`}>
+              <div className="shrink-0 text-xl">
+                {p.status === 'ok' ? '✅' : p.status === 'atrasado' ? '🔴' : '⏳'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900">{p.descricao}</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  📂 {p.projetoId} · 🏢 {p.responsavel} · Prazo: {new Date(p.prazo).toLocaleDateString('pt-BR')}
+                </p>
+              </div>
+              <div className="shrink-0">
+                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                  p.status === 'ok' ? 'bg-green-100 text-green-700'
+                  : p.status === 'atrasado' ? 'bg-red-100 text-red-700'
+                  : 'bg-yellow-100 text-yellow-700'
+                }`}>
+                  {p.status === 'ok' ? 'Concluído' : p.status === 'atrasado' ? 'Atrasado' : 'Pendente'}
+                </span>
+              </div>
+              {p.status !== 'ok' && (
+                <button className="shrink-0 text-xs px-3 py-1.5 bg-brand-600 text-white rounded-lg hover:bg-brand-700">
+                  Enviar
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Parecer Contábil ──────────────────────────────────────────── */}
+      <section>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">📋 Parecer Contábil</h2>
+        <div className="card p-6 space-y-4">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-gray-900">Parecer ref. Projeto: Adote uma Nascente (prj-001)</p>
+              <p className="text-xs text-gray-500 mt-0.5">Emitido em 15/01/2025 · Contador: Dr. Ricardo Alves (CRC-SP 123.456)</p>
+            </div>
+            <span className="shrink-0 text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-semibold">✅ Homologado</span>
+          </div>
+          <p className="text-sm text-gray-700 border-l-4 border-brand-400 pl-4 py-1 bg-brand-50 rounded-r-lg">
+            As demonstrações financeiras do projeto Adote uma Nascente, referentes ao exercício Jan–Dez/2024,
+            foram examinadas e encontram-se em conformidade com os princípios contábeis aplicáveis às Organizações
+            da Sociedade Civil. Os valores captados de R$ 312.000 estão devidamente registrados, os lançamentos
+            possuem documentação comprobatória (NF e recibos) e o saldo disponível é consistente com o relatório
+            de execução financeira.
+          </p>
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100">
+            {['📄 DRE Completa', '📊 Balancete', '📎 Comprovantes (12)', '📤 Exportar PDF'].map((a) => (
+              <button key={a} className="text-xs px-3 py-1.5 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50">
+                {a}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
- 

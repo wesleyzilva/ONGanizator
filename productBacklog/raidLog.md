@@ -1,182 +1,98 @@
-<<<<<<< HEAD
-# Deprecated — não usar
-
-Este arquivo é legado. As informações principais foram distribuídas para os documentos ativos:
-
-- `productBacklog/vision.md`
-- `productBacklog/roadmap.md`
-- `productBacklog/backlog.md`
-- `productBacklog/raid-log.md`
-
-Use somente os arquivos acima para desenvolvimento AI-first.
-
----
-
 Em uma arquitetura
 Frontend React
 Facade Java que conecta com
 API´s Java por domínimos de capabilities para persistência em bancos.
-=======
-# RAID Log - ONGanizator
->>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
-## Contexto atual
+Nunca deve ficar se criando novos campos de tabelas deve-se sempre tentar reaproveitar o maximo que foi construido.
 
-Estamos reorganizando o projeto antes de iniciar a execucao local. A documentacao passa a refletir que ONGanizator nao e uma plataforma de alto volume, mas um sistema auditavel para coordenar poucos stakeholders com grande responsabilidade na jornada de captacao e prestacao de contas.
+Nosso foco agora é uma app mock funcional para apresentação em um webinar para mostrar para as ONG´s e pegar feedbacks.
 
-Referencias de mercado agora consideradas: Portal do Incentivo, Benevity e GlobalGiving. Analise consolidada em [Referencias-Mercado.md](../Referencias-Mercado.md) e diagnostico do app atual em [Analise-Projeto-Atual.md](../Analise-Projeto-Atual.md).
+Qual o problema á ser resolvido? 
+O que a ONG não tem?
+Não tem um sistema de gestão de projetos auditável.
+Não tem um sistema de captação de recursos ativo.
 
-## Decisoes
+Isso gera uma falta de evidencias auditáveis no tempo 
+que faz com que a ONG se perca os recursos por falta 
+de provas e acompanhamento.
 
-| ID | Decisao | Motivo | Status |
-|---|---|---|---|
-| D1 | Priorizar jornada auditavel sobre escala tecnica | Baixo volume de usuarios e requests | Decidido |
-| D2 | Tratar advogado como agente principal de prospeccao | Ele cadastra ONG, prospecta financiadores e estrutura relacao | Decidido |
-| D3 | Tratar contador como agente de validacao financeira | Valores intermediarios e comprovantes precisam de visao propria | Decidido |
-| D4 | Tratar projeto como unidade auditavel | Projeto conecta objetivo, KRs, orcamento, evidencias e relatorio anual | Decidido |
-| D5 | Manter mock funcional para webinar antes de persistencia real | Objetivo e coletar feedback de ONGs | Decidido |
-| D6 | Evitar criar novos campos sem reaproveitar entidades existentes | Reduz complexidade e retrabalho | Decidido |
-| D7 | Criar documentacao legal separada, sem dumps colados | Facilita evolucao e reduz duplicidade | Decidido |
-| D8 | Criar squad de agentes para desenvolvimento e suporte | Evita backlog solto e cria responsabilidade por produto, UX, frontend, backend, QA, seguranca e suporte | Decidido |
-| D9 | Usar Portal do Incentivo como referencia de motor fiscal, nao como dump de conteudo | O produto precisa de workflow, calculadora e checklist | Decidido |
-| D10 | Usar Benevity e GlobalGiving como benchmark de confianca, nao como escopo enterprise/global | MVP deve ficar Brasil-first e baixo volume | Decidido |
-| D11 | Criar backlog canonico do PO separado do RAID log | O RAID registra decisoes/riscos; o PO backlog orienta desenvolvimento | Decidido |
-| D12 | Arquivar materiais duplicados em `docs/backup` | Reduz ruido para agentes e preserva contexto historico | Decidido |
+Quais são os Stakeholders?
+Empresa Doadora deseja projetos e conhecer as ONG´s e projetos.
 
-## Assumptions
+Advogado que intermedia e capta o dinheiro para as ONG´s e fica com uma porcentagem do valor do projeto
 
-| ID | Assumption | Como validar |
-|---|---|---|
-| A1 | ONGs aceitam entrar em um fluxo guiado de maturidade e selos | Testar no webinar com jornada Bronze/Prata/Ouro |
-| A2 | Advogado consegue operar a prospeccao dentro de um kanban simples | Demonstrar CRM com leads, status e semaforo |
-| A3 | Investidores e fundacoes valorizam pacote de auditoria e relatorio anual | Mostrar projeto com evidencias, financeiro e impacto |
-| A4 | Contador precisa de tela propria, nao apenas campos dentro do projeto | Validar com fluxo de lancamentos e comprovantes |
-| A5 | White-label aumenta aderencia da ONG | Demonstrar identidade visual configuravel em fase posterior |
+Contador que precisa de um sistema que olhe os valores intermediarios em todo este processo.
 
-## Risks
+ONG que precisa ser cadastrada no sistema e cadastrar e dar manutenção e auditar os projetos para mostrar para a empresa tudo que ela precisa saber para continuar recebendo os recursos.
 
-| ID | Risco | Impacto | Mitigacao |
-|---|---|---|---|
-| R1 | Escopo crescer para muitas frentes ao mesmo tempo | MVP perde foco | Manter jornada principal como criterio de corte |
-| R2 | Regras legais serem interpretadas como parecer automatico | Risco juridico | Usar disclaimers e revisao por advogado |
-| R3 | Dados mock parecerem artificiais | Demo perde credibilidade | Usar poucas ONGs/projetos realistas e com estados diferentes |
-| R4 | Selos virarem enfeite visual | Perde valor auditavel | Cada selo deve exigir evidencia e evento |
-| R5 | Relatorio anual virar tela manual | Perde rastreabilidade | Gerar relatorio a partir de eventos, KRs, evidencias e financeiro |
+SquadLATAM-AIgile que desenvolve o sistema para fazer tudo isso e precisa de perfis específicos que serão agents para desenvolvimento backend, desenvolvimento frontend, garantir segurança, garantir testes e o que mais esta app pode precisar de "equipe" para compor a Squad.
 
-## Issues
+O sistema é um WhiteLabel que pode receber personalização de imagens para para que a ONG use como se fosse seu.
 
-| ID | Issue | Acao |
-|---|---|---|
-| I1 | Documentos estavam duplicando visao, benchmark e material legal | Consolidado em docs separados |
-| I2 | RAID log continha textos juridicos longos colados | Substituido por backlog vivo e linkado ao guia legal |
-| I3 | Arquivos de cidades tinham dumps repetitivos de fonte externa | Reduzir para listas curadas de prospeccao |
-| I4 | Personas novas ainda nao estao necessariamente alinhadas no mock | Ajustar apos rodar app local |
-| I5 | Paginas para ONGs e para Advogados/Contadores precisam ser definidas | Entrar no backlog funcional |
-| I6 | `mockAuth.ts` nao separa contador e fundacao | Criar novos perfis e perspectivas no M1 |
-| I7 | `packages/shared` usa papeis antigos diferentes do mock atual | Alinhar tipos no M1/M2 |
-| I8 | CRM atual e de doadores, nao kanban de prospeccao do advogado | Transformar em oportunidade/prospecao no M3 |
-| I9 | Leis de incentivo existem como dados, mas nao conduzem elegibilidade | Evoluir para calculadora/checklist no M4 |
-| I10 | Raiz do repositorio tinha pitch, benchmark e dump bruto competindo com docs canonicos | Movido para `docs/backup` ou consolidado em docs canonicos |
+O advogado e contador tem a função de olhar tudo que a empresa e a ong faz.
 
-## Dependencies
+Jornada Principal para o MOCK.
+1- Advogado cadastra ONG
+2- Advogado libera acesso para ONG
+3- ONG tem acesso e pode:
+3.1- Atualizar seu cadastro
+3.2- Cadastrar e dar manutenção em um projeto. Cada alteração é auditável.
+3.3- Projeto é cadastrado e inicia sem selos, pois os selos são a gamificação da evolução da ONG com relação as entregas dos seus projetos baseado no framework de OKR. Então o projeto precisa ter Objetivo vinculado a empresa e KR´s para medir o acompanhamento.
+3.3.1- O processo de selo vem  de um fluxo na qual a ong inicia uma jornada e tem tela de boas vindas explicando o processo depois chama a tela de autoavaliação e depois vem o score que ela ganhou com aquela autoavaliação e no final é para falar que vamos ajudar nesta jornada em cada ponto de forma gameficada gerando uma facil leitura e acompnahmanehto auditável.
 
-| ID | Dependencia | Observacao |
-|---|---|---|
-| DEP1 | Validacao com ONGs no webinar | Principal fonte de feedback de produto |
-| DEP2 | Revisao juridica/contabil | Necessaria antes de usar regras legais em producao |
-| DEP3 | Dados mock revisados | Precisam refletir agentes, selos, evidencias e relatorio anual |
-| DEP4 | Rodar app local | Validado em 2026-07-01: web 3000 e API 3001 ativas na copia local |
-| DEP5 | Validar build estatico GitHub Pages | Validado em 2026-07-01: `apps/web/out` gerado com sucesso |
+	Selo Bronze: ONG cadastrada, Curso de imersão ao sistema, Projeto cadastrado vai para Advogado aprovar, Aprovado ganha selo Bronze.
+	Selo Prata: Tudo do Selo Bronze + Curso xxx
+	Selo Ouro: Tudo dos Selos anteriores + Primeira entrega auditável
 
-## Backlog reestruturado por marco
+Preciso de um para cada selo mockado para ver como fica.
 
-### M0 - Squad, referencias e governanca do backlog
+Precisamos de uma tela de login que vai permitir que o perfil visualize o que ele pode visualizar após login.
+Preciso de x acessos para seus x perfils que fizerem sentido de forma mock para podermos testar a jornada e ao logar validar a jornada que quero explorar ja preenchidos para eu poder selecionar o perfil que quero entrar.
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | Criar squad de agentes | Agentes de produto, legal, UX, frontend, backend, QA, seguranca e suporte documentados | Concluido |
-| P0 | Criar agentes VS Code | `.github/agents/*.agent.md` disponiveis para desenvolvimento e suporte | Concluido |
-| P0 | Consolidar referencias de mercado | Portal do Incentivo, Benevity e GlobalGiving traduzidos em decisoes | Concluido |
-| P0 | Diagnosticar projeto atual | Gaps entre mock atual e plataforma desejada documentados | Concluido |
-| P0 | Criar backlog do PO | `productBacklog/poBacklog.md` criado com historias, aceite e validacao | Concluido |
-| P0 | Arquivar docs duplicados | Materiais nao canonicos movidos para `docs/backup` | Concluido |
+Jornada da prospecção de empresas para financiar ONG´s em seus projetos. Não fazer agora.
+1- Advogado cadastra empresa e o potencial de valor.
+2- Advogado valida qual ONG e qual projeto pode ser interessante e associa isso á empresa no cadastro
+Observação: Existem varios tipos e formas da empresa financiar projetos precisaremos explorar isso para estruturar esta parte.
+3- O Advogado precisa ter uma noção de como esta aquele projeto em um kanban com status backlog, prospecção, em andamento e finalizado.
+No kanban ele consegue ter uma sinalização como no JIRA de um semáforo como um label na qual pode ser verde, amarelo ou vermelho.
 
-### M1 - Perfis, permissoes e navegacao
+Preciso de um MD com tudo que preciso saber sobre a lei de incentivo para ONG´s, regras governamentais para ONG, como captar o dinheiro, quais as obrigações legais de cada interlocutor.
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | Separar perfis mock | Advogado, contador, ONG, investidor, fundacao e admin no login | A fazer |
-| P0 | Separar perspectivas no menu | Contador e fundacao deixam de compartilhar visao com advogado/investidor | A fazer |
-| P0 | Alinhar tipos compartilhados | `packages/shared` reflete roles e entidades desejadas | A fazer |
-| P1 | Registrar matriz de permissoes na UI | Cada tela deixa claro quem pode editar, aprovar ou visualizar | A fazer |
+Neste momento não precisamos nos preocupar com Sonar, Junit e outros pontos que geram um backlog técnico extenso.
 
-### M2 - Projeto auditavel e selos
+Tem que ter a sessão:
+Para Investidores de projetos: https://wesleyzilva.github.io/ONGanizator/para-investidores
+Para Ongs:
+Para Advogados e Contadores:
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | Projeto com objetivo e KRs | Cadastro/detalhe mostra objetivo, KRs, indicadores e responsaveis | A fazer |
-| P0 | Selos Bronze, Prata e Ouro | Um projeto mockado por selo, com criterio e evidencia | A fazer |
-| P0 | Eventos de auditoria mockados | Alteracoes, aprovacoes, evidencias e relatorios aparecem na timeline | A fazer |
-| P0 | Relatorio anual | Fechamento anual gerado a partir de KRs, evidencias e financeiro | A fazer |
+O menu ele pode recuar
+O Whitelabel de exemplo é o Frontend-whitelabel-flexpag
 
-### M3 - Captacao conduzida pelo advogado
+Este projeto já esta no repositorio e precisa ser rearranjado com o foco acima.
+Preciso ter um md para irmos evoluindo como um RAIDlog.md para irmos construindo um backlog datadriven conforme esta jornada aqui é evoluida.
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | CRM vira kanban de prospeccao | Backlog, Prospeccao, Em andamento, Finalizado, semaforo e dono | A fazer |
-| P0 | Associar oportunidade a projeto | Advogado conecta financiador/fundacao a projeto e registra hipotese de match | A fazer |
-| P0 | Proposta para patrocinador | Gerar apresentacao simples com projeto, KRs, orcamento e contrapartidas | A fazer |
-| P1 | Pagina para Advogados e Contadores | Explicar fluxo profissional e valor operacional | A fazer |
+O que e ODS e como posso colocar um lugar para explicar.
 
-### M4 - Incentivos, compliance e contabilidade
+REF:
+https://www.jusbrasil.com.br/artigos/formas-de-captacao-de-recursos-por-associacoes-e-fundacoes-no-brasil/5348289479?msockid=174358cb74b5676805494fb975ca66f3
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | Calculadora de incentivo | Limite estimado por lei, tipo de financiador e imposto informado | A fazer |
-| P0 | Checklist por mecanismo | Rouanet, Esporte, FIA, Idoso, PRONON, PRONAS, Reciclagem e Audiovisual | A fazer |
-| P0 | Parecer advogado/contador | Validacao juridica e contabil aparece no projeto/oportunidade | A fazer |
-| P1 | Pacote de auditoria | Exportar ou visualizar documentos, eventos, evidencias e financeiro | A fazer |
 
-### M5 - Webinar e validacao
 
-| Prioridade | Item | Resultado esperado | Status |
-|---|---|---|---|
-| P0 | Dados mock realistas | ONGs/projetos em estados Bronze, Prata e Ouro | A fazer |
-| P0 | Roteiro de demonstracao | Caminho por perfil: advogado, ONG, contador, fundacao/investidor | A fazer |
-| P0 | Rodar app local e revisar telas | App local rodando; revisao de telas segue para ajustes do M1 | Em andamento |
-| P1 | White-label basico | Nome, logo e cores configuraveis para demo | A fazer |
+Todos
+Pesquisar no Jusbrasil
 
-## Validacoes executadas
+Cadastre-se
+Entrar
+Formas de captação de recursos por associações e fundações no Brasil
+Receba uma orientação
 
-| Data | Validacao | Resultado |
-|---|---|---|
-| 2026-07-01 | Build estatico web | `npm run build --workspace=apps/web` concluiu com sucesso e exportou 72 paginas |
-| 2026-07-01 | Ambiente local | `npm run dev` subiu Next.js em `http://localhost:3000/ONGanizator` e NestJS em `http://localhost:3001/docs` |
 
-## Criterios para o webinar
+A sustentabilidade financeira das organizações do Terceiro Setor depende de uma captação de recursos bem estruturada. Para associações e fundações sem fins lucrativos, obter financiamento significa garantir a continuidade e o desenvolvimento de suas atividades com segurança jurídica, governança e transparência.
 
-1. Conseguir entrar com cada perfil principal.
-2. Mostrar uma ONG com cadastro incompleto e outra mais madura.
-3. Mostrar tres projetos: Bronze, Prata e Ouro.
-4. Mostrar advogado criando oportunidade e associando a projeto.
-5. Mostrar contador validando orcamento/comprovantes.
-6. Mostrar investidor ou fundacao acompanhando evidencias.
-7. Mostrar relatorio anual como fechamento da jornada.
+Neste artigo, abordamos de forma prática e atualizada as principais formas de captação de recursos por associações e fundações no Brasil.
 
-## Referencias internas
 
-- [Overview.md](../Overview.md)
-- [Analise-Projeto-Atual.md](../Analise-Projeto-Atual.md)
-- [Referencias-Mercado.md](../Referencias-Mercado.md)
-- [Stakeholders-Agentes.md](../Stakeholders-Agentes.md)
-- [Squad-Agentes.md](../Squad-Agentes.md)
-- [Jornada-Auditavel.md](../Jornada-Auditavel.md)
-- [Legal-Captacao-ONGs.md](../Legal-Captacao-ONGs.md)
-- [Arquitetura-MVP-Tradeoffs.md](../Arquitetura-MVP-Tradeoffs.md)
-- [poBacklog.md](poBacklog.md)
-- [Backup de docs](../docs/backup/README.md)
 
-<<<<<<< HEAD
 Constituição Formal e requisitos essenciais
 Para que possam captar recursos formalmente, entidades do Terceiro Setor, como associações e fundações, devem ser legalmente constituídas como pessoas jurídicas sem fins lucrativos, o que implica que todo recurso captado deve ser aplicado integralmente em sua finalidade social.
 
@@ -3921,7 +3837,8 @@ Política de privacidade
 VER ARQYUVOS
 Arquitetura-MVP-Tradeoffs
 BenchMark
-Overview
+Overview e
+README.md
 
 Qual a sugestão de nome desta aplicação? Atualmente é ONGanizator.
 
@@ -4060,26 +3977,123 @@ Vídeos
 Publicações
 Reportagens
 
+---
 
-Outras informações que podemos aproveitar: # ongs-doacao
-Lista de ONGs para doação
+## Sprint 01 — 2026-07-01 · Log de Entregas
 
-Listas baseadas no artigo https://www.uol.com.br/ecoa/ultimas-noticias/2021/03/23/fome-no-brasil-como-ajudar-pessoas-a-comer-e-sobreviver-na-pandemia.htm
+### Riscos resolvidos
 
-Brasil: https://github.com/renatolm/ongs-doacao/blob/main/Brasil.md
+| # | Risco | Resolução |
+|---|---|---|
+| R-01 | Dev server com EADDRINUSE ao reiniciar | `npx kill-port 3000 3001` + restart; adicionado ao runbook |
+| R-02 | Webpack cache corrompido causando 500 local | `rm -rf apps/web/.next` antes de restart |
+| R-03 | Flash de conteúdo em rotas protegidas | `mounted` flag no Shell.tsx — retorna `null` até useEffect completar |
+| R-04 | `apps/api/dist` rastreado pelo git inflando commits | `git rm -r --cached apps/api/dist/` + .gitignore atualizado |
+| R-05 | Build quebrado: params não tipado como Promise (Next.js 15) | Padronizado `params: Promise<{id:string}>` + `async/await` em todos os server components dinâmicos |
+| R-06 | onClick em server component quebra build estático | Removido onClick de `relatorio/anual/page.tsx`; botão imprimir mantido sem handler |
 
-Norte: https://github.com/renatolm/ongs-doacao/blob/main/Norte.md
+### Decisões arquiteturais
 
-Nordeste: https://github.com/renatolm/ongs-doacao/blob/main/Nordeste.md
+| # | Decisão | Justificativa |
+|---|---|---|
+| D-01 | `output: 'export'` + `basePath: '/ONGanizator'` | Deploy gratuito no GitHub Pages sem servidor |
+| D-02 | Todos os dados em `apps/web/src/lib/mockData.ts` | Build 100% estático; sem chamada de API em produção |
+| D-03 | `perspective.ts` como único controlador de menus e rotas permitidas | Evita duplicação de lógica de acesso em cada página |
+| D-04 | `'use client'` apenas em páginas com estado (calculadora, white-label) | Maximiza geração estática e performance de carregamento |
+| D-05 | `packages/shared/src/index.ts` como fonte de verdade de tipos | Web e API compartilham contratos sem duplicação |
 
-Centro-Oeste: https://github.com/renatolm/ongs-doacao/blob/main/Centro-Oeste.md
+### Validações executadas
 
-Sudeste: https://github.com/renatolm/ongs-doacao/blob/main/Sudeste.md
+| Data | Item | Resultado |
+|---|---|---|
+| 2026-07-01 | PO-017 — ambiente local | `npm run dev` sobe web :3000 e API :3001; 200 em `/ONGanizator` e `/docs` |
+| 2026-07-01 | PO-018 — build estático (pré-sprint P1) | 72 páginas exportadas para `apps/web/out` |
+| 2026-07-01 | PO-001 — login com 6 perfis | Testado manualmente; cada perfil carrega menu correto e /perfil mostra role |
+| 2026-07-01 | PO-002 — menus por papel | Shell.tsx: route guard ativo; flash eliminado; menus filtrados por perspectiva |
+| 2026-07-01 | PO-003 — tipos compartilhados | `packages/shared/src/index.ts` atualizado: ProjectStatus inclui `aprovado_para_prospeccao`, adicionados Selo, CRMLead, AuditEvent, Perspective, MecanismoCaptacao, BeneficioFiscal |
+| 2026-07-01 | PO-005 — projetos com KRs e ODS | Detalhe do projeto exibe objetivo, KRs, metas, orçamento, marcos, timeline |
+| 2026-07-01 | PO-006 — aprovado_para_prospeccao | Status presente em mockData e Shell; evento na timeline com responsável e timestamp |
+| 2026-07-01 | PO-007 — selos Bronze/Prata/Ouro | Lista de projetos com coluna Selo; detalhe mostra critérios e próximo nível |
+| 2026-07-01 | PO-008 — relatório anual | `/projetos/[id]/relatorio/anual` com 11 seções; gerado para todos os 8 projetos |
+| 2026-07-01 | PO-009 — CRM kanban | `/crm` com 4 colunas; semáforo; campo etapa tipado |
+| 2026-07-01 | PO-010 — associar financiador a projeto | Card CRM mostra ONG, projeto, financiador e justificativa |
+| 2026-07-01 | PO-011 — proposta para patrocinador | `/projetos/[id]/proposta` com ODS, KRs, orçamento e mecanismo recomendado |
+| 2026-07-01 | PO-013 — seletor de mecanismo | `/captacao` aba 1: filtro por área/regime, grid 6 mecanismos, detalhe expandido |
+| 2026-07-01 | PO-014 — calculadora de incentivo | `/captacao` aba 2: inputs + resultado com economia, custo efetivo e comparativo |
+| 2026-07-01 | PO-015 — contabilidade com pendências | `/contabilidade` com semáforo + parecer contábil |
+| 2026-07-01 | PO-019 — roteiro de demo | `/demo` com 5 perfis, steps clicáveis, fala sugerida, painel de acesso rápido |
+| 2026-07-01 | PO-004 — matriz de permissões | `/permissoes` com 22 ações em 7 módulos; adm apenas |
+| 2026-07-01 | PO-012 — página para profissionais | `/para-profissionais` com jornada advogado + contador, dores e ganhos |
+| 2026-07-01 | PO-016 — pacote de auditoria | `/projetos/[id]/auditoria`: checklist, docs jurídicos, comprovantes, trilha, evidências |
+| 2026-07-01 | PO-020 — white-label básico | `/configuracoes`: 4 logos, 6 cores, 5 fontes, modo escuro, preview ao vivo |
+| 2026-07-01 | Build final P0+P1 | `npm run build --workspace=apps/web` → **101 páginas exportadas** sem erros |
 
-Sul: https://github.com/renatolm/ongs-doacao/blob/main/Sul.md
+### Pendências abertas
 
-Unicamp: https://github.com/renatolm/ongs-doacao/blob/main/Unicamp.md
+| # | Item | Tipo | Status |
+|---|---|---|---|
+| P-01 | `git push origin main` — 9 commits locais pendentes | Ação | Aguardando PAT GitHub do responsável |
+| P-02 | GitHub Actions — deploy automático para GitHub Pages | Melhoria | Funciona após push; `.github/workflows/deploy.yml` já existe |
+| P-03 | Botão "Imprimir" no relatório anual sem handler | Melhoria | Removido onClick para não quebrar build; pode ser extraído em `PrintButton` client component |
+| P-04 | `/mentoria` e `/risco` — páginas com conteúdo placeholder | Conteúdo | Fora do escopo P0/P1; manter para próximo sprint |
+| P-05 | API NestJS — endpoints apenas mock (sem banco) | Técnico | Intencional para MVP; persistência é fase futura |
 
 
-=======
->>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
+---
+
+## Sprint 02 — 2026-07-01 · UX, Jornadas e Qualidade
+
+### Riscos resolvidos
+
+| # | Risco | Resolucao |
+|---|---|---|
+| R-07 | Troca de perfil nao atualizava sidebar/header | Shell.tsx useEffect depende de pathname; Sidebar rele user ao mudar perspectiva |
+| R-08 | Login redirecionava usuario ja logado em loop | Flag isSwitching detecta contexto; nao redireciona automaticamente |
+| R-09 | /investidores/[id] retornava 404 | Criada pagina investidores/[id]/page.tsx com generateStaticParams |
+| R-10 | Erro JSX: faltava </tr> no thead de projetos/page.tsx | Tag de fechamento inserida |
+| R-11 | Relatorio anual inacessivel pela UI | Botao Anual adicionado na coluna Acoes da lista de projetos |
+
+### Decisoes arquiteturais
+
+| # | Decisao | Justificativa |
+|---|---|---|
+| D-06 | perspective.ts como controlador unico de menus e permissoes | Evita duplicacao: VIEW_ALLOWED_HREFS define acesso; Shell aplica guard |
+| D-07 | usePathname como dependencia do useEffect no Shell.tsx | Garante releitura do localStorage a cada mudanca de rota sem reload |
+| D-08 | Footer da sidebar como ponto unico de troca de perfil/logout | Remove botoes redundantes do dashboard; UX mais limpa |
+| D-09 | Badge de perspectiva no header como link para /login | Acesso rapido a troca de perfil a partir de qualquer pagina |
+
+### Validacoes executadas
+
+| Data | Item | Resultado |
+|---|---|---|
+| 2026-07-01 | Troca de perfil atualiza menu imediatamente | Testado adm->ong->investidor; menus mudam sem reload |
+| 2026-07-01 | /investidores/[id] acessivel para adm, investidor, fundacao | 200 OK com mandato, ODS e projetos compativeis |
+| 2026-07-01 | Relatorio anual acessivel em 1 clique da lista de projetos | Botao Anual redireciona para /projetos/[id]/relatorio/anual |
+| 2026-07-01 | ong ve /mentoria e /marketplace no menu | Confirmado apos correcao de VIEW_ALLOWED_HREFS |
+| 2026-07-01 | investidor ve /projetos e /impacto no menu | Confirmado apos correcao de VIEW_ALLOWED_HREFS |
+| 2026-07-01 | contador ve /organizacoes no menu | Confirmado apos correcao de VIEW_ALLOWED_HREFS |
+| 2026-07-01 | fundacao ve /diagnostico no menu | Confirmado apos correcao de VIEW_ALLOWED_HREFS |
+| 2026-07-01 | Docs atualizados: README, Overview, Arquitetura, raidLog | Refletem 33+ rotas e 6 perfis com permissoes corretas |
+
+### Pendencias abertas
+
+| # | Item | Tipo | Status |
+|---|---|---|---|
+| P-06 | git push origin main — commits locais pendentes | Acao | Aguardando PAT GitHub do responsavel |
+| P-07 | Build final validado pos-Sprint 02 | Validacao | Executar antes do push |
+| P-08 | API NestJS — endpoints apenas mock (sem banco) | Tecnico | Intencional para MVP; persistencia e fase futura |
+| P-09 | Botao Imprimir no relatorio anual sem handler | Melhoria | Extrair PrintButton client component no proximo sprint |
+
+---
+
+## Decisao de Produto — 2026-07-01
+
+### Nome definitivo da plataforma
+- **Semente** (dominio alvo: semente.org.br / semente.app)
+- Subtitulo: Governanca e captacao para impacto social
+- ONGanizator mantido como nome tecnico do repositorio
+
+### Proxima fase tecnica planejada
+- Migrar de GitHub Pages/mock para: Supabase (DB) + Railway (API) + Vercel (frontend)
+- Objetivo: validar jornada ponta a ponta com dados reais antes de buscar investimento
+

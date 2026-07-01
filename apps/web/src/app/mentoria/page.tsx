@@ -1,117 +1,157 @@
-import { MENTORES } from '@/lib/mockData';
-import Link from 'next/link';
-
-function Stars({ n }: { n: number }) {
-  return (
-    <span className="text-yellow-400 text-sm">
-      {'★'.repeat(Math.floor(n))}{'☆'.repeat(5 - Math.floor(n))}
-      <span className="text-xs text-gray-500 ml-1">{n.toFixed(1)}</span>
-    </span>
-  );
-}
+const MENTORES_DATA = [
+  {
+    iniciais: 'AC',
+    nome: 'Ana Carvalho',
+    area: 'Governança e Compliance',
+    especialidade: 'Estatutos, OSCIP, MROSC',
+    bio: '15 anos assessorando ONGs em formalização e reestruturação jurídica.',
+    avatarBg: 'bg-indigo-600',
+    badgeCls: 'bg-indigo-50 text-indigo-700',
+  },
+  {
+    iniciais: 'CM',
+    nome: 'Carlos Mendes',
+    area: 'Captação e Incentivos Fiscais',
+    especialidade: 'Rouanet, FIA, Lei do Esporte',
+    bio: 'Ex-Gestor Cultural MinC com vasta experiência em editais federais e estaduais.',
+    avatarBg: 'bg-green-600',
+    badgeCls: 'bg-green-50 text-green-700',
+  },
+  {
+    iniciais: 'FL',
+    nome: 'Fernanda Lima',
+    area: 'Impacto e ESG',
+    especialidade: 'ODS, teoria da mudança, indicadores',
+    bio: 'Doutora em desenvolvimento sustentável com publicações em revistas internacionais.',
+    avatarBg: 'bg-emerald-600',
+    badgeCls: 'bg-emerald-50 text-emerald-700',
+  },
+  {
+    iniciais: 'RA',
+    nome: 'Roberto Alves',
+    area: 'Gestão Financeira',
+    especialidade: 'DRE, fluxo de caixa, prestação de contas',
+    bio: 'Contador CRC com foco exclusivo em organizações do terceiro setor.',
+    avatarBg: 'bg-blue-600',
+    badgeCls: 'bg-blue-50 text-blue-700',
+  },
+  {
+    iniciais: 'JS',
+    nome: 'Juliana Santos',
+    area: 'Comunicação e Fundraising',
+    especialidade: 'Crowdfunding, narrativa de impacto, redes sociais',
+    bio: 'CMO de ONG com 3 campanhas que superaram R$500k em captação digital.',
+    avatarBg: 'bg-pink-600',
+    badgeCls: 'bg-pink-50 text-pink-700',
+  },
+  {
+    iniciais: 'MO',
+    nome: 'Marcos Oliveira',
+    area: 'Projetos e Metas SMART',
+    especialidade: 'OKR, KRs, planejamento estratégico',
+    bio: 'Gestor de projetos sociais certificado PMI com atuação em 30+ organizações.',
+    avatarBg: 'bg-orange-600',
+    badgeCls: 'bg-orange-50 text-orange-700',
+  },
+  {
+    iniciais: 'PN',
+    nome: 'Patrícia Nunes',
+    area: 'Relações Institucionais',
+    especialidade: 'Parcerias corporativas, GIFE, fundações',
+    bio: '12 anos em institutos empresariais estruturando programas de investimento social.',
+    avatarBg: 'bg-purple-600',
+    badgeCls: 'bg-purple-50 text-purple-700',
+  },
+  {
+    iniciais: 'DC',
+    nome: 'Diego Costa',
+    area: 'Tecnologia para ONGs',
+    especialidade: 'Sistemas de gestão, LGPD, dados',
+    bio: 'CTO de plataforma de impacto social com foco em transformação digital de ONGs.',
+    avatarBg: 'bg-cyan-600',
+    badgeCls: 'bg-cyan-50 text-cyan-700',
+  },
+];
 
 export default function MentoriaPage() {
   return (
     <div className="p-8 space-y-8 max-w-5xl mx-auto">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">🎓 Marketplace de Mentoria</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Conecte-se com especialistas em captação, governança, comunicação e impacto social.
-          </p>
-        </div>
-        <button className="px-4 py-2 border border-brand-300 text-brand-700 text-sm font-medium rounded-lg hover:bg-brand-50">
-          Quero ser mentor
-        </button>
-      </div>
-
-      {/* como funciona */}
-      <div className="card p-5 bg-gradient-to-r from-brand-50 to-purple-50 border-brand-200">
-        <h2 className="text-sm font-bold text-brand-800 mb-3">Como funciona</h2>
-        <div className="grid md:grid-cols-4 gap-4 text-xs text-center">
-          {[
-            { n: '1', t: 'Escolha o mentor', d: 'Filtre por especialidade e ODS de interesse.' },
-            { n: '2', t: 'Agende a sessão', d: 'Escolha data/horário no calendário do mentor.' },
-            { n: '3', t: 'Pague com segurança', d: 'Pagamento retido até após a sessão.' },
-            { n: '4', t: 'Acesse a gravação', d: 'Sessão gravada disponível por 30 dias.' },
-          ].map((s) => (
-            <div key={s.n}>
-              <div className="w-7 h-7 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mx-auto mb-1">{s.n}</div>
-              <p className="font-semibold text-gray-800">{s.t}</p>
-              <p className="text-gray-500 mt-0.5">{s.d}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-brand-700 mt-3 text-center">
-          ✅ Plataforma retém 15% · Mentor recebe 85% · Cancelamento grátis até 24h antes
+      {/* header */}
+      <div>
+        <h1 className="text-2xl font-bold text-gray-800">Mentoria</h1>
+        <p className="text-sm text-gray-500 mt-1">
+          Conecte-se com especialistas para acelerar a maturidade institucional da sua organização.
         </p>
       </div>
 
-      {/* filtros */}
+      {/* filtro por área — exibição estática de todas as áreas */}
       <div className="flex flex-wrap gap-2">
-        {['Todos', 'Captação', 'Governança', 'Comunicação', 'ESG', 'Tecnologia'].map((f) => (
-          <button key={f} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${f === 'Todos' ? 'bg-brand-600 text-white border-brand-600' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
-            {f}
-          </button>
+        {[
+          'Todos',
+          'Governança e Compliance',
+          'Captação e Incentivos Fiscais',
+          'Impacto e ESG',
+          'Gestão Financeira',
+          'Comunicação e Fundraising',
+          'Projetos e Metas SMART',
+          'Relações Institucionais',
+          'Tecnologia para ONGs',
+        ].map((area, i) => (
+          <span
+            key={area}
+            className={`px-3 py-1.5 text-xs rounded-full border ${
+              i === 0
+                ? 'bg-indigo-600 text-white border-indigo-600'
+                : 'border-gray-200 text-gray-600 bg-white'
+            }`}
+          >
+            {area}
+          </span>
         ))}
       </div>
 
       {/* grid de mentores */}
       <div className="grid md:grid-cols-2 gap-6">
-        {MENTORES.map((m) => (
-          <div key={m.id} className="card p-5 hover:shadow-md transition-shadow">
+        {MENTORES_DATA.map((m) => (
+          <div key={m.nome} className="bg-white rounded-xl shadow p-6 flex flex-col gap-4">
             <div className="flex items-start gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={m.imagem} alt={m.nome} className="w-14 h-14 rounded-2xl object-cover shrink-0" />
+              {/* avatar com iniciais */}
+              <div
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 ${m.avatarBg}`}
+              >
+                {m.iniciais}
+              </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900">{m.nome}</h3>
-                <p className="text-xs text-brand-600 font-medium">{m.especialidade}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  <Stars n={m.avaliacaoMedia} />
-                  <span className="text-xs text-gray-400">({m.totalSessoes} sessões)</span>
-                </div>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-lg font-bold text-gray-900">R$ {m.precoSessao}</p>
-                <p className="text-xs text-gray-400">por sessão</p>
+                <h3 className="font-semibold text-gray-800 text-base">{m.nome}</h3>
+                <span className={`inline-block text-xs px-2 py-0.5 rounded-full font-medium mt-1 ${m.badgeCls}`}>
+                  {m.area}
+                </span>
               </div>
             </div>
 
-            <p className="text-sm text-gray-500 mt-3">{m.bio}</p>
-
-            <div className="flex flex-wrap gap-2 mt-3">
-              {m.ods.map((o: number) => (
-                <span key={o} className="text-xs px-1.5 py-0.5 bg-green-50 text-green-700 rounded font-medium">ODS {o}</span>
-              ))}
-              <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded">{m.formato}</span>
-              <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded">📅 {m.disponibilidade}</span>
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Especialidade</p>
+              <p className="text-sm text-gray-700">{m.especialidade}</p>
             </div>
 
-            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
-              <button className="flex-1 py-2 bg-brand-600 text-white text-xs font-semibold rounded-lg hover:bg-brand-700 transition-colors">
-                Agendar sessão
-              </button>
-              <button className="px-3 py-2 border border-gray-200 text-xs text-gray-600 rounded-lg hover:bg-gray-50">
-                Ver perfil
-              </button>
-            </div>
+            <p className="text-sm text-gray-500 flex-1">{m.bio}</p>
+
+            <a
+              href="#"
+              className="bg-indigo-600 text-white rounded-lg px-4 py-2 text-sm font-medium text-center hover:bg-indigo-700 transition-colors"
+            >
+              Agendar mentoria
+            </a>
           </div>
         ))}
       </div>
 
-      {/* CTA tornar-se mentor */}
-      <div className="card p-8 text-center border-dashed border-2 border-brand-200">
-        <div className="text-3xl mb-3">🤝</div>
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Você é especialista em impacto social?</h2>
-        <p className="text-sm text-gray-500 mb-5 max-w-md mx-auto">
-          Cadastre-se como mentor e ajude ONGs a evoluir. Você define seu valor, horários e especialidades.
-          Recebe 85% do valor de cada sessão.
-        </p>
-        <button className="px-6 py-3 bg-brand-600 text-white font-semibold text-sm rounded-lg hover:bg-brand-700 transition-colors">
-          Quero ser mentor →
-        </button>
+      {/* rodapé */}
+      <div className="text-center pt-4 border-t border-gray-100">
+        <a href="#" className="text-sm text-indigo-600 hover:underline font-medium">
+          Quer ser mentor? Cadastre-se como especialista →
+        </a>
       </div>
     </div>
   );
 }
- 

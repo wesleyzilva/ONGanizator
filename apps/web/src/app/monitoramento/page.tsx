@@ -232,4 +232,3 @@ export default async function MonitoramentoPage() {
     </div>
   );
 }
- 

@@ -13,4 +13,3 @@ export default async function RelatorioPage({
   const { id } = await params;
   return <RelatorioForm projetoId={id} />;
 }
- 

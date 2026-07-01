@@ -1,8 +1,6 @@
 import { api } from '@/lib/api';
-import { getProjects } from '@/lib/mockUtils';
+import { PROJECTS, SELO_CRITERIOS } from '@/lib/mockData';
 import Link from 'next/link';
-import ProjectContributions from '@/components/ProjectContributions';
-import ExportReportButton from '@/components/ExportReportButton';
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ id: p.id }));
@@ -11,6 +9,7 @@ export function generateStaticParams() {
 const STATUS_LABEL: Record<string, string> = {
   ativo: 'Ativo',
   em_avaliacao: 'Em Avaliação',
+  aprovado_para_prospeccao: 'Aprovado p/ Prospecção',
   rascunho: 'Rascunho',
   concluido: 'Concluído',
 };
@@ -18,6 +17,7 @@ const STATUS_LABEL: Record<string, string> = {
 const STATUS_COLOR: Record<string, string> = {
   ativo: 'bg-green-100 text-green-800',
   em_avaliacao: 'bg-yellow-100 text-yellow-800',
+  aprovado_para_prospeccao: 'bg-purple-100 text-purple-800',
   rascunho: 'bg-gray-100 text-gray-600',
   concluido: 'bg-blue-100 text-blue-800',
 };
@@ -39,6 +39,8 @@ const TIMELINE_ICON: Record<string, string> = {
   relatorio: '📋',
   aporte: '💰',
   conquista: '🏆',
+  auditoria: '🔍',
+  aprovacao: '✅',
 };
 
 function fmt(n: number) {
@@ -98,70 +100,80 @@ export default async function ProjetoDetalheePage({
             ))}
           </div>
         </div>
-        <div className="flex gap-2">
-          <Link href={`/projetos/${id}/contribuir`} className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">Contribuir</Link>
-          <ExportReportButton title={`Prestação — ${projeto.titulo}`} renderHtml={() => `
-            <h1>${projeto.titulo}</h1>
-            <p class="muted">${projeto.organizacaoNome}</p>
-            <h3>Resumo</h3>
-            <p>${projeto.descricao}</p>
-            <h3>Meta / Captado</h3>
-            <p>Meta: ${fmt(projeto.valorMeta)} — Captado: ${fmt(projeto.valorCaptado)}</p>
-          `} />
-          <Link href={`/projetos/${id}/relatorio`} className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">+ Relatório</Link>
+        <div className="flex flex-col gap-2 sm:flex-row flex-wrap">
+          <Link href={`/projetos/${id}/proposta`}
+            className="shrink-0 px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors">
+            🤝 Gerar Proposta
+          </Link>
+          <Link href={`/projetos/${id}/relatorio/anual`}
+            className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors">
+            📋 Relatório Anual
+          </Link>
+          <Link href={`/projetos/${id}/auditoria`}
+            className="shrink-0 px-4 py-2 bg-slate-700 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors">
+            📦 Pacote de Auditoria
+          </Link>
+          <Link href={`/projetos/${id}/relatorio`}
+            className="shrink-0 px-4 py-2 border border-brand-300 text-brand-700 text-sm font-medium rounded-lg hover:bg-brand-50 transition-colors">
+            + Novo Relatório
+          </Link>
         </div>
       </div>
 
-      <section className="grid gap-4 lg:grid-cols-[1.5fr,0.5fr]">
-        <div className="card p-6 bg-brand-50 border-brand-100">
-          <p className="text-xs uppercase tracking-[0.2em] text-brand-700">Jornada de valor</p>
-          <h2 className="mt-3 text-xl font-semibold text-gray-900">ONG → Projeto → Captação → Investidor → Compliance</h2>
-          <p className="mt-3 text-sm text-gray-600">
-            Este projeto conecta a organização, a captação e o investidor com um fluxo de compliance e relatório anual. Use os links ao lado para acompanhar cada etapa da jornada.
-          </p>
-          <div className="mt-5 space-y-3 text-sm">
-            <div className="flex items-center gap-2">
-              <span>1.</span>
-              <Link href="/organizacoes" className="font-semibold text-brand-700 hover:underline">Organização</Link>
+      {/* ── Selo de Maturidade ──────────────────────────────────────────── */}
+      {(() => {
+        const selo = (projeto as any).selo as string | null;
+        const s = selo ? SELO_CRITERIOS[selo as keyof typeof SELO_CRITERIOS] : null;
+        const proximo = !selo ? 'bronze' : selo === 'bronze' ? 'prata' : selo === 'prata' ? 'ouro' : null;
+        const proximoS = proximo ? SELO_CRITERIOS[proximo as keyof typeof SELO_CRITERIOS] : null;
+        return (
+          <div className="card p-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Selo de Maturidade Auditável</p>
+              {s ? (
+                <div className="flex items-center gap-2">
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-sm font-bold ${s.cor}`}>
+                    {s.icon} {s.label}
+                  </span>
+                  <span className="text-xs text-gray-500">Certificado pela plataforma</span>
+                </div>
+              ) : (
+                <span className="text-sm text-gray-400 italic">Sem selo ainda — veja os critérios abaixo</span>
+              )}
+              {s && (
+                <ul className="mt-3 space-y-1">
+                  {s.criterios.map((c) => (
+                    <li key={c} className="flex items-start gap-1.5 text-xs text-gray-600">
+                      <span className="text-green-600 mt-0.5">✓</span> {c}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <div className="flex items-center gap-2">
-              <span>2.</span>
-              <Link href="/projetos" className="font-semibold text-brand-700 hover:underline">Projeto</Link>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>3.</span>
-              <Link href="/crowdfunding" className="font-semibold text-brand-700 hover:underline">Captação</Link>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>4.</span>
-              <Link href="/investidores" className="font-semibold text-brand-700 hover:underline">Investidor</Link>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>5.</span>
-              <Link href="/relatorios" className="font-semibold text-brand-700 hover:underline">Compliance & Relatório</Link>
-            </div>
+            {proximoS && (
+              <div className="shrink-0 rounded-xl border border-dashed border-gray-200 bg-gray-50 p-4 max-w-xs">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Próximo: {proximoS.icon} {proximoS.label}</p>
+                <ul className="space-y-1">
+                  {proximoS.criterios.map((c) => (
+                    <li key={c} className="flex items-start gap-1.5 text-xs text-gray-500">
+                      <span className="text-gray-300 mt-0.5">○</span> {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-        </div>
-        <div className="card p-6 bg-white border border-gray-200">
-          <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Apoie o fechamento</p>
-          <p className="mt-3 text-sm text-gray-600">
-            Ao documentar evidências e relatórios, este projeto entra no ciclo de prestação de contas e traz maior confiança ao investidor.
-          </p>
-          <div className="mt-5 space-y-3">
-            <Link href="/crowdfunding" className="block rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-semibold text-brand-700 hover:bg-brand-100">Ver captação</Link>
-            <Link href="/investidores" className="block rounded-2xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">Ver investidores</Link>
-            <Link href="/relatorios" className="block rounded-2xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">Ver relatórios</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── KPI cards ──────────────────────────────────────────────────── */}
+        );
+      })()}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="card p-4 text-center">
           <p className="text-xs text-gray-500 mb-1">Meta total</p>
           <p className="text-xl font-bold text-gray-900">{fmt(projeto.valorMeta)}</p>
         </div>
-        <ProjectContributions projetoId={projeto.id} baseCaptado={projeto.valorCaptado} />
+        <div className="card p-4 text-center">
+          <p className="text-xs text-gray-500 mb-1">Captado</p>
+          <p className="text-xl font-bold text-brand-600">{fmt(projeto.valorCaptado)}</p>
+        </div>
         <div className="card p-4 text-center">
           <p className="text-xs text-gray-500 mb-1">% captado</p>
           <p className="text-xl font-bold text-gray-900">{percentualCaptado}%</p>
@@ -447,8 +459,9 @@ export default async function ProjetoDetalheePage({
                       <p className="font-medium text-gray-900 text-sm">{t.titulo}</p>
                       <p className="text-xs text-gray-400">{new Date(t.data).toLocaleDateString('pt-BR')}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{t.descricao}</p>
-                  </div>
+                    <p className="text-sm text-gray-500">{t.descricao}</p>                    {t.responsavel && (
+                      <p className="text-xs text-gray-400 mt-0.5">🖊 {t.responsavel}</p>
+                    )}                  </div>
                 </div>
               ))}
             </div>
@@ -473,4 +486,3 @@ export default async function ProjetoDetalheePage({
     </div>
   );
 }
- 

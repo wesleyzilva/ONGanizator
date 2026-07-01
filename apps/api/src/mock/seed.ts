@@ -24,7 +24,7 @@ export const MOCK_ORGANIZATIONS: Organization[] = [
   {
     id: "org-002",
     razaoSocial: "Cooperativa Sementes do Cerrado",
-    nomeFantasia: "Sementes Cerrado",
+    nomeFantasia: "Semente.org",
     cnpj: "00.000.002/0001-02",
     tipo: "cooperativa",
     areaAtuacao: "Agricultura Familiar",
@@ -168,7 +168,7 @@ export const MOCK_PROJECTS: Project[] = [
   {
     id: "prj-003",
     organizacaoId: "org-002",
-    organizacaoNome: "Sementes Cerrado",
+    organizacaoNome: "Semente.org",
     titulo: "Banco de Sementes Nativas",
     descricao:
       "Coleta, armazenamento e distribuição de sementes nativas do Cerrado.",
@@ -383,4 +383,3 @@ export const MOCK_INDICATORS: ImpactIndicator[] = [
     periodo: "2024",
   },
 ];
- 

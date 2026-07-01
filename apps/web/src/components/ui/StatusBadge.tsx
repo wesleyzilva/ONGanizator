@@ -19,4 +19,3 @@ export function StatusBadge({ status }: { status: string }) {
   const s = STATUS_MAP[status] ?? { label: status, cls: 'bg-gray-100 text-gray-500' };
   return <span className={clsx('badge', s.cls)}>{s.label}</span>;
 }
- 

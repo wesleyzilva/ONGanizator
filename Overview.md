@@ -2,138 +2,143 @@
 
 ## 1. Visao
 
-ONGanizator e uma plataforma de governanca, captacao e monitoramento auditavel para ONGs, fundacoes e projetos sociais. A proposta e ajudar uma operacao pequena, com poucos usuarios e baixo volume de requisicoes, a funcionar com clareza, rastreabilidade e confianca para quem executa e para quem financia.
+ONGanizator e uma plataforma de governanca, captacao e financiamento de impacto social que conecta ONGs, cooperativas, negocios sociais, empresas doadoras, institutos, fundacoes e investidores sociais.
 
-O produto deve funcionar como um ambiente white-label que uma ONG ou rede parceira possa usar como se fosse seu, mantendo a administracao da plataforma, a captacao profissional, a contabilidade e a auditoria em uma mesma trilha.
+O objetivo central e criar uma jornada clara para a empresa e uma jornada auditavel para a ONG:
 
-## 2. Tese
+1. A empresa entende projetos, riscos, beneficios fiscais e contrapartidas ESG.
+2. A ONG estrutura cadastro, documentos, projeto, orcamento, metas e evidencias.
+3. A plataforma gera match, contrato, acompanhamento, prestacao de contas e relatorios.
 
-O valor central nao esta em escala tecnica de alto volume. O valor esta em coordenar agentes que dependem uns dos outros:
+## 2. Problema
 
-- a ONG precisa organizar cadastro, documentos, projetos, metas e evidencias;
-- o advogado precisa prospectar investidores, empresas e fundacoes, estruturar a relacao e acompanhar riscos;
-- o contador precisa enxergar valores intermediarios, comprovantes, receitas, despesas e saldos;
-- o investidor ou fundacao precisa decidir com seguranca e acompanhar o que foi entregue;
-- o administrador da plataforma precisa garantir acesso, configuracao, auditoria e consistencia;
-- o projeto precisa ser a unidade auditavel que conecta objetivo, KRs, orcamento, entregas e relatorio anual.
+Empresas querem doar ou patrocinar impacto social, mas enfrentam:
 
-## 3. Problema
+- baixa clareza sobre mecanismos legais e fiscais brasileiros;
+- dificuldade de validar reputacao e capacidade de execucao das ONGs;
+- falta de padrao contratual;
+- pouca rastreabilidade entre aporte, execucao e impacto;
+- relatorios ESG manuais e pouco auditaveis.
 
-ONGs pequenas normalmente nao tem:
+ONGs, por outro lado, precisam:
 
-- sistema de gestao de projetos auditavel;
-- captacao ativa e estruturada;
-- padrao para evidencias ao longo do tempo;
-- clareza sobre obricoes legais, contabeis e fiscais;
-- historico confiavel para mostrar ao investidor o que foi prometido, executado e comprovado.
+- organizar documentos e governanca;
+- apresentar projetos com objetivos, metas SMART e orcamento;
+- captar recursos em multiplos canais;
+- comprovar execucao fisica e financeira;
+- construir relacionamento recorrente com doadores.
 
-Investidores, empresas e fundacoes, por outro lado, precisam de:
+## 3. Proposta de valor
 
-- pipeline confiavel de projetos;
-- comparabilidade entre ONGs;
-- analise de risco reputacional;
-- transparencia financeira;
-- relatorio anual com impacto, evidencias e prestacao de contas.
-
-## 4. Stakeholders da plataforma
-
-| Agente | Papel principal | Resultado esperado |
-|---|---|---|
-| Advogado | Captacao, prospeccao, estruturacao juridica e relacao com financiadores | Pipeline de oportunidades e parcerias juridicamente organizadas |
-| Contador | Validacao financeira, lancamentos, comprovantes e saldos | Prestacao de contas consistente e auditavel |
-| ONG | Dono institucional da causa e da execucao | Cadastro completo, projetos vivos e evidencias reais |
-| Projeto | Unidade operacional auditavel | Objetivos, KRs, orcamento, status, entregas e relatorio anual |
-| Investidor | Financiador com mandato de impacto | Decisao baseada em risco, tese, ticket, ODS e execucao |
-| Fundacao/Instituto | Financiador ou parceiro institucional | Apoio recorrente, editais, grants e acompanhamento de resultados |
-| Administrador da plataforma | Governanca do ambiente, acessos e parametrizacao white-label | Plataforma consistente, segura e configuravel |
-
-Detalhamento em [Stakeholders-Agentes.md](Stakeholders-Agentes.md).
-
-## 5. Jornada principal do MVP mock
-
-1. Advogado cadastra uma ONG ou convida uma ONG existente.
-2. Advogado libera acesso para a ONG.
-3. ONG atualiza cadastro, documentos e informacoes institucionais.
-4. ONG cadastra um projeto com objetivo, KRs, orcamento, cronograma e ODS.
-5. Projeto nasce sem selo e entra em avaliacao.
-6. Advogado aprova elegibilidade inicial e encaminha pendencias quando necessario.
-7. Contador valida estrutura financeira e acompanha valores intermediarios.
-8. Advogado prospecta investidor, empresa ou fundacao e associa oportunidade ao projeto.
-9. Financiador avalia risco, tese de impacto, documentos e contrapartidas.
-10. Projeto recebe aporte, executa marcos e registra evidencias.
-11. Plataforma gera prestacao de contas periodica e relatorio anual.
-
-Fluxo detalhado em [Jornada-Auditavel.md](Jornada-Auditavel.md).
-
-## 6. Gamificacao por selos
-
-Os selos representam maturidade auditavel do projeto e da ONG, nao apenas pontuacao visual.
-
-| Selo | Condicao minima no mock | Valor para a jornada |
-|---|---|---|
-| Bronze | ONG cadastrada, curso de imersao concluido, projeto cadastrado e aprovado pelo advogado | Prontidao inicial para prospeccao |
-| Prata | Tudo do Bronze, documentos revisados, KRs completos, orcamento validado e curso complementar concluido | Projeto pronto para abordagem ativa de financiadores |
-| Ouro | Tudo do Prata, primeira entrega auditavel registrada, evidencias aprovadas e lancamentos conciliados | Projeto com capacidade comprovada de execucao |
-
-O mock precisa ter pelo menos um projeto em cada selo para demonstracao.
-
-## 7. Prospecao e captacao
-
-A captacao deve ser vista como uma esteira de relacionamento conduzida pelo advogado, com apoio do contador e da ONG.
-
-| Etapa | Responsavel | Saida auditavel |
-|---|---|---|
-| Identificar financiador | Advogado | Lead com tipo, tese, ticket e potencial |
-| Associar ONG/projeto | Advogado | Hipotese de match documentada |
-| Validar capacidade financeira | Contador | Parecer financeiro simplificado |
-| Preparar proposta | Advogado + ONG | Proposta com objetivo, KRs, orcamento e contrapartidas |
-| Negociar e aprovar | Advogado + Financiador | Termo, contrato ou aceite |
-| Executar e prestar contas | ONG + Contador | Evidencias, despesas e relatorios |
-
-O kanban de prospeccao deve iniciar com status: `Backlog`, `Prospeccao`, `Em andamento`, `Finalizado`. Cada card pode ter semaforo `Verde`, `Amarelo` ou `Vermelho`.
-
-## 8. Modulos do produto
-
-| Modulo | Objetivo | Estado na demo |
-|---|---|---|
-| Login e perfis | Entrar como stakeholder mock | Existente, precisa alinhar personas novas |
-| Organizacoes | Cadastro e governanca da ONG | Existente |
-| Projetos | Objetivos, KRs, orcamento, cronograma e evidencias | Existente, precisa reforcar OKR e auditoria |
-| CRM | Prospecao de investidores, empresas e fundacoes | Existente, precisa virar kanban principal do advogado |
-| Investidores/Fundacoes | Mandato, ticket, ODS, restricoes e historico | Existente, precisa separar fundacao/instituto |
-| Contabilidade | Entradas, despesas, DRE, comprovantes e pendencias | Existente |
-| Risco | Reputacao, compliance e documentos | Existente |
-| Monitoramento | Marcos, evidencias, timeline e prestacao de contas | Existente |
-| Impacto | ODS, ESG e relatorios consolidados | Existente |
-| White-label | Identidade visual por ONG/rede | Planejado |
-| Relatorio anual | Consolidado de entrega fisica, financeira e impacto | Planejado como fluxo central |
-
-## 9. Metricas de produto
-
-| Metrica | Por que importa |
+| Publico | Valor entregue |
 |---|---|
-| % de cadastro completo | Mede prontidao institucional da ONG |
-| % de documentos validados | Reduz risco juridico e reputacional |
-| Score de maturidade | Ajuda a comparar ONGs sem simplificar demais |
-| Score de match | Prioriza financiadores e projetos com melhor alinhamento |
-| % de KRs com evidencia | Mede qualidade da execucao auditavel |
-| % de orcamento executado | Mostra uso do recurso e saldo |
-| Pendencias contabeis abertas | Ajuda contador e ONG a manter prestacao de contas em dia |
-| Tempo de prospeccao ate aporte | Mede eficiencia da captacao |
-| Relatorios anuais entregues | Mede fechamento da promessa feita ao financiador |
+| ONG | Cadastro, diagnostico, projetos, crowdfunding, CRM, contabilidade, evidencias e prestacao de contas |
+| Empresa | Busca de projetos, analise de risco, calculo de beneficio fiscal, contrato personalizado e relatorio ESG |
+| Investidor social | Match com projetos alinhados a ODS, regiao, ticket, maturidade e tracao |
+| Auditor/compliance | Trilha de documentos, contratos, pagamentos, marcos, evidencias e relatorios |
+| Mentor/consultor | Marketplace para acelerar maturidade institucional das ONGs |
 
-## 10. ODS no produto
+## 4. Modulos atuais
 
-ODS significa Objetivos de Desenvolvimento Sustentavel. No produto, ODS deve ser usado como linguagem de classificacao e comunicacao de impacto, nao como enfeite.
+| Grupo | Modulo | Rota | Status |
+|---|---|---|---|
+| Principal | Dashboard | `/` | Implementado |
+| Principal | Organizacoes | `/organizacoes` | Implementado |
+| Principal | Projetos | `/projetos` | Implementado |
+| Principal | Investidores | `/investidores` | Implementado |
+| Captacao | Marketplace | `/marketplace` | Implementado |
+| Captacao | Crowdfunding | `/crowdfunding` | Implementado |
+| Captacao | CRM | `/crm` | Implementado |
+| Governanca | Diagnostico | `/diagnostico` | Implementado |
+| Governanca | Risco Reputacional | `/risco` | Implementado |
+| Governanca | Contabilidade | `/contabilidade` | Implementado |
+| Impacto | Monitoramento | `/monitoramento` | Implementado |
+| Impacto | Impacto & ESG | `/impacto` | Implementado |
+| Impacto | Mentoria | `/mentoria` | Implementado |
+| Institucional | Para Investidores | `/para-investidores` | Implementado |
+| Legal/Compliance | Parcerias legais | `/parcerias` | Planejado imediato |
 
-Cada projeto deve ter:
+## 5. Fluxos principais
 
-- ODS principal;
-- ODS secundarios opcionais;
-- justificativa simples de aderencia;
-- indicadores relacionados;
-- evidencias ligadas aos KRs.
+### 5.1 Jornada da ONG
 
-## 11. Norte de implementacao
+1. Cadastro institucional.
+2. Diagnostico de maturidade.
+3. Cadastro de projeto com objetivos, metas, orcamento e cronograma.
+4. Publicacao no marketplace/crowdfunding.
+5. Recebimento de interesse ou aporte.
+6. Execucao do projeto com marcos e evidencias.
+7. Lancamentos contabeis e DRE.
+8. Relatorio periodico e prestacao de contas final.
 
-Antes de criar novas telas ou campos, validar se o dado ja existe em organizacao, projeto, investidor, relatorio, evidencia, lancamento contabil ou evento de auditoria. A arquitetura deve privilegiar reaproveitamento e eventos auditaveis em vez de crescer tabelas e campos sem criterio.
+### 5.2 Jornada da empresa doadora
+
+1. Explora projetos por causa, ODS, regiao e ticket.
+2. Consulta score de risco reputacional da ONG.
+3. Escolhe mecanismo legal: doacao direta, FIA, Rouanet, Esporte, PRONON/PRONAS ou MROSC.
+4. Simula beneficio fiscal e custo efetivo.
+5. Gera contrato/termo personalizado.
+6. Acompanha a execucao por dashboard.
+7. Baixa relatorio ESG e pacote de auditoria.
+
+### 5.3 Jornada do investidor social
+
+1. Cadastra mandato de impacto.
+2. Define ODS, regioes, ticket minimo/maximo e restricoes.
+3. Recebe ranking de projetos por score de match.
+4. Solicita relatorio completo ou conversa com ONG.
+5. Acompanha indicadores de impacto.
+
+## 6. Regras legais brasileiras no produto
+
+A plataforma deve conhecer e operacionalizar regras legais brasileiras como base de orientacao, geracao de contratos e trilha auditavel. A implementacao deve conter:
+
+- base de marcos legais com limites, requisitos, orgao aprovador e documentos obrigatorios;
+- calculadora de beneficio fiscal estimado;
+- seletor de mecanismo adequado por tipo de projeto e regime tributario;
+- gerador de contratos/termos com campos obrigatorios;
+- checklist documental para empresa e ONG;
+- alertas de conformidade;
+- pacote de auditoria exportavel.
+
+Mecanismos cobertos inicialmente:
+
+- Doacao direta;
+- FIA;
+- Lei Rouanet;
+- Lei de Incentivo ao Esporte;
+- PRONON/PRONAS;
+- MROSC.
+
+## 7. Dados e mock atual
+
+A demo usa dados estaticos em `apps/web/src/lib/mockData.ts`, incluindo organizacoes, projetos, investidores, indicadores, relatorios, timeline, campanhas de crowdfunding, diagnostico, risco, CRM, mentoria, contabilidade, marcos legais brasileiros e calculadora de beneficio fiscal.
+
+## 8. Metricas de produto
+
+| Metrica | Objetivo |
+|---|---|
+| Score de maturidade | Indicar prontidao da ONG para receber recursos |
+| Score de risco | Apoiar decisao da empresa antes da parceria |
+| Score de match | Priorizar projetos para cada investidor |
+| % de metas SMART | Acompanhar execucao real do projeto |
+| % de orcamento executado | Comparar aporte, despesa e saldo |
+| Evidencias por marco | Sustentar auditoria e relatorios ESG |
+| Custo efetivo da doacao | Mostrar impacto dos beneficios fiscais |
+
+## 9. Estado atual de entrega
+
+- App web em Next.js 15 com export estatico.
+- Monorepo com `apps/web`, `apps/api` e `packages/shared`.
+- Deploy automatico para GitHub Pages via GitHub Actions.
+- Build validado com rotas estaticas e `generateStaticParams` em rotas dinamicas.
+- Dados mock suficientes para demonstracao executiva.
+
+## 10. Proximas entregas recomendadas
+
+1. Criar rota `/parcerias` com jornada legal, calculadora fiscal e gerador de contrato.
+2. Adicionar workflow de documentos obrigatorios por mecanismo legal.
+3. Criar pacote de auditoria exportavel por projeto.
+4. Adicionar persistencia real com PostgreSQL/Prisma.
+5. Integrar assinatura digital e armazenamento de documentos.
+6. Evoluir API NestJS para substituir mock local.

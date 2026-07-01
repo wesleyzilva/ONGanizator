@@ -10,6 +10,8 @@ const ROLE_LABELS: Record<UserRole, string> = {
   ong: 'ONG',
   investidor: 'Investidor',
   advogado: 'Advogado',
+  contador: 'Contador',
+  fundacao: 'Fundação / Instituto',
 };
 
 export default function RegisterPage() {
@@ -111,4 +113,3 @@ export default function RegisterPage() {
     </div>
   );
 }
- 

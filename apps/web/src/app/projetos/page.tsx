@@ -1,9 +1,21 @@
-import { getProjects } from '@/lib/mockUtils';
+import { api } from '@/lib/api';
+import { SELO_CRITERIOS } from '@/lib/mockData';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import Link from 'next/link';
 
+function SeloBadge({ selo }: { selo: string | null | undefined }) {
+  if (!selo) return null;
+  const s = SELO_CRITERIOS[selo as keyof typeof SELO_CRITERIOS];
+  if (!s) return null;
+  return (
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-semibold ${s.cor}`}>
+      {s.icon} {s.label}
+    </span>
+  );
+}
+
 export default async function ProjetosPage() {
-  const data = getProjects();
+  const { data } = await api.projetos();
 
   const fmt = (n: number) =>
     n >= 1_000_000
@@ -30,6 +42,8 @@ export default async function ProjetosPage() {
               <th className="text-right py-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Meta</th>
               <th className="text-right py-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Captado</th>
               <th className="text-right py-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Benef.</th>
+              <th className="text-center py-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Selo</th>
+              <th className="text-right py-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -46,9 +60,13 @@ export default async function ProjetosPage() {
                 <td className="py-3 px-2 text-right font-medium text-gray-800">{fmt(p.valorMeta)}</td>
                 <td className="py-3 px-2 text-right font-semibold text-brand-600">{fmt(p.valorCaptado)}</td>
                 <td className="py-3 px-2 text-right text-gray-600">{p.beneficiarios.toLocaleString('pt-BR')}</td>
-                <td className="py-3 px-2 text-right space-x-2">
-                  <Link href={`/projetos/${p.id}/contribuir`} className="text-xs text-white bg-brand-600 hover:bg-brand-700 rounded px-2 py-1">Contribuir</Link>
-                  <Link href={`/projetos/${p.id}/editar`} className="text-xs text-gray-400 hover:text-brand-600 border border-gray-200 rounded px-2 py-1">✏️</Link>
+                <td className="py-3 px-2 text-center"><SeloBadge selo={(p as any).selo} /></td>
+                <td className="py-3 px-2">
+                  <div className="flex items-center justify-end gap-1">
+                    <Link href={`/projetos/${p.id}/relatorio/anual`} title="Relatório Anual" className="text-xs text-brand-600 hover:text-brand-800 border border-brand-200 rounded px-2 py-1 font-medium">📋 Anual</Link>
+                    <Link href={`/projetos/${p.id}/auditoria`} title="Auditoria" className="text-xs text-gray-400 hover:text-brand-600 border border-gray-200 rounded px-2 py-1">🔍</Link>
+                    <Link href={`/projetos/${p.id}/editar`} title="Editar" className="text-xs text-gray-400 hover:text-brand-600 border border-gray-200 rounded px-2 py-1">✏️</Link>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -58,4 +76,3 @@ export default async function ProjetosPage() {
     </div>
   );
 }
- 

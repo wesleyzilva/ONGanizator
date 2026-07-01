@@ -166,4 +166,3 @@ export default function EditarInvestidorForm({ id }: { id: string }) {
     </div>
   );
 }
- 

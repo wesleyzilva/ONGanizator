@@ -1,7 +1,8 @@
 node_modules/
 .next/
 apps/web/out
- dist/
+dist/
+apps/api/dist/
 build/
 .env
 .env.local
@@ -10,3 +11,4 @@ build/
 .DS_Store
 .turbo/
 coverage/
+*.zip

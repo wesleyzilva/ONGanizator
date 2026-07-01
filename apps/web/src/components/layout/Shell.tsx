@@ -1,50 +1,80 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import clsx from 'clsx';
+import { useRouter, usePathname } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
-import { getPerspective, type Perspective } from '@/lib/mockAuth';
+import { getUser, getPerspective, type Perspective } from '@/lib/mockAuth';
+import { isRouteAllowed } from '@/lib/perspective';
 
-interface ShellProps {
-  children: React.ReactNode;
-}
+/** Routes that don't require authentication and render without the app shell */
+const PUBLIC_PATHS = ['/login', '/registro'];
 
-export default function Shell({ children }: ShellProps) {
+export default function Shell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [perspective, setPerspective] = useState<Perspective>('adm');
+  const [isPublic, setIsPublic] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    setPerspective(getPerspective());
-    const id = setInterval(() => {
+    // Strip basePath (/ONGanizator) to get the app-relative path
+    const raw = window.location.pathname;
+    const path = raw.replace(/^\/ONGanizator/, '') || '/';
+
+    const publicRoute = PUBLIC_PATHS.some((p) => path === p || path.startsWith(p + '/'));
+    setIsPublic(publicRoute);
+
+    const user = getUser();
+
+    // Not logged in → redirect to login (public routes are exempt)
+    if (!user && !publicRoute) {
+      router.replace('/login');
+      // Don't set mounted yet — avoid flash of protected shell
+      return;
+    }
+
+    if (user) {
+      // Always re-read perspective from storage (handles profile switch)
       const p = getPerspective();
-      setPerspective((prev) => (prev === p ? prev : p));
-    }, 400);
-    return () => clearInterval(id);
-  }, []);
+      setPerspective(p);
+
+      // Route not allowed for this perspective → redirect to dashboard
+      if (!publicRoute && !isRouteAllowed(p, path)) {
+        router.replace('/');
+        return;
+      }
+    }
+
+    if (window.innerWidth < 1024) setSidebarOpen(false);
+    setMounted(true);
+  // Re-run whenever pathname changes so switching profile → back to app updates everything
+  }, [router, pathname]);
+
+  // Prevent flash: nothing until we know the auth/route state
+  if (!mounted) return null;
+
+  // Public routes (login, registro) render without header/sidebar
+  if (isPublic) return <>{children}</>;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header
         perspective={perspective}
-        onToggleSidebar={() => setSidebarOpen((value) => !value)}
-        onPerspectiveChange={setPerspective}
+        onToggleSidebar={() => setSidebarOpen((v) => !v)}
       />
 
-      <div className="flex min-h-[calc(100vh-5rem)]">
-        {/* Mobile overlay sidebar */}
+      <div className="flex h-[calc(100vh-4rem)]">
+        {/* Sidebar — parte do flex layout, empurra o conteúdo */}
         <div
-          className={clsx(
-            'fixed inset-y-0 left-0 z-40 w-72 transform bg-white border-r border-gray-200 transition-transform duration-200 ease-in-out lg:hidden',
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          )}
+          className={`shrink-0 overflow-hidden border-r border-gray-200 bg-white transition-[width] duration-200 ease-in-out ${
+            sidebarOpen ? 'w-72' : 'w-0'
+          }`}
         >
-          <Sidebar perspective={perspective} onChangePerspective={setPerspective} />
-        </div>
-
-        {/* Desktop static sidebar that toggles width */}
-        <div className={clsx('hidden lg:flex flex-col transition-all duration-200', sidebarOpen ? 'w-72' : 'w-16') }>
-          <Sidebar perspective={perspective} onChangePerspective={setPerspective} collapsed={!sidebarOpen} />
+          <div className="w-72 h-full">
+            <Sidebar perspective={perspective} />
+          </div>
         </div>
 
         <main className="flex-1 overflow-auto px-4 py-6 sm:px-6 lg:px-8">
@@ -54,4 +84,3 @@ export default function Shell({ children }: ShellProps) {
     </div>
   );
 }
- 

@@ -1,5 +1,5 @@
-export type UserRole = 'administrador' | 'ong' | 'investidor' | 'advogado';
-export type Perspective = 'adm' | 'ong' | 'investidor' | 'advogado';
+export type UserRole = 'administrador' | 'ong' | 'investidor' | 'advogado' | 'contador' | 'fundacao';
+export type Perspective = 'adm' | 'ong' | 'investidor' | 'advogado' | 'contador' | 'fundacao';
 
 export interface UserProfile {
   name: string;
@@ -32,9 +32,11 @@ export const ROLE_TO_PERSPECTIVE: Record<UserRole, Perspective> = {
   ong: 'ong',
   investidor: 'investidor',
   advogado: 'advogado',
+  contador: 'contador',
+  fundacao: 'fundacao',
 };
 
-export const PERSPECTIVE_OPTIONS: Perspective[] = ['adm', 'ong', 'investidor', 'advogado'];
+export const PERSPECTIVE_OPTIONS: Perspective[] = ['adm', 'ong', 'investidor', 'advogado', 'contador', 'fundacao'];
 
 export function getUser(): UserProfile | null {
   const stored = readStorage<Partial<UserProfile> | null>(USER_KEY, null);
@@ -42,7 +44,7 @@ export function getUser(): UserProfile | null {
     return null;
   }
 
-  const role = stored.role && ['administrador', 'ong', 'investidor', 'advogado'].includes(stored.role)
+  const role = stored.role && ['administrador', 'ong', 'investidor', 'advogado', 'contador', 'fundacao'].includes(stored.role)
     ? stored.role
     : 'administrador';
 
@@ -112,5 +114,18 @@ export const DEMO_USERS: UserProfile[] = [
     perspective: 'advogado',
     consent: true,
   },
+  {
+    name: 'Contador Demo',
+    email: 'contador@demo.com.br',
+    role: 'contador',
+    perspective: 'contador',
+    consent: true,
+  },
+  {
+    name: 'Fundação Demo',
+    email: 'fundacao@demo.org',
+    role: 'fundacao',
+    perspective: 'fundacao',
+    consent: true,
+  },
 ];
- 

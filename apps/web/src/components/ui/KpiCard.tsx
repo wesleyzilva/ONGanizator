@@ -31,4 +31,3 @@ export function KpiCard({ title, value, sub, color = 'green', icon }: Props) {
     </div>
   );
 }
- 

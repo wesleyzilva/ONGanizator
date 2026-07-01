@@ -9,4 +9,3 @@ export default async function EditarProjetoPage({ params }: { params: Promise<{ 
   const { id } = await params;
   return <EditarProjetoForm id={id} />;
 }
- 

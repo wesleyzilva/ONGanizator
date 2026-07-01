@@ -6,7 +6,6 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { ImpactoModule } from "./impacto/impacto.module";
 import { AuthModule } from "./auth/auth.module";
 import { MonitoramentoModule } from "./monitoramento/monitoramento.module";
-import { ReportsModule } from "./reports/reports.module";
 
 @Module({
   imports: [
@@ -17,8 +16,6 @@ import { ReportsModule } from "./reports/reports.module";
     DashboardModule,
     ImpactoModule,
     MonitoramentoModule,
-    ReportsModule,
   ],
 })
 export class AppModule {}
- 

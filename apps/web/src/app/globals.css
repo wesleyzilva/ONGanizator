@@ -34,4 +34,3 @@ body {
 .sidebar-link.active {
   @apply bg-brand-50 text-brand-700;
 }
- 

@@ -1,8 +1,8 @@
 'use client';
+
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import DashboardWhitelabel from '@/components/DashboardWhitelabel';
 import { DEMO_USERS, getUser, ROLE_TO_PERSPECTIVE, setUser, UserProfile, UserRole } from '@/lib/mockAuth';
 
 const ROLE_LABELS: Record<UserRole, string> = {
@@ -10,6 +10,8 @@ const ROLE_LABELS: Record<UserRole, string> = {
   ong: 'ONG',
   investidor: 'Investidor',
   advogado: 'Advogado',
+  contador: 'Contador',
+  fundacao: 'Fundação / Instituto',
 };
 
 export default function LoginPage() {
@@ -19,13 +21,12 @@ export default function LoginPage() {
     role: 'administrador',
   });
   const [message, setMessage] = useState('');
+  const [isSwitching, setIsSwitching] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (getUser()) {
-      router.replace('/perfil');
-    }
-  }, [router]);
+    setIsSwitching(!!getUser());
+  }, []);
 
   function handleChange(field: keyof UserProfile, value: string) {
     setCurrent((prev) => ({ ...prev, [field]: value }));
@@ -47,28 +48,41 @@ export default function LoginPage() {
       consent: true,
     });
 
-    router.push('/perfil');
+    router.push('/');
   }
 
   function loginDemo(user: UserProfile) {
     setUser(user);
-    router.push('/perfil');
+    router.push('/');
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Login de perfis</h1>
-          <p className="mt-2 text-sm text-gray-600">Entre com um perfil mockado para testar as jornadas de ONG, Investidor, Advogado/Contador e ADM.</p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              {isSwitching ? 'Trocar perfil' : 'Entrar no ONGanizator'}
+            </h1>
+            <p className="mt-2 text-sm text-gray-600">
+              {isSwitching
+                ? 'Selecione outro perfil para mudar a jornada ativa. Seus dados de sessão serão atualizados.'
+                : 'Selecione o perfil com que deseja navegar. Cada perfil ativa menus e jornadas específicas.'}
+            </p>
+          </div>
+          {isSwitching && (
+            <button
+              onClick={() => router.back()}
+              className="shrink-0 text-sm text-gray-500 hover:text-gray-700 border border-gray-200 rounded-lg px-3 py-1.5"
+            >
+              ← Voltar
+            </button>
+          )}
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xs font-semibold text-gray-500">SEU LOGO<br/>AQUI</div>
-              <h2 className="text-lg font-semibold text-gray-900">Entrar como usuário</h2>
-            </div>
+            <h2 className="text-lg font-semibold text-gray-900">Entrar como usuário</h2>
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
@@ -125,7 +139,7 @@ export default function LoginPage() {
                   className="flex w-full items-center justify-between rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-left text-sm font-medium text-gray-800 hover:border-brand-300 hover:bg-white"
                 >
                   <span>{user.name}</span>
-                  <span className="text-xs text-gray-500">{user.role}</span>
+                  <span className="text-xs text-gray-500">{ROLE_LABELS[user.role]}</span>
                 </button>
               ))}
             </div>
@@ -136,25 +150,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-        <DashboardWhitelabel />
-      </div>
-
-      {/* Whitelabel indicator fixed at right side */}
-      <div className="hidden lg:block fixed right-6 top-28 z-50">
-        <div className="w-64 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-xs text-gray-400">WHITELABEL</p>
-              <p className="font-semibold text-gray-900">SEU LOGO AQUI</p>
-            </div>
-            <div className="w-12 h-12 rounded-md bg-gray-100 flex items-center justify-center text-xs text-gray-500">Logo</div>
-          </div>
-          <p className="mt-2 text-xs text-gray-500">Personalize esta interface com a sua marca e jornada.</p>
-        </div>
-      </div>
     </div>
   );
 }
- 
