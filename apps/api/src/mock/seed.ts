@@ -383,3 +383,4 @@ export const MOCK_INDICATORS: ImpactIndicator[] = [
     periodo: "2024",
   },
 ];
+ 
