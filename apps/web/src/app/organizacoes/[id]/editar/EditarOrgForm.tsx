@@ -154,3 +154,4 @@ export default function EditarOrgForm({ id }: { id: string }) {
     </div>
   );
 }
+ 
