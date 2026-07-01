@@ -2,14 +2,40 @@
 
 Plataforma white-label para governanca, captacao e prestacao de contas de projetos sociais, desenhada para uma operacao pequena, auditavel e orientada por stakeholders.
 
+<<<<<<< HEAD
+> O repositório agora usa um backlog AI-first ativo centralizado em `productBacklog`.
+=======
 O foco do projeto nao e volume alto de usuarios ou requisicoes. O foco e coordenar poucos agentes com responsabilidades claras: advogado, contador, ONG, projeto, investidor, fundacao/instituto e administrador da plataforma. A plataforma deve registrar a jornada completa da prospeccao ate o relatorio anual do que foi entregue.
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+## Documentos ativos
+=======
 ## Problema que a plataforma resolve
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+- `productBacklog/vision.md` — visão de produto, perfis, públicos e jornada.
+- `productBacklog/roadmap.md` — status técnico, gaps, roteiro de execução e sprints.
+- `productBacklog/backlog.md` — backlog priorizado com status de entrega.
+- `productBacklog/raid-log.md` — descobertas, contexto e decisões de evolução.
+=======
 ONGs e fundacoes pequenas normalmente nao tem um sistema auditavel para gerir projetos, evidencias, orcamento, prestacao de contas e captacao recorrente. Isso cria perda de memoria, baixa confianca para investidores e dificuldade de comprovar o que foi entregue.
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+## Status atual
+=======
 ONGanizator organiza essa jornada em um fluxo unico:
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+- Frontend em Next.js 15 com export estático.
+- Backend mock em NestJS 11 para API local.
+- Persistência de dados mock, menu adaptativo e perspectivas de usuário implementados.
+- Fluxo de crowdfunding com PIX simulado e relatórios básicos disponível.
+- As principais lacunas são persistência real, legal/compliance e backend de produção.
+=======
 1. Advogado prospecta investidores, empresas e fundacoes.
 2. Advogado cadastra ou convida a ONG.
 3. ONG completa cadastro, documentos e projetos.
@@ -18,9 +44,20 @@ ONGanizator organiza essa jornada em um fluxo unico:
 6. Investidor ou fundacao avalia, aprova e acompanha a execucao.
 7. Plataforma registra evidencias, alteracoes e entregas.
 8. Relatorio anual consolida execucao fisica, financeira e impacto.
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+## Como usar
+=======
 ## Documentacao reorganizada
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+1. Consulte `productBacklog/vision.md` para a visão de produto e personas.
+2. Use `productBacklog/roadmap.md` para planejar entregas e próximos sprints.
+3. Use `productBacklog/backlog.md` para priorizar tarefas e acompanhar status.
+4. Use `productBacklog/raid-log.md` para registrar hipóteses, descobertas e contexto.
+=======
 | Documento | Finalidade |
 |---|---|
 | [Overview.md](Overview.md) | Visao do produto, problema, modulos e jornadas principais |
@@ -36,9 +73,17 @@ ONGanizator organiza essa jornada em um fluxo unico:
 | [productBacklog/cidades/franciscoBeltrao.md](productBacklog/cidades/franciscoBeltrao.md) | Base enxuta de prospeccao local em Francisco Beltrao |
 | [productBacklog/cidades/patobranco.md](productBacklog/cidades/patobranco.md) | Base enxuta de prospeccao local em Pato Branco |
 | [docs/backup/README.md](docs/backup/README.md) | Materiais arquivados para nao confundir os agentes |
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+## Rodar localmente
+=======
 ## Escopo do mock atual
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+```powershell
+=======
 O repositorio ja possui uma demo em monorepo com frontend Next.js, API NestJS preparada e dados mock. Antes de rodar localmente e avaliar telas, a documentacao passa a ser a referencia do que o mock deve demonstrar:
 
 - login por perfil de stakeholder;
@@ -83,18 +128,34 @@ O repositorio ja possui uma demo em monorepo com frontend Next.js, API NestJS pr
 Use estes comandos para iniciar o desenvolvimento local:
 
 ```bash
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 npm install --workspaces --include-workspace-root
+<<<<<<< HEAD
+npm run dev:web
+=======
 npm run dev
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 ```
 
+<<<<<<< HEAD
+## Observação
+=======
 | Servico | URL |
 |---|---|
 | Frontend | http://localhost:3000 |
 | API | http://localhost:3001 |
 | Swagger | http://localhost:3001/docs |
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+Os arquivos de documentação de nível antigo permanecem como histórico e estão depreciados.
+Use apenas os documentos ativos em `productBacklog/` para planejamento e execução.
+=======
 Para validar o export estatico antes do deploy no GitHub Pages:
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
 
+<<<<<<< HEAD
+=======
 ```bash
 npm run build --workspace=apps/web
 ```
@@ -104,3 +165,5 @@ O workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) public
 ## Principio de produto
 
 Cada acao relevante deve responder quatro perguntas: quem fez, por que fez, o que mudou e qual evidencia sustenta a mudanca. Se a resposta nao puder aparecer no relatorio anual, a acao ainda nao esta bem modelada.
+
+>>>>>>> bfbf6f688b78fd8d347da3df3afd1b96dad7c03e
